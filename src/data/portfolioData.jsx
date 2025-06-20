@@ -10,6 +10,7 @@ export const user = {
     github: "#",
     linkedin: "#",
     twitter: "#",
+    facebook: "#",
   },
   email: "hello@luongminhson.dev",
 };

@@ -1,6 +1,6 @@
 // src/components/Footer.js
 import React from "react";
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { Github, Linkedin, Twitter, Facebook } from "lucide-react";
 import { user } from "/src/data/portfolioData.jsx";
 
 const Footer = () => {
@@ -23,11 +23,11 @@ const Footer = () => {
             <Linkedin />
           </a>
           <a
-            href={user.socials.twitter}
-            aria-label="Twitter Profile"
+            href={user.socials.facebook}
+            aria-label="Facebook Profile"
             className="text-gray-400 hover:text-indigo-400 transition-transform duration-300 hover:scale-110"
           >
-            <Twitter />
+            <Facebook />
           </a>
         </div>
         <p>

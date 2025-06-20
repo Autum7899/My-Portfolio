@@ -1,7 +1,7 @@
 // src/components/Hero.js
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Twitter, MapPin } from 'lucide-react';
+import { Github, Linkedin, Twitter, MapPin, Facebook } from 'lucide-react';
 import { user } from '/src/data/portfolioData.jsx';
 
 const Hero = () => {
@@ -31,7 +31,7 @@ const Hero = () => {
                 <div className="flex justify-center space-x-6 mb-10">
                     <a href={user.socials.github} aria-label="GitHub Profile" className="text-gray-400 hover:text-indigo-400 transition-transform duration-300 hover:scale-110"><Github size={28}/></a>
                     <a href={user.socials.linkedin} aria-label="LinkedIn Profile" className="text-gray-400 hover:text-indigo-400 transition-transform duration-300 hover:scale-110"><Linkedin size={28}/></a>
-                    <a href={user.socials.twitter} aria-label="Twitter Profile" className="text-gray-400 hover:text-indigo-400 transition-transform duration-300 hover:scale-110"><Twitter size={28}/></a>
+                    <a href={user.socials.facebook} aria-label="Facebook Profile" className="text-gray-400 hover:text-indigo-400 transition-transform duration-300 hover:scale-110"><Facebook size={28}/></a>
                 </div>
                 <a href={`mailto:${user.email}`} className="inline-block bg-indigo-600 text-white font-semibold px-8 py-3 rounded-lg hover:bg-indigo-700 transition-all duration-300 shadow-lg transform hover:scale-105">
                     Get In Touch
