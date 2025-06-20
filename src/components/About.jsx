@@ -15,7 +15,7 @@ const About = () => {
               <div className="absolute inset-0 bg-indigo-500 rounded-lg transform -rotate-3"></div>
               <img
                 src="https://placehold.co/600x600/1a202c/a3bffa?text=Profile+Pic"
-                alt="About Lương Minh Sơn"
+                alt="About Minh Sơn"
                 className="rounded-lg shadow-2xl w-full relative transform hover:rotate-0 transition-transform duration-300"
               />
             </div>

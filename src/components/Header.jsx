@@ -76,7 +76,7 @@ const Header = () => {
             href="#hero"
             className="text-xl font-bold text-white hover:text-indigo-400 transition-colors"
           >
-            Lương Minh Sơn
+             Minh Sơn
           </a>
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
