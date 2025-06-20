@@ -53,46 +53,55 @@ const Header = () => {
   // Animation variants for each navigation link
   const linkVariants = {
     hidden: { x: 20, opacity: 0 },
-    visible: { x: 0, opacity: 1, transition: { type: 'spring', stiffness: 100 } },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { type: "spring", stiffness: 100 },
+    },
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-slate-900/80 backdrop-blur-lg shadow-lg"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <a
-          href="#hero"
-          className="text-xl font-bold text-white hover:text-indigo-400 transition-colors"
-        >
-          Lương Minh Sơn
-        </a>
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-8">
-          {navLinks.map((link) => (
-            <a
-              key={link}
-              href={`#${link.toLowerCase()}`}
-              className="text-gray-300 hover:text-indigo-400 transition-colors"
-            >
-              {link}
-            </a>
-          ))}
-        </nav>
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsMenuOpen(true)}
-          className="md:hidden text-white z-50"
-          aria-label="Open menu"
-        >
-          <Menu />
-        </button>
-      </div>
+    // Use a React Fragment to return multiple root elements
+    <>
+      <header
+        className={`fixed top-0 left-0 right-0 z-30 transition-all duration-300 ${
+          // Lowered z-index for header
+          isScrolled
+            ? "bg-slate-900/80 backdrop-blur-lg shadow-lg"
+            : "bg-transparent"
+        }`}
+      >
+        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+          <a
+            href="#hero"
+            className="text-xl font-bold text-white hover:text-indigo-400 transition-colors"
+          >
+            Lương Minh Sơn
+          </a>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex space-x-8">
+            {navLinks.map((link) => (
+              <a
+                key={link}
+                href={`#${link.toLowerCase()}`}
+                className="text-gray-300 hover:text-indigo-400 transition-colors"
+              >
+                {link}
+              </a>
+            ))}
+          </nav>
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMenuOpen(true)}
+            className="md:hidden text-white"
+            aria-label="Open menu"
+          >
+            <Menu />
+          </button>
+        </div>
+      </header>
 
+      {/* Mobile Menu is now a sibling to the header, not a child */}
       <AnimatePresence>
         {isMenuOpen && (
           <>
@@ -111,9 +120,8 @@ const Header = () => {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="fixed top-0 bottom-0 right-0 w-4/5 max-w-sm bg-slate-900/95 shadow-2xl z-50 md:hidden"
+              className="fixed top-0 bottom-0 right-0 w-4/5 max-w-sm bg-slate-900 shadow-2xl z-50 md:hidden"
             >
-              {/* This container now centers its content vertically */}
               <div className="flex flex-col h-full p-8 justify-center">
                 <button
                   onClick={() => setIsMenuOpen(false)}
@@ -122,7 +130,7 @@ const Header = () => {
                 >
                   <X size={28} />
                 </button>
-                
+
                 {/* Navigation Links */}
                 <nav className="flex flex-col space-y-8">
                   {navLinks.map((link) => (
@@ -142,7 +150,7 @@ const Header = () => {
           </>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 };
 
