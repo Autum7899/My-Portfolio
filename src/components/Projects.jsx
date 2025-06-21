@@ -9,12 +9,12 @@ const Projects = () => {
   return (
     <AnimatedSection id="projects">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">Featured Projects</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">Featured Projects</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={index}
-              className="bg-slate-800 rounded-lg overflow-hidden group shadow-lg"
+              className="bg-card rounded-lg overflow-hidden group shadow-lg border"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.5 }}
@@ -25,16 +25,16 @@ const Projects = () => {
                 <div className="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-20 transition-all duration-300"></div>
               </div>
               <div className="p-6">
-                <h3 className="text-2xl font-bold mb-2 text-white">{project.title}</h3>
-                <p className="text-gray-400 mb-4">{project.description}</p>
+                <h3 className="text-2xl font-bold mb-2 text-card-foreground">{project.title}</h3>
+                <p className="text-muted-foreground mb-4">{project.description}</p>
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map(tag => <span key={tag} className="bg-slate-700 text-indigo-300 text-xs font-semibold px-2.5 py-1 rounded-full">{tag}</span>)}
+                  {project.tags.map(tag => <span key={tag} className="bg-muted text-primary text-xs font-semibold px-2.5 py-1 rounded-full">{tag}</span>)}
                 </div>
                 <div className="flex justify-between items-center mt-6">
-                  <a href={project.demo} className="text-indigo-400 hover:text-indigo-300 font-semibold inline-flex items-center group/link">
+                  <a href={project.demo} className="text-primary hover:text-primary/90 font-semibold inline-flex items-center group/link">
                     View Demo <ArrowRight className="inline w-4 h-4 ml-1 transform group-hover/link:translate-x-1 transition-transform" />
                   </a>
-                  <a href={project.repo} className="text-gray-400 hover:text-white"><Github /></a>
+                  <a href={project.repo} className="text-muted-foreground hover:text-foreground"><Github /></a>
                 </div>
               </div>
             </motion.div>
@@ -44,5 +44,4 @@ const Projects = () => {
     </AnimatedSection>
   );
 };
-
 export default Projects;

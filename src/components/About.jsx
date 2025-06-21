@@ -6,13 +6,13 @@ const About = () => {
   return (
     <AnimatedSection id="about">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
           About Me
         </h2>
         <div className="grid md:grid-cols-5 gap-12 items-center">
           <div className="md:col-span-2">
             <div className="relative">
-              <div className="absolute inset-0 bg-indigo-500 rounded-lg transform -rotate-3"></div>
+              <div className="absolute inset-0 bg-primary rounded-lg transform -rotate-3"></div>
               <img
                 src="https://placehold.co/600x600/1a202c/a3bffa?text=Profile+Pic"
                 alt="About Minh Sơn"
@@ -20,7 +20,7 @@ const About = () => {
               />
             </div>
           </div>
-          <div className="md:col-span-3 text-lg text-gray-300 space-y-6">
+          <div className="md:col-span-3 text-lg text-muted-foreground space-y-6">
             <p>
               Hello! I'm Sơn, a third-year Computer Science student with a deep
               passion for technology and a specialization in Information
@@ -46,5 +46,4 @@ const About = () => {
     </AnimatedSection>
   );
 };
-
 export default About;

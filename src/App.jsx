@@ -1,6 +1,5 @@
-// src/App.js
-import React, { useState, useEffect } from 'react';
-import { AnimatePresence } from 'framer-motion';
+// src/App.jsx
+import React from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -9,40 +8,27 @@ import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import LoadingScreen from './components/LoadingScreen';
+import ThemeToggleButton from './components/ThemeToggleButton';
+import { useTheme } from './components/useTheme';
 
-export default function App() {
-  const [isLoading, setIsLoading] = useState(true);
+function App() {
+    const { theme } = useTheme();
 
-  useEffect(() => {
-    // Simulate a loading delay
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2500); // 2.5 seconds
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  return (
-    <div className="bg-slate-900 text-gray-200 font-sans leading-relaxed scroll-smooth">
-      <AnimatePresence>
-        {isLoading && <LoadingScreen />}
-      </AnimatePresence>
-      
-      {!isLoading && (
-        <>
-          <Header />
-          <main>
-            <Hero />
-            <About />
-            <Education />
-            <Skills />
-            <Projects />
-            <Contact />
-          </main>
-          <Footer />
-        </>
-      )}
-    </div>
-  );
+    return (
+        <div className={`${theme} bg-background text-foreground`}>
+            <Header />
+            <main>
+                <Hero />
+                <About />
+                <Education />
+                <Skills />
+                <Projects />
+                <Contact />
+            </main>
+            <Footer />
+            <ThemeToggleButton />
+        </div>
+    );
 }
+
+export default App;

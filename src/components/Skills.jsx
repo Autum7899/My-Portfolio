@@ -8,7 +8,7 @@ const Skills = () => {
   return (
     <AnimatedSection id="skills">
       <div className="container mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-white">Technical Skills</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-foreground">Technical Skills</h2>
           <div className="max-w-5xl mx-auto grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-8 text-center">
             {skills.map((skill, index) => (
                 <motion.div
@@ -24,7 +24,7 @@ const Skills = () => {
                       alt={`${skill.name} logo`}
                       className={`w-16 h-16 object-contain ${skill.invert ? 'dark:invert' : ''}`}
                     />
-                    <p className="font-semibold text-gray-300">{skill.name}</p>
+                    <p className="font-semibold text-muted-foreground">{skill.name}</p>
                 </motion.div>
             ))}
           </div>
@@ -32,5 +32,4 @@ const Skills = () => {
     </AnimatedSection>
   );
 };
-
 export default Skills;
