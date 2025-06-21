@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./WalkingCharacter.css";
 // Note: If you set the background-image in the CSS, you can remove the import here
 // and the style prop on the div below for a cleaner separation.
-import spriteSheet from "./pixel-me.png";
+import spriteSheet from "./glasses.png";
 
 const WalkingCharacter = () => {
   const [isWalking, setIsWalking] = useState(false);
