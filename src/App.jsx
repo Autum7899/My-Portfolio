@@ -1,6 +1,5 @@
-// src/App.jsx
-
-import React from 'react';
+import React, { useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -12,25 +11,41 @@ import Footer from './components/Footer';
 import ThemeToggleButton from './components/ThemeToggleButton';
 import ParticlesBackground from './components/ParticlesBackground';
 import WalkingCharacter from './components/WalkingCharacter/WalkingCharacter';
+import LoadingScreen from './components/LoadingScreen';
 
 function App() {
+  // We only need one state: is the loading screen visible?
+  const [isLoading, setIsLoading] = useState(true);
+
+  // All the useEffect logic for loading has been moved into LoadingScreen.js
+
   return (
-    // Add "relative" and "isolate" to the main wrapper div
     <div className="relative isolate">
-      <ParticlesBackground />
-      <Header />
-      {/* No need for z-index on main anymore */}
-      <main>
-        <Hero />
-        <About />
-        <Education />
-        <Skills />
-        <Projects />
-        <Contact />
-      </main>
-      <Footer />
-      <ThemeToggleButton />
-      <WalkingCharacter />
+      <AnimatePresence>
+        {/* We render the LoadingScreen and pass it the function to change our state.
+          When the LoadingScreen is done, it will call setIsLoading(false),
+          which will trigger AnimatePresence to remove it.
+        */}
+        {isLoading && <LoadingScreen setIsLoading={setIsLoading} />}
+      </AnimatePresence>
+      
+      {!isLoading && (
+        <>
+          <ParticlesBackground />
+          <Header />
+          <main>
+            <Hero />
+            <About />
+            <Education />
+            <Skills />
+            <Projects />
+            <Contact />
+          </main>
+          <Footer />
+          <ThemeToggleButton />
+          <WalkingCharacter />
+        </>
+      )}
     </div>
   );
 }
