@@ -1,0 +1,76 @@
+/* --- CONTAINER --- */
+.walker-container {
+  /* This variable is the link to our JavaScript. It MUST match the sprite width. */
+  --character-width: 32px;
+
+  position: fixed;
+  bottom: 10px;
+  width: var(--character-width);
+  height: 32px;
+  z-index: 9999;
+  
+  /* FIX: Removed 'transform: translateX(-50%)'.
+    Our JavaScript's calc() function handles the positioning correctly
+    to keep the character fully on-screen.
+  */
+}
+
+/* --- SPRITE --- */
+.walker-sprite {
+  width: 100%;
+  height: 100%;
+  
+  /* Set the transform origin so scaling and flipping happens from the character's feet */
+  transform-origin: bottom;
+  
+  /* Base styles for the sprite sheet */
+  background-image: url('./pixel-me.png'); /* Assuming your JS doesn't set this anymore */
+  background-size: auto 100%;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* --- STATES: IDLE vs. WALKING --- */
+
+.walker-sprite.is-idle {
+  /* Forces the sprite to show the first frame (at position 0px) */
+  background-position-x: 0px;
+}
+
+.walker-sprite.is-walking {
+  /* Use the 4-frame walking animation */
+  animation: walk-cycle 0.8s steps(4) infinite;
+}
+
+/* --- DIRECTION FACING --- */
+
+/* FIX: Combined 'scale' and 'scaleX' into a single transform property
+  to prevent them from overwriting each other. Also corrected the flip direction.
+*/
+
+.walker-sprite[data-direction='left'] {
+  /* Moving right is the default, un-flipped direction. */
+  transform: scale(2) scaleX(1); 
+}
+.walker-sprite[data-direction='right'] {
+  /* Moving left should flip the sprite horizontally. */
+  transform: scale(2) scaleX(-1);
+}
+
+
+/* --- KEYFRAMES --- */
+
+/* This animation looks correct for a 4-frame walking cycle where the
+  sprite sheet has 5 frames total: [Idle, Walk1, Walk2, Walk3, Walk4].
+  It starts on the second frame (at -32px) and cycles through 4 frames.
+*/
+@keyframes walk-cycle {
+  from {
+    background-position-x: -32px;
+  }
+  to {
+    /* The position AFTER the last frame of the animation (4 * 32px = 128px from the start) */
+    background-position-x: -160px; 
+  }
+}
