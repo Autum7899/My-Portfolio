@@ -58,7 +58,5 @@
   body {
     @apply bg-background text-foreground;
     /* --- Add these lines for the dot grid --- */
-    background-image: radial-gradient(hsl(var(--border)) 1px, transparent 1px);
-    background-size: 2rem 2rem;
   }
 }

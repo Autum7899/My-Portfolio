@@ -33,7 +33,7 @@ const circleTransition = {
 
 const LoadingScreen = () => {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900">
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
       <img
         src="/pikachu-running.gif"
         alt="Loading..."
