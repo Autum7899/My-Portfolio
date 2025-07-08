@@ -18,8 +18,7 @@ export const handler = async (event) => {
       };
     }
 
-    const databaseUrl = process.env.NEON_DATABASE_URL;
-    const sql = neon(databaseUrl);
+    const sql = neon();
 
     await sql`
       INSERT INTO messages (name, email, message)
