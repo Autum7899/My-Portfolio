@@ -12,10 +12,16 @@ const Contact = () => {
         const data = new FormData(form);
 
         try {
-          const response = await fetch("https://formspree.io/f/YOUR_FORM_ID", { // TODO: Replace with your Formspree endpoint
+          const response = await fetch('/.netlify/functions/submit-message', {
               method: 'POST',
-              body: data,
-              headers: { 'Accept': 'application/json' }
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                name: data.get('name'),
+                email: data.get('email'),
+                message: data.get('message'),
+              }),
           });
 
           if (response.ok) {
