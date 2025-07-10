@@ -7,18 +7,18 @@ export const user = {
   bio: "A third-year Computer Science student specializing in Information Systems. Passionate about building robust applications and solving complex problems with code.",
   profileImage: "https://placehold.co/150x150/1e293b/a5b4fc?text=LMS",
   socials: {
-    github: "#",
-    linkedin: "#",
+    github: "https://github.com/Autum7899",
+    linkedin: "https://www.linkedin.com/in/sơn-minh-3837a8370/",
     twitter: "#",
-    facebook: "#",
+    facebook: "https://www.facebook.com/Autum83/",
   },
-  email: "hello@luongminhson.dev",
+  email: "minhson78999@gmail.com",
 };
 
 export const education = [
   {
-    institution: "Your University Name", // <-- TODO: Add your university name
-    degree: "Bachelor of Science in Computer Science",
+    institution: "University of Economics - Technology for Industries", // <-- TODO: Add your university name
+    degree: "Engineering degree in Information Technology",
     major: "Information Systems",
     date: "Expected Graduation: 2026",
     description:
