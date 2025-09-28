@@ -168,7 +168,7 @@ const About = () => {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 1.1 + index * 0.1 }}
                     >
-                      <CheckCircle size={20} className="text-green-500 flex-shrink-0" />
+                      <CheckCircle size={20} className="text-green-500 dark:text-green-400 flex-shrink-0" />
                       <span className="text-muted-foreground">{achievement}</span>
                     </motion.div>
                   ))}

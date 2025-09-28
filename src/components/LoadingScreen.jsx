@@ -34,7 +34,7 @@ const LoadingScreen = ({ setIsLoading }) => {
               }}
             >
               <div className="w-20 h-20 bg-gradient-to-r from-primary to-purple-500 rounded-2xl flex items-center justify-center mx-auto shadow-2xl">
-                <Code size={32} className="text-white" />
+                <Code size={32} className="text-white dark:text-gray-900" />
               </div>
             </motion.div>
 
@@ -80,7 +80,7 @@ const LoadingScreen = ({ setIsLoading }) => {
                   scale: { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
                 }}
               >
-                <Cpu size={16} className="text-blue-500" />
+                <Cpu size={16} className="text-blue-500 dark:text-blue-400" />
               </motion.div>
               
               <motion.div
@@ -94,7 +94,7 @@ const LoadingScreen = ({ setIsLoading }) => {
                   scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
                 }}
               >
-                <Database size={12} className="text-green-500" />
+                <Database size={12} className="text-green-500 dark:text-green-400" />
               </motion.div>
             </div>
           </div>

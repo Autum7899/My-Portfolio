@@ -63,14 +63,14 @@ const Footer = () => {
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 1, repeat: Infinity }}
               >
-                <Heart size={16} className="text-red-500" />
+                <Heart size={16} className="text-red-500 dark:text-red-400" />
               </motion.div>
               <span>and lots of</span>
               <motion.div
                 animate={{ rotate: [0, 10, -10, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                <Coffee size={16} className="text-amber-600" />
+                <Coffee size={16} className="text-amber-600 dark:text-amber-400" />
               </motion.div>
             </motion.div>
           </motion.div>

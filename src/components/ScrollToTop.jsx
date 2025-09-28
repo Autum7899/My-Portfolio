@@ -30,7 +30,7 @@ const ScrollToTop = () => {
     <AnimatePresence>
       {isVisible && (
         <motion.button
-          className="fixed bottom-16 right-5 z-40 p-2 bg-slate-800 text-white rounded-full shadow-lg hover:bg-slate-700 transition-colors"
+          className="fixed bottom-16 right-5 z-40 p-2 bg-slate-800 dark:bg-slate-200 text-white dark:text-gray-900 rounded-full shadow-lg hover:bg-slate-700 dark:hover:bg-slate-300 transition-colors"
           onClick={scrollToTop}
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}

@@ -264,7 +264,7 @@ const Contact = () => {
                                             />
                                             {errors.name && (
                                                 <motion.p 
-                                                    className="text-red-500 text-sm mt-1"
+                                                    className="text-red-500 dark:text-red-400 text-sm mt-1"
                                                     initial={{ opacity: 0, y: -10 }}
                                                     animate={{ opacity: 1, y: 0 }}
                                                 >
@@ -290,7 +290,7 @@ const Contact = () => {
                                             />
                                             {errors.email && (
                                                 <motion.p 
-                                                    className="text-red-500 text-sm mt-1"
+                                                    className="text-red-500 dark:text-red-400 text-sm mt-1"
                                                     initial={{ opacity: 0, y: -10 }}
                                                     animate={{ opacity: 1, y: 0 }}
                                                 >

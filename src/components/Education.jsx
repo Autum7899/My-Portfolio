@@ -122,7 +122,7 @@ const Education = () => {
                                     >
                                         {/* Status Badge */}
                                         <motion.div
-                                            className="absolute -top-3 -right-3 liquid-glass text-white px-4 py-1.5 rounded-full text-sm font-semibold shadow-lg"
+                                            className="absolute -top-3 -right-3 liquid-glass text-white dark:text-gray-900 px-4 py-1.5 rounded-full text-sm font-semibold shadow-lg"
                                             initial={{ opacity: 0, scale: 0 }}
                                             animate={{ opacity: 1, scale: 1 }}
                                             transition={{ delay: 0.4 + index * 0.1 }}
