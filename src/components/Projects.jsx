@@ -1,13 +1,16 @@
 // src/components/Projects.js
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Github, ArrowRight, ExternalLink, Calendar, Code2, Star, Eye } from 'lucide-react';
+import { Github, ArrowRight, ExternalLink, Calendar, Code2, Star, Eye, Filter, Grid, List, Search } from 'lucide-react';
 import AnimatedSection from './AnimatedSection';
 import { projects } from '/src/data/portfolioData.jsx';
 
 const Projects = () => {
   const [hoveredProject, setHoveredProject] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchTerm, setSearchTerm] = useState('');
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
@@ -39,6 +42,31 @@ const Projects = () => {
       }
     }
   };
+
+  // Project categories
+  const categories = [
+    { id: 'all', name: 'All Projects', count: projects.length },
+    { id: 'web', name: 'Web Development', count: projects.filter(p => p.tags.some(tag => ['React', 'Next.js', 'Vue.js', 'HTML5', 'CSS3', 'JavaScript'].includes(tag))).length },
+    { id: 'backend', name: 'Backend', count: projects.filter(p => p.tags.some(tag => ['Node.js', 'Express', 'C#', '.NET', 'Python', 'Django'].includes(tag))).length },
+    { id: 'database', name: 'Database', count: projects.filter(p => p.tags.some(tag => ['MySQL', 'SQL Server', 'MongoDB'].includes(tag))).length }
+  ];
+
+  // Filter projects based on category and search
+  const filteredProjects = projects.filter(project => {
+    const matchesCategory = selectedCategory === 'all' || 
+      project.tags.some(tag => {
+        switch(selectedCategory) {
+          case 'web': return ['React', 'Next.js', 'Vue.js', 'HTML5', 'CSS3', 'JavaScript'].includes(tag);
+          case 'backend': return ['Node.js', 'Express', 'C#', '.NET', 'Python', 'Django'].includes(tag);
+          case 'database': return ['MySQL', 'SQL Server', 'MongoDB'].includes(tag);
+          default: return true;
+        }
+      });
+    const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         project.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+    return matchesCategory && matchesSearch;
+  });
 
   return (
     <AnimatedSection id="projects">
@@ -98,24 +126,100 @@ const Projects = () => {
             />
           </motion.div>
 
-          {/* Projects Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              className="group relative liquid-glass-card liquid-glass-hover rounded-2xl overflow-hidden shadow-xl liquid-gradient-accent transition-all duration-300"
-              whileHover={{ 
-                scale: 1.02, 
-                y: -8,
-                rotateY: 2
-              }}
-              onHoverStart={() => setHoveredProject(index)}
-              onHoverEnd={() => setHoveredProject(null)}
-              style={{ transformStyle: "preserve-3d" }}
-            >
+          {/* Enhanced Controls */}
+          <motion.div 
+            className="mb-12"
+            variants={itemVariants}
+          >
+            <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
+              {/* Search Bar */}
+              <div className="relative flex-1 max-w-md">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" size={20} />
+                <input
+                  type="text"
+                  placeholder="Search projects..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-10 pr-4 py-3 liquid-glass-card rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-300"
+                />
+              </div>
+
+              {/* Category Filter */}
+              <div className="flex flex-wrap gap-2">
+                {categories.map((category) => (
+                  <motion.button
+                    key={category.id}
+                    onClick={() => setSelectedCategory(category.id)}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                      selectedCategory === category.id
+                        ? 'liquid-glass text-primary-foreground'
+                        : 'liquid-glass-card text-muted-foreground hover:text-foreground'
+                    }`}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {category.name} ({category.count})
+                  </motion.button>
+                ))}
+              </div>
+
+              {/* View Mode Toggle */}
+              <div className="flex liquid-glass-card rounded-lg p-1">
+                <button
+                  onClick={() => setViewMode('grid')}
+                  className={`p-2 rounded-md transition-all duration-300 ${
+                    viewMode === 'grid' 
+                      ? 'liquid-glass text-primary-foreground' 
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  <Grid size={20} />
+                </button>
+                <button
+                  onClick={() => setViewMode('list')}
+                  className={`p-2 rounded-md transition-all duration-300 ${
+                    viewMode === 'list' 
+                      ? 'liquid-glass text-primary-foreground' 
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  <List size={20} />
+                </button>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Projects Display */}
+          <motion.div 
+            className={`${
+              viewMode === 'grid' 
+                ? 'grid md:grid-cols-2 lg:grid-cols-3 gap-8' 
+                : 'space-y-6'
+            }`}
+            variants={containerVariants}
+          >
+            {filteredProjects.map((project, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className={`group relative ${
+                  viewMode === 'list' 
+                    ? 'flex flex-col md:flex-row gap-6 p-6 liquid-glass-card liquid-glass-hover rounded-2xl' 
+                    : 'liquid-glass-card liquid-glass-hover rounded-2xl overflow-hidden shadow-xl liquid-gradient-accent transition-all duration-300'
+                }`}
+                whileHover={{ 
+                  scale: viewMode === 'grid' ? 1.02 : 1.01, 
+                  y: viewMode === 'grid' ? -8 : -2,
+                  rotateY: viewMode === 'grid' ? 2 : 0
+                }}
+                onHoverStart={() => setHoveredProject(index)}
+                onHoverEnd={() => setHoveredProject(null)}
+                style={{ transformStyle: "preserve-3d" }}
+              >
                 {/* Project Image */}
-                <div className="relative overflow-hidden h-64">
+                <div className={`relative overflow-hidden ${
+                  viewMode === 'list' ? 'md:w-80 h-48' : 'h-64'
+                }`}>
                   <motion.img 
                     src={project.image} 
                     alt={project.title} 
@@ -158,170 +262,139 @@ const Projects = () => {
                   </motion.div>
 
                   {/* Featured Badge */}
-                  <motion.div
-                    className="absolute top-4 left-4 liquid-glass text-primary-foreground px-3 py-1 rounded-full text-xs font-semibold"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.2 + index * 0.1 }}
-                  >
-                    Featured
-                  </motion.div>
+                  {index < 2 && (
+                    <motion.div 
+                      className="absolute top-4 left-4 liquid-glass px-3 py-1 rounded-full text-xs font-semibold text-primary-foreground"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: 0.5 + index * 0.1 }}
+                    >
+                      <Star size={12} className="inline mr-1" />
+                      Featured
+                    </motion.div>
+                  )}
                 </div>
 
                 {/* Project Content */}
-                <div className="p-6">
-                  <motion.h3 
-                    className="text-2xl font-bold mb-3 text-card-foreground group-hover:text-primary transition-colors"
-                    whileHover={{ x: 5 }}
-                  >
-                    {project.title}
-                  </motion.h3>
-                  
-                  <motion.p 
-                    className="text-muted-foreground mb-4 leading-relaxed"
-                    initial={{ opacity: 0.8 }}
-                    whileHover={{ opacity: 1 }}
-                  >
+                <div className={`p-6 ${viewMode === 'list' ? 'flex-1' : ''}`}>
+                  <div className="flex items-start justify-between mb-4">
+                    <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                      {project.title}
+                    </h3>
+                    <motion.div
+                      className="flex items-center text-muted-foreground text-sm"
+                      whileHover={{ x: 5 }}
+                    >
+                      <Calendar size={14} className="mr-1" />
+                      <span>2024</span>
+                    </motion.div>
+                  </div>
+
+                  <p className="text-muted-foreground mb-6 leading-relaxed">
                     {project.description}
-                  </motion.p>
+                  </p>
 
                   {/* Tech Stack */}
                   <div className="flex flex-wrap gap-2 mb-6">
                     {project.tags.map((tag, tagIndex) => (
-                      <motion.span 
-                        key={tag}
-                        className="liquid-glass-card text-primary text-xs font-semibold px-3 py-1 rounded-full"
-                        initial={{ opacity: 0, scale: 0 }}
+                      <motion.span
+                        key={tagIndex}
+                        className="px-3 py-1 liquid-glass-card text-xs font-medium text-foreground rounded-full"
+                        initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.3 + tagIndex * 0.05 }}
-                        whileHover={{ 
-                          scale: 1.1, 
-                          backgroundColor: "rgba(59, 130, 246, 0.2)" 
-                        }}
+                        transition={{ delay: 0.1 * tagIndex }}
+                        whileHover={{ scale: 1.05 }}
                       >
                         {tag}
                       </motion.span>
                     ))}
                   </div>
 
-                  {/* Project Stats */}
-                  <motion.div 
-                    className="flex items-center justify-between text-sm text-muted-foreground mb-6"
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <div className="flex items-center space-x-4">
-                      <motion.div 
-                        className="flex items-center space-x-1"
-                        whileHover={{ scale: 1.1 }}
-                      >
-                        <Calendar size={14} />
-                        <span>2024</span>
-                      </motion.div>
-                      <motion.div 
-                        className="flex items-center space-x-1"
-                        whileHover={{ scale: 1.1 }}
-                      >
-                        <Code2 size={14} />
-                        <span>Full-Stack</span>
-                      </motion.div>
-                    </div>
-                  </motion.div>
-
                   {/* Action Buttons */}
-                  <motion.div 
-                    className="flex justify-between items-center"
-                    initial={{ y: 20, opacity: 0 }}
-                    whileHover={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  >
+                  <div className="flex gap-3">
                     <motion.a
                       href={project.demo}
-                      className="text-primary hover:text-primary/90 font-semibold inline-flex items-center group/link"
-                      whileHover={{ x: 5 }}
+                      className="flex items-center gap-2 px-4 py-2 liquid-glass text-primary-foreground rounded-lg font-medium transition-all duration-300"
+                      whileHover={{ scale: 1.05, x: 5 }}
+                      whileTap={{ scale: 0.95 }}
                     >
-                      View Demo 
-                      <motion.div
-                        className="ml-2"
-                        whileHover={{ x: 5 }}
-                        transition={{ type: "spring", stiffness: 400 }}
-                      >
-                        <ArrowRight className="w-4 h-4" />
-                      </motion.div>
+                      <Eye size={16} />
+                      View Demo
+                      <ArrowRight size={16} />
                     </motion.a>
-                    
                     <motion.a
                       href={project.repo}
-                      className="text-muted-foreground hover:text-foreground p-2 rounded-lg hover:bg-muted/50 transition-all"
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      whileTap={{ scale: 0.9 }}
+                      className="flex items-center gap-2 px-4 py-2 liquid-glass-card text-foreground rounded-lg font-medium transition-all duration-300 hover:liquid-glass"
+                      whileHover={{ scale: 1.05, x: 5 }}
+                      whileTap={{ scale: 0.95 }}
                     >
-                      <Github size={20} />
+                      <Github size={16} />
+                      Code
                     </motion.a>
-                  </motion.div>
+                  </div>
                 </div>
 
-                {/* Glow Effect */}
+                {/* Animated Background */}
                 <motion.div
-                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100"
-                  style={{
-                    background: "linear-gradient(45deg, rgba(59, 130, 246, 0.1), transparent)",
-                    filter: "blur(10px)"
+                  className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100"
+                  initial={{ scale: 0, rotate: 180 }}
+                  whileHover={{ 
+                    scale: 1, 
+                    rotate: 0,
+                    transition: { duration: 0.3 }
                   }}
-                  animate={{
-                    scale: [1, 1.05, 1],
-                    opacity: [0, 0.3, 0]
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                />
-
-                {/* Hover Border */}
-                <motion.div
-                  className="absolute inset-0 rounded-2xl border-2 border-primary/50 opacity-0 group-hover:opacity-100"
-                  initial={{ scale: 0.95 }}
-                  whileHover={{ scale: 1 }}
-                  transition={{ duration: 0.3 }}
                 />
               </motion.div>
             ))}
-          </div>
+          </motion.div>
+
+          {/* No Results */}
+          {filteredProjects.length === 0 && (
+            <motion.div 
+              className="text-center py-16"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="liquid-glass-card p-8 rounded-2xl max-w-md mx-auto">
+                <Search size={48} className="mx-auto mb-4 text-muted-foreground" />
+                <h3 className="text-xl font-semibold text-foreground mb-2">No Projects Found</h3>
+                <p className="text-muted-foreground">
+                  Try adjusting your search terms or category filter.
+                </p>
+              </div>
+            </motion.div>
+          )}
 
           {/* Call to Action */}
-          <motion.div
-            variants={itemVariants}
+          <motion.div 
             className="text-center mt-16"
+            variants={itemVariants}
           >
-            <motion.div
-              className="liquid-glass-card liquid-gradient-primary rounded-2xl p-8"
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
+            <div className="liquid-glass-card p-8 rounded-2xl max-w-2xl mx-auto">
               <h3 className="text-2xl font-bold text-foreground mb-4">
-                Interested in seeing more?
+                Interested in Working Together?
               </h3>
               <p className="text-muted-foreground mb-6">
-                Check out my GitHub profile for more projects and contributions.
+                I'm always excited to take on new challenges and create amazing projects. 
+                Let's discuss how we can bring your ideas to life!
               </p>
               <motion.a
-                href={projects[0]?.repo || '#'}
-                className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-6 py-3 rounded-lg hover:bg-primary/90 transition-all duration-300"
+                href="#contact"
+                className="inline-flex items-center gap-2 px-6 py-3 liquid-glass text-primary-foreground rounded-lg font-semibold transition-all duration-300"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Github size={20} />
-                View All Projects
-                <ArrowRight size={16} />
+                <Code2 size={20} />
+                Start a Project
+                <ArrowRight size={20} />
               </motion.a>
-            </motion.div>
+            </div>
           </motion.div>
         </motion.div>
       </div>
     </AnimatedSection>
   );
 };
+
 export default Projects;

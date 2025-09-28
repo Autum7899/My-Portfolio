@@ -1,11 +1,10 @@
 // src/components/About.js
 import React, { useState, useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import { Code, Cpu, Database, Lightbulb, Target, Users, Award, BookOpen, Zap, Heart, ArrowRight, CheckCircle } from "lucide-react";
+import { Code, Cpu, Database, Lightbulb, Target, Users, Award, BookOpen, Zap, ArrowRight, CheckCircle } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 
 const About = () => {
-  const [hoveredCard, setHoveredCard] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
@@ -39,39 +38,7 @@ const About = () => {
     }
   };
 
-  const stats = [
-    { number: "3+", label: "Years Learning", icon: BookOpen, color: "text-blue-500" },
-    { number: "15+", label: "Projects Built", icon: Code, color: "text-green-500" },
-    { number: "20+", label: "Technologies", icon: Cpu, color: "text-purple-500" },
-    { number: "∞", label: "Passion", icon: Heart, color: "text-red-500" }
-  ];
 
-  const interests = [
-    { 
-      title: "Full-Stack Development", 
-      description: "Building complete web applications from frontend to backend with modern technologies", 
-      icon: Code,
-      color: "from-blue-500 to-cyan-500"
-    },
-    { 
-      title: "Database Design", 
-      description: "Creating efficient and scalable data structures for optimal performance", 
-      icon: Database,
-      color: "from-green-500 to-emerald-500"
-    },
-    { 
-      title: "System Analysis", 
-      description: "Understanding complex requirements and designing elegant solutions", 
-      icon: Target,
-      color: "from-purple-500 to-pink-500"
-    },
-    { 
-      title: "Continuous Learning", 
-      description: "Always exploring new technologies and staying updated with industry trends", 
-      icon: BookOpen,
-      color: "from-orange-500 to-red-500"
-    }
-  ];
 
   const achievements = [
     "Third-year Computer Science student",
@@ -210,136 +177,7 @@ const About = () => {
             </motion.div>
           </div>
 
-          {/* Stats Section */}
-          <motion.div
-            variants={containerVariants}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20"
-          >
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="text-center group cursor-pointer"
-                whileHover={{ scale: 1.05, y: -5 }}
-                onHoverStart={() => setHoveredCard(index)}
-                onHoverEnd={() => setHoveredCard(null)}
-              >
-                <motion.div
-                  className="relative p-6 rounded-2xl liquid-glass-card liquid-glass-hover liquid-gradient-primary transition-all duration-300"
-                  animate={{
-                    boxShadow: hoveredCard === index 
-                      ? "0 20px 40px rgba(59, 130, 246, 0.2)" 
-                      : "0 4px 6px rgba(0, 0, 0, 0.1)"
-                  }}
-                >
-                  <motion.div
-                    className="w-16 h-16 mx-auto mb-4 liquid-glass-card rounded-full flex items-center justify-center"
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.6 }}
-                  >
-                    <stat.icon size={24} className={stat.color} />
-                  </motion.div>
-                  
-                  <motion.h3 
-                    className="text-3xl font-bold text-foreground mb-2"
-                    animate={{
-                      color: hoveredCard === index ? "#3b82f6" : undefined
-                    }}
-                  >
-                    {stat.number}
-                  </motion.h3>
-                  
-                  <p className="text-muted-foreground font-medium">
-                    {stat.label}
-                  </p>
-                  
-                  {/* Animated Background */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100"
-                    initial={{ scale: 0, rotate: 180 }}
-                    whileHover={{ 
-                      scale: 1, 
-                      rotate: 0,
-                      transition: { duration: 0.3 }
-                    }}
-                  />
-                </motion.div>
-              </motion.div>
-            ))}
-          </motion.div>
 
-          {/* Interests Section */}
-          <motion.div
-            variants={containerVariants}
-            className="space-y-12"
-          >
-            <motion.h3 
-              variants={itemVariants}
-              className="text-3xl font-bold text-center text-foreground mb-12"
-            >
-              What Drives Me
-            </motion.h3>
-            
-            <div className="grid md:grid-cols-2 gap-8">
-              {interests.map((interest, index) => (
-                <motion.div
-                  key={index}
-                  variants={itemVariants}
-                  className="group relative p-6 rounded-2xl liquid-glass-card liquid-glass-hover liquid-gradient-secondary transition-all duration-300 cursor-pointer"
-                  whileHover={{ 
-                    scale: 1.02, 
-                    y: -5,
-                    rotateY: 5
-                  }}
-                  style={{
-                    transformStyle: "preserve-3d"
-                  }}
-                >
-                  <motion.div
-                    className="flex items-start space-x-4"
-                    whileHover={{ x: 10 }}
-                  >
-                    <motion.div
-                      className={`w-12 h-12 liquid-glass rounded-xl flex items-center justify-center flex-shrink-0`}
-                      whileHover={{ 
-                        scale: 1.1,
-                        rotate: 10
-                      }}
-                    >
-                      <interest.icon size={20} className="text-white" />
-                    </motion.div>
-                    
-                    <div>
-                      <h4 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-                        {interest.title}
-                      </h4>
-                      <p className="text-muted-foreground leading-relaxed">
-                        {interest.description}
-                      </p>
-                    </div>
-                  </motion.div>
-                  
-                  {/* Glow Effect */}
-                  <motion.div
-                    className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100"
-                    style={{
-                      background: "linear-gradient(45deg, rgba(59, 130, 246, 0.1), transparent)",
-                      filter: "blur(10px)"
-                    }}
-                    animate={{
-                      scale: [1, 1.05, 1],
-                      opacity: [0, 0.3, 0]
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                  />
-                </motion.div>
-              ))}
-        </div>
-          </motion.div>
         </motion.div>
       </div>
     </AnimatedSection>
