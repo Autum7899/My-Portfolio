@@ -40,7 +40,7 @@
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 0 0% 0%;
     --muted: 210 40% 96.1%;
-    --muted-foreground: 0 0% 0%; /* Black text for light backgrounds */
+    --muted-foreground: 0 0% 45%; /* Dark gray text for light backgrounds */
     --accent: 210 40% 96.1%;
     --accent-foreground: 0 0% 0%;
     --destructive: 0 84.2% 60.2%;

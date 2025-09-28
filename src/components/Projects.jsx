@@ -335,19 +335,20 @@ const Projects = () => {
             initial={{ y: 20 }}
             whileInView={{ y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6 }}
           >
             <motion.h2 
               className="text-3xl md:text-4xl font-bold text-center text-foreground relative z-10"
             >
               Featured Projects
             </motion.h2>
+            {/* Liquid Glass background for title */}
             <motion.div 
               className="absolute inset-0 -m-4 liquid-glass rounded-2xl"
               initial={{ scale: 0.8 }}
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
+              transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
             />
           </motion.div>
           

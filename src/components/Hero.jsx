@@ -66,11 +66,16 @@ const Hero = () => {
                 className="container mx-auto px-6 relative z-10"
             >
 
-                {/* Enhanced Name with Subtle Effects */}
-                <motion.div className="relative mb-4">
+                {/* Enhanced Name with Liquid Glass Background */}
+                <motion.div 
+                    className="relative mb-8"
+                    initial={{ y: 20 }}
+                    whileInView={{ y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                >
                     <motion.h1 
-                        variants={itemVariants}
-                        className="text-4xl md:text-6xl font-extrabold text-foreground leading-tight"
+                        className="text-4xl md:text-6xl font-extrabold text-center text-foreground relative z-10 leading-tight"
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -90,12 +95,13 @@ const Hero = () => {
                         </motion.span>
                     </motion.h1>
                     
-                    {/* Liquid Glass underline */}
-                    <motion.div
-                        className="absolute -bottom-2 left-0 right-0 h-0.5 liquid-glass rounded-full"
-                        initial={{ scaleX: 0 }}
-                        animate={{ scaleX: 1 }}
-                        transition={{ delay: 1, duration: 1, ease: "easeOut" }}
+                    {/* Liquid Glass background for title */}
+                    <motion.div 
+                        className="absolute inset-0 -m-4 liquid-glass rounded-2xl"
+                        initial={{ scale: 0.8 }}
+                        whileInView={{ scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
                     />
                 </motion.div>
 

@@ -67,10 +67,6 @@ const Education = () => {
                         
                         <motion.h2 
                             className="text-3xl md:text-4xl font-bold text-center text-foreground relative z-10"
-                            initial={{ y: 30 }}
-                            whileInView={{ y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.3, duration: 0.8 }}
                         >
                             Education
                         </motion.h2>
@@ -81,7 +77,7 @@ const Education = () => {
                             initial={{ scale: 0.8 }}
                             whileInView={{ scale: 1 }}
                             viewport={{ once: true }}
-                            transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
+                            transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
                         />
                     </motion.div>
                     
@@ -122,7 +118,7 @@ const Education = () => {
                                     >
                                         {/* Status Badge */}
                                         <motion.div
-                                            className="absolute -top-3 -right-3 liquid-glass text-white dark:text-gray-900 px-4 py-1.5 rounded-full text-sm font-semibold shadow-lg"
+                                            className="absolute -top-3 -right-3 liquid-glass text-primary-foreground dark:text-gray-900 px-4 py-1.5 rounded-full text-sm font-semibold shadow-lg"
                                             initial={{ opacity: 0, scale: 0 }}
                                             animate={{ opacity: 1, scale: 1 }}
                                             transition={{ delay: 0.4 + index * 0.1 }}

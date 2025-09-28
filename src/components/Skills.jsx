@@ -81,38 +81,22 @@ const Skills = () => {
               }}
             >
               {/* Enhanced Category Header with Liquid Glass */}
-              <motion.div 
-                className="relative"
-                initial={{ x: -20 }}
-                whileInView={{ x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2, duration: 0.6 }}
-              >
+              <div className="relative">
                 <div className="flex items-center gap-6 relative z-10">
-                  <motion.div 
+                  <div 
                     className={`h-2 w-20 liquid-glass rounded-full relative overflow-hidden`}
-                    whileHover={{ scaleX: 1.2 }}
-                    transition={{ type: "spring", stiffness: 300 }}
                   >
-                    <motion.div 
+                    <div 
                       className={`absolute inset-0 bg-gradient-to-r ${category.color} opacity-60`}
-                      initial={{ x: "-100%" }}
-                      whileInView={{ x: "100%" }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.5, duration: 1.5, ease: "easeInOut" }}
                     />
-                  </motion.div>
+                  </div>
                   <h3 className="text-2xl font-bold text-foreground">{category.title}</h3>
                 </div>
                 {/* Liquid Glass background for category header */}
-                <motion.div 
+                <div 
                   className="absolute inset-0 -m-3 liquid-glass-card rounded-xl"
-                  initial={{ scale: 0.9 }}
-                  whileInView={{ scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.4, duration: 0.6 }}
                 />
-              </motion.div>
+              </div>
               
               {/* Enhanced Skills Grid */}
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
