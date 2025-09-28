@@ -29,6 +29,11 @@ const PokemonBackground = () => {
     const lastFrameTime = useRef(0);
     const targetFPS = 60;
     const frameInterval = 1000 / targetFPS;
+    
+    // Hover state management
+    const hoveredPokemon = useRef(null);
+    const mousePosition = useRef({ x: 0, y: 0 });
+    const originalImages = useRef(new Map()); // Store original Pokemon images
 
 
     useEffect(() => {
@@ -88,6 +93,9 @@ const PokemonBackground = () => {
                 image.crossOrigin = "Anonymous";
                 image.src = spriteUrl;
                 image.onload = () => {
+                    // Store original image
+                    originalImages.current.set(randomId, image);
+                    
                     const offscreenCanvas = document.createElement('canvas');
                     const offscreenCtx = offscreenCanvas.getContext('2d');
                     offscreenCanvas.width = image.width;
@@ -111,7 +119,11 @@ const PokemonBackground = () => {
                     }
                     offscreenCtx.putImageData(imageData, 0, 0);
 
-                    pokemonGrid.current.set(key, { silhouette: offscreenCanvas, id: randomId });
+                    pokemonGrid.current.set(key, { 
+                        silhouette: offscreenCanvas, 
+                        id: randomId,
+                        originalImage: image
+                    });
                     pendingGridCells.current.delete(key);
                 };
                 image.onerror = () => { throw new Error('Image failed to load'); };
@@ -127,6 +139,7 @@ const PokemonBackground = () => {
             pokemonGrid.current.clear();
             pendingGridCells.current.clear();
             activePokemonIds.current.clear();
+            originalImages.current.clear();
         };
 
         // Đảm bảo các ô có thể nhìn thấy đều có Pokémon
@@ -189,7 +202,18 @@ const PokemonBackground = () => {
                         screenY > -SQUARE_SIZE && screenY < canvas.height) {
                         const pokemon = pokemonGrid.current.get(`${gridX},${gridY}`);
                         if (pokemon && pokemon.silhouette) {
-                            ctx.drawImage(pokemon.silhouette, screenX, screenY, SQUARE_SIZE, SQUARE_SIZE);
+                            // Check if mouse is hovering over this Pokemon
+                            const isHovered = hoveredPokemon.current && 
+                                hoveredPokemon.current.gridX === gridX && 
+                                hoveredPokemon.current.gridY === gridY;
+                            
+                            if (isHovered && pokemon.originalImage) {
+                                // Draw original Pokemon image
+                                ctx.drawImage(pokemon.originalImage, screenX, screenY, SQUARE_SIZE, SQUARE_SIZE);
+                            } else {
+                                // Draw colored silhouette
+                                ctx.drawImage(pokemon.silhouette, screenX, screenY, SQUARE_SIZE, SQUARE_SIZE);
+                            }
                         }
                     }
                 }
@@ -198,6 +222,7 @@ const PokemonBackground = () => {
             ctx.restore();
             animationFrameId.current = requestAnimationFrame(animate);
         };
+
 
         // Check if theme has changed and regenerate Pokemon if needed
         if (currentTheme.current !== theme) {
@@ -225,12 +250,49 @@ const PokemonBackground = () => {
         };
     }, [theme]); // Re-run when theme changes to update Pokemon colors
 
+    // Global mouse tracking effect
+    useEffect(() => {
+        const handleGlobalMouseMove = (event) => {
+            const canvas = canvasRef.current;
+            if (!canvas) return;
+            
+            const rect = canvas.getBoundingClientRect();
+            mousePosition.current = {
+                x: event.clientX - rect.left,
+                y: event.clientY - rect.top
+            };
+            
+            // Calculate which grid cell the mouse is over
+            const SQUARE_SIZE = 96;
+            const gridX = Math.floor((mousePosition.current.x + gridOffset.current.x) / SQUARE_SIZE);
+            const gridY = Math.floor((mousePosition.current.y + gridOffset.current.y) / SQUARE_SIZE);
+            
+            // Check if there's a Pokemon at this grid position
+            const pokemon = pokemonGrid.current.get(`${gridX},${gridY}`);
+            if (pokemon) {
+                hoveredPokemon.current = { gridX, gridY, pokemon };
+            } else {
+                hoveredPokemon.current = null;
+            }
+        };
+
+        // Add global mouse listener
+        document.addEventListener('mousemove', handleGlobalMouseMove);
+
+        return () => {
+            document.removeEventListener('mousemove', handleGlobalMouseMove);
+        };
+    }, []);
+
     return (
         <div className="fixed top-0 left-0 w-full h-full -z-10">
             <canvas 
                 ref={canvasRef} 
                 className="w-full h-full opacity-25"
-                style={{ opacity: 0.25 }}
+                style={{ 
+                    opacity: 0.25,
+                    pointerEvents: 'none'
+                }}
             ></canvas>
         </div>
     );
