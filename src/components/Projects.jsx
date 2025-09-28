@@ -549,7 +549,7 @@ const Projects = () => {
               </p>
               <motion.a
                 href="#contact"
-                className="inline-flex items-center gap-2 px-6 py-3 liquid-glass text-primary-foreground rounded-lg font-semibold transition-all duration-200"
+                className="inline-flex items-center gap-2 px-6 py-3 liquid-glass text-black dark:text-white rounded-lg font-semibold transition-all duration-200"
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.1 }}

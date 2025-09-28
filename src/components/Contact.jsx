@@ -346,7 +346,7 @@ const Contact = () => {
                                         <motion.button 
                                             type="submit" 
                                             disabled={isSubmitting}
-                                            className="liquid-glass text-primary-foreground font-semibold px-8 py-4 rounded-xl hover:liquid-glass-hover transition-all duration-300 shadow-xl w-full md:w-auto relative overflow-hidden group border-2 border-primary/30"
+                                            className="liquid-glass text-black dark:text-white font-semibold px-8 py-4 rounded-xl hover:liquid-glass-hover transition-all duration-300 shadow-xl w-full md:w-auto relative overflow-hidden group border-2 border-primary/30"
                                             whileHover={{ scale: 1.02, y: -2 }}
                                             whileTap={{ scale: 0.98 }}
                                         >
