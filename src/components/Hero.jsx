@@ -119,15 +119,6 @@ const Hero = () => {
                     </motion.span>
                 </motion.p>
 
-                {/* Enhanced Bio */}
-                <motion.p 
-                    variants={itemVariants}
-                    className="max-w-4xl mx-auto text-lg text-muted-foreground mb-8 leading-relaxed"
-                >
-                    A passionate third-year Computer Science student specializing in Information Systems. 
-                    I love building robust applications and solving complex problems with clean, efficient code. 
-                    Currently exploring the exciting world of full-stack development and always eager to learn new technologies.
-                </motion.p>
 
                 {/* Location with Animation */}
                 <motion.div 
@@ -177,8 +168,8 @@ const Hero = () => {
 
                 {/* Enhanced Download CV Button */}
                 <motion.a
-                    href="/cv.pdf"
-                    download="Minh_Son_CV.pdf"
+                    href="/LuongMinhSon-CV.pdf"
+                    download="LuongMinhSon-CV.pdf"
                     className="inline-flex items-center gap-3 liquid-glass text-black dark:text-white font-semibold px-8 py-4 rounded-xl liquid-glass-hover transition-all duration-300 shadow-xl border-2 border-primary/30 group relative overflow-hidden"
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
