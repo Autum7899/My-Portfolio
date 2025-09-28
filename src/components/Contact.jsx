@@ -125,22 +125,39 @@ const Contact = () => {
                     animate={isInView ? "visible" : "hidden"}
                     className="relative"
                 >
-                    {/* Header Section */}
-                    <motion.div variants={itemVariants} className="text-center mb-16">
+                    {/* Enhanced Title with Liquid Glass */}
+                    <motion.div 
+                        className="relative mb-16"
+                        initial={{ y: 20 }}
+                        whileInView={{ y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                    >
                         <motion.h2 
-                            className="text-4xl md:text-6xl font-bold mb-4 text-foreground"
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            className="text-3xl md:text-4xl font-bold text-center text-foreground relative z-10"
                         >
                             Let's Connect
                         </motion.h2>
-                        
+                        {/* Liquid Glass background for title */}
+                        <motion.div 
+                            className="absolute inset-0 -m-4 liquid-glass rounded-2xl"
+                            initial={{ scale: 0.8 }}
+                            whileInView={{ scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
+                        />
+                    </motion.div>
+                    
+                    {/* Description */}
+                    <motion.div 
+                        className="text-center mb-16"
+                        initial={{ y: 20 }}
+                        whileInView={{ y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2, duration: 0.6 }}
+                    >
                         <motion.p 
                             className="text-lg text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed"
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.5, duration: 0.6 }}
                         >
                             I'm actively seeking internship opportunities and exciting projects. 
                             Whether you have a role that fits my skills or just want to chat about technology, 
@@ -150,8 +167,9 @@ const Contact = () => {
                         <motion.div
                             className="w-24 h-1 liquid-glass mx-auto rounded-full"
                             initial={{ scaleX: 0 }}
-                            animate={{ scaleX: 1 }}
-                            transition={{ delay: 0.8, duration: 0.8 }}
+                            whileInView={{ scaleX: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.5, duration: 0.8 }}
                         />
                     </motion.div>
 

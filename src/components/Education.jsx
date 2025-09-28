@@ -56,32 +56,45 @@ const Education = () => {
                     animate={isVisible ? "visible" : "hidden"}
                     className="relative"
                 >
-                    {/* Header Section */}
-                    <motion.div variants={itemVariants} className="text-center mb-20">
-                        <motion.div
-                            className="inline-flex items-center gap-3 liquid-glass-card liquid-glass-hover text-primary px-6 py-3 rounded-full text-sm font-semibold mb-6"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2 }}
-                        >
-                            <GraduationCap size={16} />
-                            Academic Journey
-                        </motion.div>
+                    {/* Enhanced Title with Liquid Glass */}
+                    <motion.div 
+                        className="relative mb-20"
+                        initial={{ y: 20 }}
+                        whileInView={{ y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                    >
                         
                         <motion.h2 
-                            className="text-5xl md:text-7xl font-bold mb-6 text-foreground bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text"
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
+                            className="text-3xl md:text-4xl font-bold text-center text-foreground relative z-10"
+                            initial={{ y: 30 }}
+                            whileInView={{ y: 0 }}
+                            viewport={{ once: true }}
                             transition={{ delay: 0.3, duration: 0.8 }}
                         >
                             Education
                         </motion.h2>
                         
+                        {/* Liquid Glass background for title */}
+                        <motion.div 
+                            className="absolute inset-0 -m-4 liquid-glass rounded-2xl"
+                            initial={{ scale: 0.8 }}
+                            whileInView={{ scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
+                        />
+                    </motion.div>
+                    
+                    {/* Description */}
+                    <motion.div 
+                        className="text-center mb-16"
+                        initial={{ y: 20 }}
+                        whileInView={{ y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2, duration: 0.6 }}
+                    >
                         <motion.p 
                             className="text-xl text-muted-foreground mb-8 max-w-4xl mx-auto leading-relaxed"
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.5, duration: 0.6 }}
                         >
                             Building a strong foundation in computer science and information systems, 
                             preparing for a successful career in technology.
