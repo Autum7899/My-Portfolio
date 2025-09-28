@@ -1,76 +1,104 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+// src/components/LoadingScreen.js
+import React, { useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Code, Cpu, Database } from 'lucide-react';
 
 const LoadingScreen = ({ setIsLoading }) => {
-  // State to manage the loading progress percentage
-  const [progress, setProgress] = useState(0);
-
   useEffect(() => {
-    // This effect simulates the loading progress
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        // Increment progress by a small random amount
-        const newProgress = prev + Math.random() * 10;
-        // Cap the simulated progress at 90% until the page is truly loaded
-        return newProgress > 90 ? 100 : newProgress;
-      });
-    }, 400); // Update every 400ms
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
 
-    // When the component unmounts or loading is done, clear the interval
-    return () => clearInterval(interval);
-  }, []);
-
-  // This effect listens for the signal from App.jsx to finish loading
-  useEffect(() => {
-    // This function will be called by App.jsx when the window has finished loading
-    const handleLoad = () => {
-      // 1. Instantly move the progress bar to 100%
-      setProgress(100);
-
-      // 2. Wait a moment for the user to see 100%, then start the screen fade-out
-      setTimeout(() => {
-        setIsLoading(false); // This tells App.jsx to unmount the loader
-      }, 500); // Wait 0.5s after hitting 100%
-    };
-
-    if (document.readyState === "complete") {
-      handleLoad();
-    } else {
-      window.addEventListener("load", handleLoad);
-      return () => window.removeEventListener("load", handleLoad);
-    }
+    return () => clearTimeout(timer);
   }, [setIsLoading]);
 
   return (
-    // The outer container handles the fade-out of the whole screen
-    <motion.div
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#0f172a]"
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.75 }}
-    >
-      {/* Pikachu GIF */}
-      <img
-        src="/pikachu-running.gif"
-        alt="Loading..."
-        className="w-64 h-auto"
-      />
-
-      {/* Progress Bar Container */}
-      <div className="w-64 h-4 mt-4 bg-gray-700 rounded-full overflow-hidden">
-        {/* The filling part of the progress bar */}
         <motion.div
-          className="h-full bg-blue-400"
-          initial={{ width: "0%" }}
-          animate={{ width: `${progress}%` }} // Animate the width based on progress
-          transition={{ ease: "linear", duration: 0.2 }}
-        />
-      </div>
+          className="fixed inset-0 bg-background z-50 flex items-center justify-center"
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="text-center">
+            {/* Animated Logo/Icon */}
+            <motion.div
+              className="relative mb-8"
+              animate={{
+                scale: [1, 1.1, 1],
+                rotate: [0, 5, -5, 0]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <div className="w-20 h-20 bg-gradient-to-r from-primary to-purple-500 rounded-2xl flex items-center justify-center mx-auto shadow-2xl">
+                <Code size={32} className="text-white" />
+              </div>
+            </motion.div>
 
-      {/* Percentage Text */}
-      <p className="mt-3 text-lg text-white font-semibold">
-        {Math.round(progress)}%
-      </p>
-    </motion.div>
+            {/* Loading Text */}
+            <motion.h2
+              className="text-2xl font-bold text-foreground mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              Minh Sơn
+            </motion.h2>
+
+            {/* Loading Animation */}
+            <div className="flex justify-center space-x-2 mb-8">
+              {[0, 1, 2].map((index) => (
+                <motion.div
+                  key={index}
+                  className="w-3 h-3 bg-primary rounded-full"
+                  animate={{
+                    scale: [1, 1.2, 1],
+                    opacity: [0.5, 1, 0.5]
+                  }}
+                  transition={{
+                    duration: 1,
+                    repeat: Infinity,
+                    delay: index * 0.2
+                  }}
+                />
+              ))}
+            </div>
+
+            {/* Floating Tech Icons */}
+            <div className="relative">
+              <motion.div
+                className="absolute -top-4 -right-4 w-8 h-8 bg-blue-500/20 rounded-full flex items-center justify-center"
+                animate={{
+                  rotate: 360,
+                  scale: [1, 1.2, 1]
+                }}
+                transition={{
+                  rotate: { duration: 3, repeat: Infinity, ease: "linear" },
+                  scale: { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
+                }}
+              >
+                <Cpu size={16} className="text-blue-500" />
+              </motion.div>
+              
+              <motion.div
+                className="absolute -bottom-4 -left-4 w-6 h-6 bg-green-500/20 rounded-full flex items-center justify-center"
+                animate={{
+                  rotate: -360,
+                  scale: [1, 1.3, 1]
+                }}
+                transition={{
+                  rotate: { duration: 2.5, repeat: Infinity, ease: "linear" },
+                  scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+                }}
+              >
+                <Database size={12} className="text-green-500" />
+              </motion.div>
+            </div>
+          </div>
+        </motion.div>
   );
 };
 

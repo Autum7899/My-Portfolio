@@ -56,76 +56,217 @@ export const projects = [
   },
 ];
 
-export const skills = [
-  {
-    name: "HTML",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
-  },
-  {
-    name: "CSS",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
-  },
-  {
-    name: "JavaScript",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
-  },
-  {
-    name: "TypeScript",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
-  },
-  {
-    name: "React",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-  },
-  {
-    name: "Next.js",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
-    invert: true,
-  },
-  {
-    name: "Node.js",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-  },
-  {
-    name: "Express",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
-    invert: true,
-  },
-  {
-    name: "Java",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
-  },
-  {
-    name: "C#",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg",
-  },
-  {
-    name: ".NET",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg",
-  },
-  { name: "Tailwind CSS", logo: "/Tailwind CSS.svg" },
-  {
-    name: "SQL Server",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg",
-  },
-  {
-    name: "MySQL",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
-  },
-  {
-    name: "PostgreSQL",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
-  },
-  {
-    name: "Docker",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
-  },
-  {
-    name: "Figma",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
-  },
-  {
-    name: "Git",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-  },
-];
+export const skills = {
+  frontend: [
+    {
+      name: "HTML5",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+      level: "Advanced"
+    },
+    {
+      name: "CSS3",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+      level: "Advanced"
+    },
+    {
+      name: "JavaScript",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+      level: "Advanced"
+    },
+    {
+      name: "TypeScript",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+      level: "Intermediate"
+    },
+    {
+      name: "React",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+      level: "Advanced"
+    },
+    {
+      name: "Next.js",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+      invert: true,
+      level: "Intermediate"
+    },
+    {
+      name: "Vue.js",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg",
+      level: "Learning"
+    },
+    {
+      name: "Tailwind CSS",
+      logo: "/Tailwind CSS.svg",
+      level: "Advanced"
+    },
+    {
+      name: "SASS/SCSS",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg",
+      level: "Intermediate"
+    },
+    {
+      name: "Bootstrap",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg",
+      level: "Intermediate"
+    }
+  ],
+  backend: [
+    {
+      name: "Node.js",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+      level: "Advanced"
+    },
+    {
+      name: "Express.js",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
+      invert: true,
+      level: "Advanced"
+    },
+    {
+      name: "Java",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
+      level: "Intermediate"
+    },
+    {
+      name: "Spring Boot",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg",
+      level: "Learning"
+    },
+    {
+      name: "C#",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg",
+      level: "Intermediate"
+    },
+    {
+      name: ".NET",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg",
+      level: "Intermediate"
+    },
+    {
+      name: "Python",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+      level: "Learning"
+    },
+    {
+      name: "Django",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg",
+      level: "Learning"
+    },
+    {
+      name: "FastAPI",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg",
+      level: "Learning"
+    },
+    {
+      name: "PHP",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg",
+      level: "Learning"
+    },
+    {
+      name: "Laravel",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg",
+      level: "Learning"
+    }
+  ],
+  database: [
+    {
+      name: "MySQL",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
+      level: "Advanced"
+    },
+    {
+      name: "PostgreSQL",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
+      level: "Intermediate"
+    },
+    {
+      name: "SQL Server",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg",
+      level: "Intermediate"
+    },
+    {
+      name: "MongoDB",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+      level: "Learning"
+    },
+    {
+      name: "Redis",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg",
+      level: "Learning"
+    },
+    {
+      name: "Firebase",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg",
+      level: "Learning"
+    }
+  ],
+  cloudDevOps: [
+    {
+      name: "Docker",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+      level: "Intermediate"
+    },
+    {
+      name: "AWS",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg",
+      level: "Learning"
+    },
+    {
+      name: "Azure",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg",
+      level: "Learning"
+    },
+    {
+      name: "Google Cloud",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg",
+      level: "Learning"
+    },
+    {
+      name: "Kubernetes",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-original.svg",
+      level: "Learning"
+    },
+    {
+      name: "GitHub Actions",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+      level: "Learning"
+    },
+    {
+      name: "Jenkins",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg",
+      level: "Learning"
+    }
+  ],
+  tools: [
+    {
+      name: "Git",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+      level: "Advanced"
+    },
+    {
+      name: "GitHub",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+      level: "Advanced"
+    },
+    {
+      name: "Figma",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
+      level: "Intermediate"
+    },
+    {
+      name: "Postman",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg",
+      level: "Intermediate"
+    },
+    {
+      name: "Jira",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg",
+      level: "Learning"
+    },
+    {
+      name: "Slack",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slack/slack-original.svg",
+      level: "Learning"
+    }
+  ]
+};

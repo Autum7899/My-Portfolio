@@ -9,9 +9,10 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ThemeToggleButton from './components/ThemeToggleButton';
-import ParticlesBackground from './components/ParticlesBackground';
+import PokemonBackground from './components/PokemonBackground';
 import WalkingCharacter from './components/WalkingCharacter/WalkingCharacter';
 import LoadingScreen from './components/LoadingScreen';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   // We only need one state: is the loading screen visible?
@@ -31,7 +32,7 @@ function App() {
       
       {!isLoading && (
         <>
-          <ParticlesBackground />
+          <PokemonBackground />
           <Header />
           <main>
             <Hero />
@@ -44,6 +45,7 @@ function App() {
           <Footer />
           <ThemeToggleButton />
           <WalkingCharacter />
+          <ScrollToTop />
         </>
       )}
     </div>
