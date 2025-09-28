@@ -10,7 +10,6 @@ export const user = {
     github: "https://github.com/Autum7899",
     linkedin: "https://www.linkedin.com/in/sơn-minh-3837a8370/",
     twitter: "#",
-    facebook: "https://www.facebook.com/Autum83/",
   },
   email: "minhson789999@gmail.com",
 };

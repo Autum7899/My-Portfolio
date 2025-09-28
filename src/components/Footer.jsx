@@ -1,7 +1,7 @@
 // src/components/Footer.js
 import React from "react";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Facebook, Mail, Heart, ArrowUp, Code, Coffee } from "lucide-react";
+import { Github, Linkedin, Mail, Heart, ArrowUp, Code, Coffee } from "lucide-react";
 import { user } from "/src/data/portfolioData.jsx";
 
 const Footer = () => {
@@ -12,7 +12,6 @@ const Footer = () => {
   const socialLinks = [
     { icon: Github, href: user.socials.github, label: "GitHub Profile", color: "hover:text-gray-400" },
     { icon: Linkedin, href: user.socials.linkedin, label: "LinkedIn Profile", color: "hover:text-blue-600" },
-    { icon: Facebook, href: user.socials.facebook, label: "Facebook Profile", color: "hover:text-blue-500" },
     { icon: Mail, href: `mailto:${user.email}`, label: "Email", color: "hover:text-red-500" }
   ];
 

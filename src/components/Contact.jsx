@@ -223,8 +223,7 @@ const Contact = () => {
                                 <div className="flex space-x-4">
                                     {[
                                         { icon: 'GitHub', href: user.socials.github, color: 'hover:text-gray-400' },
-                                        { icon: 'LinkedIn', href: user.socials.linkedin, color: 'hover:text-blue-600' },
-                                        { icon: 'Facebook', href: user.socials.facebook, color: 'hover:text-blue-500' }
+                                        { icon: 'LinkedIn', href: user.socials.linkedin, color: 'hover:text-blue-600' }
                                     ].map((social, index) => (
                                         <motion.a
                                             key={index}
