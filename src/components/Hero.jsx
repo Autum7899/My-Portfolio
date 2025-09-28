@@ -157,7 +157,7 @@ const Hero = () => {
                     {[
                         { icon: Github, href: user.socials.github, label: "GitHub Profile" },
                         { icon: Linkedin, href: user.socials.linkedin, label: "LinkedIn Profile" },
-                        { icon: Mail, href: `mailto:${user.email}`, label: "Email" }
+                        { icon: Mail, href: `https://mail.google.com/mail/?view=cm&fs=1&to=${user.email}`, label: "Email" }
                     ].map(({ icon: Icon, href, label }, index) => (
                         <motion.a
                             key={index}
@@ -175,17 +175,83 @@ const Hero = () => {
                     ))}
                 </motion.div>
 
-                {/* Liquid Glass CTA Button */}
+                {/* Enhanced Download CV Button */}
                 <motion.a
-                    href={`mailto:${user.email}`}
-                    className="inline-block liquid-glass text-primary-foreground font-semibold px-8 py-3 rounded-lg liquid-glass-hover transition-all duration-300 shadow-lg"
+                    href="/cv.pdf"
+                    download="Minh_Son_CV.pdf"
+                    className="inline-flex items-center gap-3 liquid-glass text-black dark:text-white font-semibold px-8 py-4 rounded-xl liquid-glass-hover transition-all duration-300 shadow-xl border-2 border-primary/30 group relative overflow-hidden"
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.8, duration: 0.6 }}
                 >
-                    Let's Build Something Amazing Together
+                    {/* Download Icon */}
+                    <motion.div
+                        className="w-6 h-6 flex items-center justify-center"
+                        whileHover={{ rotate: 360 }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        <svg 
+                            className="w-5 h-5" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            viewBox="0 0 24 24"
+                        >
+                            <path 
+                                strokeLinecap="round" 
+                                strokeLinejoin="round" 
+                                strokeWidth={2} 
+                                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" 
+                            />
+                        </svg>
+                    </motion.div>
+                    
+                    {/* Button Text */}
+                    <span className="relative z-10">Download CV</span>
+                    
+                    {/* Arrow Icon */}
+                    <motion.div
+                        className="w-5 h-5 flex items-center justify-center"
+                        whileHover={{ x: 3 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        <svg 
+                            className="w-4 h-4" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            viewBox="0 0 24 24"
+                        >
+                            <path 
+                                strokeLinecap="round" 
+                                strokeLinejoin="round" 
+                                strokeWidth={2} 
+                                d="M17 8l4 4m0 0l-4 4m4-4H3" 
+                            />
+                        </svg>
+                    </motion.div>
+                    
+                    {/* Animated Background Effect */}
+                    <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-primary/20 to-purple-500/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        whileHover={{ scale: 1.1, opacity: 0.3 }}
+                        transition={{ duration: 0.4 }}
+                    />
+                    
+                    {/* Shimmer Effect */}
+                    <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 opacity-0 group-hover:opacity-100"
+                        animate={{
+                            x: ['-100%', '100%'],
+                        }}
+                        transition={{
+                            duration: 1.5,
+                            repeat: Infinity,
+                            repeatDelay: 2,
+                            ease: "easeInOut"
+                        }}
+                    />
                 </motion.a>
             </motion.div>
         </section>

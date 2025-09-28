@@ -12,7 +12,7 @@ export const user = {
     twitter: "#",
     facebook: "https://www.facebook.com/Autum83/",
   },
-  email: "minhson78999@gmail.com",
+  email: "minhson789999@gmail.com",
 };
 
 export const education = [
