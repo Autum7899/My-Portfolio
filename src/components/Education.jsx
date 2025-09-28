@@ -59,7 +59,7 @@ const Education = () => {
                     {/* Header Section */}
                     <motion.div variants={itemVariants} className="text-center mb-20">
                         <motion.div
-                            className="inline-flex items-center gap-3 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-6"
+                            className="inline-flex items-center gap-3 liquid-glass-card liquid-glass-hover text-primary px-6 py-3 rounded-full text-sm font-semibold mb-6"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
@@ -101,7 +101,7 @@ const Education = () => {
                                 >
                                     {/* Education Card */}
                                     <motion.div 
-                                        className="relative p-8 rounded-3xl bg-gradient-to-br from-card to-card/50 border border-border/50 hover:border-primary/30 transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-primary/10"
+                                        className="relative p-8 rounded-3xl liquid-glass-card liquid-glass-hover liquid-gradient-primary transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-primary/10"
                                         whileHover={{ 
                                             scale: 1.02, 
                                             y: -8
@@ -109,7 +109,7 @@ const Education = () => {
                                     >
                                         {/* Status Badge */}
                                         <motion.div
-                                            className="absolute -top-3 -right-3 bg-gradient-to-r from-primary to-purple-500 text-white px-4 py-1.5 rounded-full text-sm font-semibold shadow-lg"
+                                            className="absolute -top-3 -right-3 liquid-glass text-white px-4 py-1.5 rounded-full text-sm font-semibold shadow-lg"
                                             initial={{ opacity: 0, scale: 0 }}
                                             animate={{ opacity: 1, scale: 1 }}
                                             transition={{ delay: 0.4 + index * 0.1 }}
@@ -138,7 +138,7 @@ const Education = () => {
                                                 className="flex items-center gap-3"
                                                 whileHover={{ x: 5 }}
                                             >
-                                                <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
+                                                <div className="w-10 h-10 liquid-glass-card rounded-xl flex items-center justify-center">
                                                     <MapPin size={18} className="text-primary" />
                                                 </div>
                                                 <p className="text-lg text-foreground font-medium">{edu.institution}</p>
@@ -148,7 +148,7 @@ const Education = () => {
                                                 className="flex items-center gap-3"
                                                 whileHover={{ x: 5 }}
                                             >
-                                                <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
+                                                <div className="w-10 h-10 liquid-glass-card rounded-xl flex items-center justify-center">
                                                     <BookOpen size={18} className="text-primary" />
                                                 </div>
                                                 <span className="text-muted-foreground font-medium">Major: {edu.major}</span>

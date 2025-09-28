@@ -90,9 +90,9 @@ const Hero = () => {
                         </motion.span>
                     </motion.h1>
                     
-                    {/* Subtle underline */}
+                    {/* Liquid Glass underline */}
                     <motion.div
-                        className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-primary via-purple-500 to-pink-500 rounded-full"
+                        className="absolute -bottom-2 left-0 right-0 h-0.5 liquid-glass rounded-full"
                         initial={{ scaleX: 0 }}
                         animate={{ scaleX: 1 }}
                         transition={{ delay: 1, duration: 1, ease: "easeOut" }}
@@ -169,10 +169,10 @@ const Hero = () => {
                     ))}
                 </motion.div>
 
-                {/* Simplified CTA Button */}
+                {/* Liquid Glass CTA Button */}
                 <motion.a
                     href={`mailto:${user.email}`}
-                    className="inline-block bg-primary text-primary-foreground font-semibold px-8 py-3 rounded-lg hover:bg-primary/90 transition-all duration-300 shadow-lg"
+                    className="inline-block liquid-glass text-primary-foreground font-semibold px-8 py-3 rounded-lg liquid-glass-hover transition-all duration-300 shadow-lg"
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                     initial={{ opacity: 0, y: 20 }}

@@ -76,7 +76,7 @@ const Projects = () => {
             </motion.p>
 
             <motion.div
-              className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"
+              className="w-24 h-1 liquid-glass mx-auto rounded-full"
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ delay: 0.8, duration: 0.8 }}
@@ -89,7 +89,7 @@ const Projects = () => {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="group relative bg-card rounded-2xl overflow-hidden shadow-xl border border-border hover:border-primary/50 transition-all duration-300"
+              className="group relative liquid-glass-card liquid-glass-hover rounded-2xl overflow-hidden shadow-xl liquid-gradient-accent transition-all duration-300"
               whileHover={{ 
                 scale: 1.02, 
                 y: -8,
@@ -126,7 +126,7 @@ const Projects = () => {
                   >
                     <motion.a
                       href={project.demo}
-                      className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
+                      className="w-10 h-10 liquid-glass rounded-full flex items-center justify-center"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                     >
@@ -134,7 +134,7 @@ const Projects = () => {
                     </motion.a>
                     <motion.a
                       href={project.repo}
-                      className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
+                      className="w-10 h-10 liquid-glass rounded-full flex items-center justify-center"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                     >
@@ -144,7 +144,7 @@ const Projects = () => {
 
                   {/* Featured Badge */}
                   <motion.div
-                    className="absolute top-4 left-4 bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-semibold"
+                    className="absolute top-4 left-4 liquid-glass text-primary-foreground px-3 py-1 rounded-full text-xs font-semibold"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.2 + index * 0.1 }}
@@ -175,7 +175,7 @@ const Projects = () => {
                     {project.tags.map((tag, tagIndex) => (
                       <motion.span 
                         key={tag}
-                        className="bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full border border-primary/20"
+                        className="liquid-glass-card text-primary text-xs font-semibold px-3 py-1 rounded-full"
                         initial={{ opacity: 0, scale: 0 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.3 + tagIndex * 0.05 }}
@@ -282,7 +282,7 @@ const Projects = () => {
             className="text-center mt-16"
           >
             <motion.div
-              className="bg-gradient-to-r from-primary/10 to-purple-500/10 rounded-2xl p-8 border border-primary/20"
+              className="liquid-glass-card liquid-gradient-primary rounded-2xl p-8"
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
             >

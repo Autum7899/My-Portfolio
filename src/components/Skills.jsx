@@ -24,19 +24,34 @@ const Skills = () => {
 
   const getLevelBadge = (level) => {
     switch (level) {
-      case "Advanced": return "bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200";
-      case "Intermediate": return "bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200";
-      case "Learning": return "bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200";
-      default: return "bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200";
+      case "Advanced": return "bg-green-500/20 text-green-500 border border-green-500/30";
+      case "Intermediate": return "bg-yellow-500/20 text-yellow-500 border border-yellow-500/30";
+      case "Learning": return "bg-blue-500/20 text-blue-500 border border-blue-500/30";
+      default: return "bg-gray-500/20 text-gray-500 border border-gray-500/30";
+    }
+  };
+
+  const getLevelBackground = (level) => {
+    switch (level) {
+      case "Advanced": return "bg-green-500/10";
+      case "Intermediate": return "bg-yellow-500/10";
+      case "Learning": return "bg-blue-500/10";
+      default: return "bg-gray-500/10";
     }
   };
 
   return (
     <AnimatedSection id="skills">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-foreground">
+        <motion.h2 
+          className="text-3xl md:text-4xl font-bold text-center mb-16 text-foreground"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           Technical Skills
-        </h2>
+        </motion.h2>
         
         <div className="space-y-12">
           {skillCategories.map((category, categoryIndex) => (
@@ -53,7 +68,7 @@ const Skills = () => {
               }}
             >
               <div className="flex items-center gap-4">
-                <div className={`h-1 w-16 bg-gradient-to-r ${category.color} rounded-full`}></div>
+                <div className={`h-1 w-16 liquid-glass rounded-full`}></div>
                 <h3 className="text-2xl font-bold text-foreground">{category.title}</h3>
               </div>
               
@@ -61,7 +76,7 @@ const Skills = () => {
                 {category.skills.map((skill, skillIndex) => (
                   <motion.div
                     key={skill.name}
-                    className="group relative flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-card border border-border hover:border-primary/50 transition-all duration-200 hover:shadow-lg hover:-translate-y-1"
+                    className={`group relative flex flex-col items-center justify-center gap-3 p-4 rounded-xl liquid-glass-card liquid-glass-hover transition-all duration-200 hover:shadow-lg hover:-translate-y-1 ${getLevelBackground(skill.level)}`}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.1 }}
@@ -79,14 +94,13 @@ const Skills = () => {
                           skill.invert ? "dark:invert" : ""
                         }`}
                       />
-                      <div className={`absolute -top-1 -right-1 w-3 h-3 rounded-full ${getLevelColor(skill.level)}`}></div>
                     </div>
                     
                     <div className="text-center">
                       <p className="font-semibold text-foreground text-sm mb-1">
                         {skill.name}
                       </p>
-                      <span className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${getLevelBadge(skill.level)}`}>
+                      <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${getLevelBadge(skill.level)}`}>
                         {skill.level}
                       </span>
                     </div>

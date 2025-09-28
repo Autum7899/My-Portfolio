@@ -148,7 +148,7 @@ const Contact = () => {
                         </motion.p>
 
                         <motion.div
-                            className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"
+                            className="w-24 h-1 liquid-glass mx-auto rounded-full"
                             initial={{ scaleX: 0 }}
                             animate={{ scaleX: 1 }}
                             transition={{ delay: 0.8, duration: 0.8 }}
@@ -171,7 +171,7 @@ const Contact = () => {
                                     <motion.a
                                         key={index}
                                         href={info.href}
-                                        className="flex items-center space-x-4 p-4 rounded-xl bg-card border border-border hover:border-primary/50 transition-all duration-300 group"
+                                        className="flex items-center space-x-4 p-4 rounded-xl liquid-glass-card liquid-glass-hover transition-all duration-300 group"
                                         whileHover={{ scale: 1.02, x: 10 }}
                                         initial={{ opacity: 0, x: -50 }}
                                         animate={{ opacity: 1, x: 0 }}

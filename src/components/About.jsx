@@ -108,7 +108,7 @@ const About = () => {
             </motion.h2>
             
             <motion.div
-              className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"
+              className="w-24 h-1 liquid-glass mx-auto rounded-full"
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ delay: 0.8, duration: 0.8 }}
@@ -123,8 +123,8 @@ const About = () => {
               className="relative"
             >
               <div className="relative group">
-                {/* Gradient Border */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-2xl p-1">
+                {/* Liquid Glass Border */}
+                <div className="absolute -inset-1 liquid-glass rounded-2xl p-1">
                   <div className="bg-background rounded-xl h-full w-full" />
                 </div>
                 
@@ -227,7 +227,7 @@ const About = () => {
                 onHoverEnd={() => setHoveredCard(null)}
               >
                 <motion.div
-                  className="relative p-6 rounded-2xl bg-card border border-border hover:border-primary/50 transition-all duration-300"
+                  className="relative p-6 rounded-2xl liquid-glass-card liquid-glass-hover liquid-gradient-primary transition-all duration-300"
                   animate={{
                     boxShadow: hoveredCard === index 
                       ? "0 20px 40px rgba(59, 130, 246, 0.2)" 
@@ -235,7 +235,7 @@ const About = () => {
                   }}
                 >
                   <motion.div
-                    className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center"
+                    className="w-16 h-16 mx-auto mb-4 liquid-glass-card rounded-full flex items-center justify-center"
                     whileHover={{ rotate: 360 }}
                     transition={{ duration: 0.6 }}
                   >
@@ -287,7 +287,7 @@ const About = () => {
                 <motion.div
                   key={index}
                   variants={itemVariants}
-                  className="group relative p-6 rounded-2xl bg-card border border-border hover:border-primary/50 transition-all duration-300 cursor-pointer"
+                  className="group relative p-6 rounded-2xl liquid-glass-card liquid-glass-hover liquid-gradient-secondary transition-all duration-300 cursor-pointer"
                   whileHover={{ 
                     scale: 1.02, 
                     y: -5,
@@ -302,7 +302,7 @@ const About = () => {
                     whileHover={{ x: 10 }}
                   >
                     <motion.div
-                      className={`w-12 h-12 bg-gradient-to-r ${interest.color} rounded-xl flex items-center justify-center flex-shrink-0`}
+                      className={`w-12 h-12 liquid-glass rounded-xl flex items-center justify-center flex-shrink-0`}
                       whileHover={{ 
                         scale: 1.1,
                         rotate: 10
