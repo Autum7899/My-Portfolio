@@ -242,8 +242,14 @@ const Contact = () => {
 
                         {/* Contact Form */}
                         <motion.div variants={itemVariants} className="relative">
-                            <div className="bg-card rounded-2xl p-8 shadow-xl border border-border">
-                                <h3 className="text-2xl font-bold text-foreground mb-6">Send Me a Message</h3>
+                            <div className="relative liquid-glass-card rounded-2xl p-8 shadow-2xl border border-primary/20">
+                                <div className="relative z-10">
+                                    <div className="flex items-center gap-3 mb-8">
+                                        <div className="w-12 h-12 liquid-glass rounded-xl flex items-center justify-center">
+                                            <Send size={24} className="text-primary" />
+                                        </div>
+                                        <h3 className="text-2xl font-bold text-foreground">Send Me a Message</h3>
+                                    </div>
                                 
                                 <form onSubmit={handleSubmit} className="space-y-6">
                                     <div className="grid md:grid-cols-2 gap-6">
@@ -258,8 +264,8 @@ const Contact = () => {
                                                 placeholder="Your Name" 
                                                 value={formData.name}
                                                 onChange={handleInputChange}
-                                                className={`w-full bg-background border rounded-lg px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all ${
-                                                    errors.name ? 'border-red-500' : 'border-border'
+                                                className={`w-full liquid-glass-card border-2 rounded-xl px-4 py-4 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 ${
+                                                    errors.name ? 'border-red-500 dark:border-red-400' : 'border-primary/20'
                                                 }`}
                                             />
                                             {errors.name && (
@@ -284,8 +290,8 @@ const Contact = () => {
                                                 placeholder="Your Email" 
                                                 value={formData.email}
                                                 onChange={handleInputChange}
-                                                className={`w-full bg-background border rounded-lg px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all ${
-                                                    errors.email ? 'border-red-500' : 'border-border'
+                                                className={`w-full liquid-glass-card border-2 rounded-xl px-4 py-4 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 ${
+                                                    errors.email ? 'border-red-500 dark:border-red-400' : 'border-primary/20'
                                                 }`}
                                             />
                                             {errors.email && (
@@ -312,8 +318,8 @@ const Contact = () => {
                                                 placeholder="Your Message" 
                                                 value={formData.message}
                                                 onChange={handleInputChange}
-                                                className={`w-full bg-background border rounded-lg px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all resize-none ${
-                                                    errors.message ? 'border-red-500' : 'border-border'
+                                                className={`w-full liquid-glass-card border-2 rounded-xl px-4 py-4 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 resize-none ${
+                                                    errors.message ? 'border-red-500 dark:border-red-400' : 'border-primary/20'
                                                 }`}
                                             />
                                             <div className="absolute bottom-2 right-2 text-xs text-muted-foreground">
@@ -340,9 +346,9 @@ const Contact = () => {
                                         <motion.button 
                                             type="submit" 
                                             disabled={isSubmitting}
-                                            className="bg-primary text-primary-foreground font-semibold px-8 py-3 rounded-lg hover:bg-primary/90 transition-all duration-300 shadow-lg w-full md:w-auto relative overflow-hidden group"
-                                            whileHover={{ scale: 1.05 }}
-                                            whileTap={{ scale: 0.95 }}
+                                            className="liquid-glass text-primary-foreground font-semibold px-8 py-4 rounded-xl hover:liquid-glass-hover transition-all duration-300 shadow-xl w-full md:w-auto relative overflow-hidden group border-2 border-primary/30"
+                                            whileHover={{ scale: 1.02, y: -2 }}
+                                            whileTap={{ scale: 0.98 }}
                                         >
                                             <motion.span
                                                 className="flex items-center justify-center gap-2"
@@ -396,6 +402,7 @@ const Contact = () => {
                                         </motion.div>
                                     )}
                                 </form>
+                                </div>
                             </div>
                         </motion.div>
                     </div>
