@@ -134,7 +134,7 @@ const Contact = () => {
                         transition={{ duration: 0.6 }}
                     >
                         <motion.h2 
-                            className="text-3xl md:text-4xl font-bold text-center text-foreground relative z-10"
+                            className="text-4xl md:text-5xl font-bold text-center text-foreground relative z-10"
                         >
                             Let's Connect
                         </motion.h2>
@@ -157,7 +157,7 @@ const Contact = () => {
                         transition={{ delay: 0.2, duration: 0.6 }}
                     >
                         <motion.p 
-                            className="text-lg text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed"
+                            className="text-xl text-muted-foreground mb-8 max-w-4xl mx-auto leading-relaxed"
                         >
                             I'm actively seeking internship opportunities and exciting projects. 
                             Whether you have a role that fits my skills or just want to chat about technology, 
@@ -177,8 +177,8 @@ const Contact = () => {
                         {/* Contact Information */}
                         <motion.div variants={itemVariants} className="space-y-8">
                             <div>
-                                <h3 className="text-2xl font-bold text-foreground mb-6">Get In Touch</h3>
-                                <p className="text-muted-foreground mb-8 leading-relaxed">
+                                <h3 className="text-3xl font-bold text-foreground mb-6">Get In Touch</h3>
+                                <p className="text-muted-foreground mb-8 leading-relaxed text-lg">
                                     Ready to collaborate or discuss opportunities? I'm always excited to connect 
                                     with fellow developers, potential employers, or anyone interested in technology!
                                 </p>
@@ -203,8 +203,8 @@ const Contact = () => {
                                             <info.icon size={20} className="text-primary" />
                                         </motion.div>
                                         <div>
-                                            <p className="text-sm text-muted-foreground">{info.label}</p>
-                                            <p className="text-foreground font-medium group-hover:text-primary transition-colors">
+                                            <p className="text-base text-muted-foreground">{info.label}</p>
+                                            <p className="text-foreground font-medium group-hover:text-primary transition-colors text-lg">
                                                 {info.value}
                                             </p>
                                         </div>

@@ -55,7 +55,7 @@ const Hero = () => {
                 {/* Name with Cool Gradient */}
                 <motion.h1 
                     variants={itemVariants}
-                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-center relative z-10 leading-tight mb-8"
+                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-center relative z-10 leading-tight mb-10"
                     style={{
                         background: "linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%)",
                         backgroundSize: "300% 300%",
@@ -71,7 +71,7 @@ const Hero = () => {
                 {/* Title */}
                 <motion.p 
                     variants={itemVariants}
-                    className="text-lg sm:text-xl md:text-2xl text-primary mb-6 font-medium max-w-2xl mx-auto"
+                    className="text-xl sm:text-2xl md:text-3xl text-primary mb-8 font-medium max-w-3xl mx-auto"
                 >
                     Information Systems Student & Aspiring Full-Stack Developer
                 </motion.p>
@@ -80,10 +80,10 @@ const Hero = () => {
                 {/* Location */}
                 <motion.div 
                     variants={itemVariants}
-                    className="flex justify-center items-center space-x-4 mb-8"
+                    className="flex justify-center items-center space-x-4 mb-10"
                 >
-                    <div className="flex items-center text-muted-foreground">
-                        <MapPin size={18} className="mr-2"/>
+                    <div className="flex items-center text-muted-foreground text-lg">
+                        <MapPin size={20} className="mr-2"/>
                         {user.location}
                     </div>
                 </motion.div>
@@ -91,7 +91,7 @@ const Hero = () => {
                 {/* Social Links */}
                 <motion.div 
                     variants={itemVariants}
-                    className="flex justify-center space-x-4 sm:space-x-6 mb-10"
+                    className="flex justify-center space-x-6 sm:space-x-8 mb-12"
                 >
                     {[
                         { icon: Github, href: user.socials.github, label: "GitHub Profile" },
@@ -104,9 +104,9 @@ const Hero = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label={label}
-                            className="text-muted-foreground hover:text-primary transition-colors duration-300 p-2 rounded-lg hover:bg-primary/10"
+                            className="text-muted-foreground hover:text-primary transition-colors duration-300 p-3 rounded-xl hover:bg-primary/10"
                         >
-                            <Icon size={24} className="sm:w-7 sm:h-7" />
+                            <Icon size={28} className="sm:w-8 sm:h-8" />
                         </a>
                     ))}
                 </motion.div>
@@ -116,7 +116,7 @@ const Hero = () => {
                     variants={itemVariants}
                     href="/LuongMinhSon-CV.pdf"
                     download="LuongMinhSon-CV.pdf"
-                    className="group relative inline-flex items-center gap-2 sm:gap-3 liquid-glass text-black dark:text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-xl liquid-glass-hover transition-all duration-300 shadow-xl border-2 border-primary/70 dark:border-primary/50 text-sm sm:text-base overflow-hidden"
+                    className="group relative inline-flex items-center gap-3 sm:gap-4 liquid-glass text-black dark:text-white font-semibold px-8 sm:px-10 py-4 sm:py-5 rounded-xl liquid-glass-hover transition-all duration-300 shadow-xl border-2 border-primary/70 dark:border-primary/50 text-base sm:text-lg overflow-hidden"
                     whileHover={{ 
                         scale: 1.05, 
                         y: -2,

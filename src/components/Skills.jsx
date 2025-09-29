@@ -51,7 +51,7 @@ const Skills = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground relative z-10">
+          <h2 className="text-4xl md:text-5xl font-bold text-center text-foreground relative z-10">
             Technical Skills
           </h2>
           {/* Liquid Glass background for title */}
@@ -82,7 +82,7 @@ const Skills = () => {
                       className={`absolute inset-0 bg-gradient-to-r ${category.color} opacity-60`}
                     />
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground">{category.title}</h3>
+                  <h3 className="text-3xl font-bold text-foreground">{category.title}</h3>
                 </div>
                 {/* Liquid Glass background for category header */}
                 <div 
@@ -95,17 +95,18 @@ const Skills = () => {
                 {category.skills.map((skill, skillIndex) => (
                   <motion.div
                     key={skill.name}
-                    className={`group relative flex flex-col items-center justify-center gap-4 p-6 rounded-2xl liquid-glass-card transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${getLevelBackground(skill.level)}`}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    className={`group relative flex flex-col items-center justify-center gap-4 p-6 rounded-2xl liquid-glass-card transition-all duration-300 hover:shadow-lg ${getLevelBackground(skill.level)}`}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
                     viewport={{ once: true, amount: 0.1 }}
                     transition={{ 
-                      duration: 0.5, 
+                      duration: 0.6, 
                       ease: "easeOut",
-                      delay: skillIndex * 0.05 
+                      delay: skillIndex * 0.03 
                     }}
                     whileHover={{ 
                       scale: 1.02,
+                      y: -2,
                       transition: { duration: 0.2 }
                     }}
                   >
@@ -115,11 +116,11 @@ const Skills = () => {
                     />
                     
                     <div className="relative z-10">
-                      <div className="p-3 rounded-xl liquid-glass-card">
+                      <div className="p-4 rounded-xl liquid-glass-card">
                         <img
                           src={skill.logo}
                           alt={`${skill.name} logo`}
-                          className={`w-12 h-12 object-contain transition-transform duration-300 group-hover:scale-110 ${
+                          className={`w-14 h-14 object-contain transition-transform duration-300 group-hover:scale-110 ${
                             skill.invert ? "dark:invert" : ""
                           }`}
                           loading="lazy"
@@ -129,11 +130,11 @@ const Skills = () => {
                     </div>
                     
                     <div className="text-center relative z-10">
-                      <p className="font-semibold text-foreground text-sm mb-2 group-hover:text-primary transition-colors duration-300">
+                      <p className="font-semibold text-foreground text-base mb-3 group-hover:text-primary transition-colors duration-300">
                         {skill.name}
                       </p>
                       <span 
-                        className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${getLevelBadge(skill.level)}`}
+                        className={`inline-block px-4 py-1.5 rounded-full text-sm font-medium ${getLevelBadge(skill.level)}`}
                       >
                         {skill.level}
                       </span>

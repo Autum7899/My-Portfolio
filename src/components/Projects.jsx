@@ -135,7 +135,7 @@ const ProjectCard = memo(({
       {/* Project Content */}
       <div className={`p-6 ${viewMode === 'list' ? 'flex-1' : ''}`}>
         <div className="flex items-start justify-between mb-4">
-          <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-200">
+          <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-200">
             {project.title}
           </h3>
           <motion.div
@@ -148,7 +148,7 @@ const ProjectCard = memo(({
           </motion.div>
         </div>
 
-        <p className="text-muted-foreground mb-6 leading-relaxed">
+        <p className="text-muted-foreground mb-6 leading-relaxed text-lg">
           {project.description}
         </p>
 
@@ -338,7 +338,7 @@ const Projects = () => {
             transition={{ duration: 0.6 }}
           >
             <motion.h2 
-              className="text-3xl md:text-4xl font-bold text-center text-foreground relative z-10"
+              className="text-4xl md:text-5xl font-bold text-center text-foreground relative z-10"
             >
               Featured Projects
             </motion.h2>
@@ -361,7 +361,7 @@ const Projects = () => {
             transition={{ delay: 0.1, duration: 0.5 }}
           >
             <motion.p 
-              className="text-lg text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed"
+              className="text-xl text-muted-foreground mb-8 max-w-4xl mx-auto leading-relaxed"
             >
               Explore my collection of projects that demonstrate my skills in full-stack development, 
               problem-solving, and innovative thinking. Each project tells a story of learning and growth.

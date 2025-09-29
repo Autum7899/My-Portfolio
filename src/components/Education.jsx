@@ -66,7 +66,7 @@ const Education = () => {
                     >
                         
                         <motion.h2 
-                            className="text-3xl md:text-4xl font-bold text-center text-foreground relative z-10"
+                            className="text-4xl md:text-5xl font-bold text-center text-foreground relative z-10"
                         >
                             Education
                         </motion.h2>
@@ -90,7 +90,7 @@ const Education = () => {
                         transition={{ delay: 0.2, duration: 0.6 }}
                     >
                         <motion.p 
-                            className="text-xl text-muted-foreground mb-8 max-w-4xl mx-auto leading-relaxed"
+                            className="text-2xl text-muted-foreground mb-8 max-w-5xl mx-auto leading-relaxed"
                         >
                             Building a strong foundation in computer science and information systems, 
                             preparing for a successful career in technology.
@@ -136,7 +136,7 @@ const Education = () => {
                                                 <span>{edu.date}</span>
                                             </motion.div>
                                             
-                                            <h3 className="text-3xl font-bold text-foreground group-hover:text-primary transition-colors mb-4">
+                                            <h3 className="text-4xl font-bold text-foreground group-hover:text-primary transition-colors mb-6">
                                                 {edu.degree}
                                             </h3>
                                         </div>
@@ -150,7 +150,7 @@ const Education = () => {
                                                 <div className="w-10 h-10 liquid-glass-card rounded-xl flex items-center justify-center">
                                                     <MapPin size={18} className="text-primary" />
                                                 </div>
-                                                <p className="text-lg text-foreground font-medium">{edu.institution}</p>
+                                                <p className="text-xl text-foreground font-medium">{edu.institution}</p>
                                             </motion.div>
 
                                             <motion.div 
@@ -160,13 +160,13 @@ const Education = () => {
                                                 <div className="w-10 h-10 liquid-glass-card rounded-xl flex items-center justify-center">
                                                     <BookOpen size={18} className="text-primary" />
                                                 </div>
-                                                <span className="text-muted-foreground font-medium">Major: {edu.major}</span>
+                                                <span className="text-muted-foreground font-medium text-lg">Major: {edu.major}</span>
                                             </motion.div>
                                         </div>
 
                                         {/* Description */}
                                         <motion.p 
-                                            className="text-muted-foreground leading-relaxed text-lg"
+                                            className="text-muted-foreground leading-relaxed text-xl"
                                             initial={{ opacity: 0.8 }}
                                             whileHover={{ opacity: 1 }}
                                         >
