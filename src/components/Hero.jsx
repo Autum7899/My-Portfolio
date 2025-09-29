@@ -116,7 +116,7 @@ const Hero = () => {
                     variants={itemVariants}
                     href="/LuongMinhSon-CV.pdf"
                     download="LuongMinhSon-CV.pdf"
-                    className="group relative inline-flex items-center gap-2 sm:gap-3 liquid-glass text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-xl liquid-glass-hover transition-all duration-300 shadow-xl border-2 border-primary/50 text-sm sm:text-base overflow-hidden"
+                    className="group relative inline-flex items-center gap-2 sm:gap-3 liquid-glass text-black dark:text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-xl liquid-glass-hover transition-all duration-300 shadow-xl border-2 border-primary/70 dark:border-primary/50 text-sm sm:text-base overflow-hidden"
                     whileHover={{ 
                         scale: 1.05, 
                         y: -2,
@@ -126,7 +126,7 @@ const Hero = () => {
                 >
                     {/* Animated Background Gradient */}
                     <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-primary/40 via-purple-500/50 to-primary/40 rounded-xl"
+                        className="absolute inset-0 bg-gradient-to-r from-primary/60 via-purple-500/70 to-primary/60 dark:from-primary/40 dark:via-purple-500/50 dark:to-primary/40 rounded-xl"
                         initial={{ x: "-100%" }}
                         whileHover={{ x: "100%" }}
                         transition={{ duration: 0.8, ease: "easeInOut" }}
@@ -160,7 +160,7 @@ const Hero = () => {
                     <motion.span 
                         className="relative z-10"
                         whileHover={{
-                            textShadow: "0 0 8px rgba(59, 130, 246, 0.6)"
+                            textShadow: "0 0 12px rgba(59, 130, 246, 0.8), 0 0 24px rgba(147, 51, 234, 0.4)"
                         }}
                     >
                         Download CV
@@ -192,7 +192,7 @@ const Hero = () => {
                     
                     {/* Shimmer Effect */}
                     <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 opacity-0 group-hover:opacity-100"
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/30 to-transparent dark:via-white/20 -skew-x-12 opacity-0 group-hover:opacity-100"
                         animate={{
                             x: ['-100%', '100%'],
                         }}
