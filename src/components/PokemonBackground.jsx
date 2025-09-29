@@ -40,7 +40,14 @@ const PokemonBackground = ({ onLoadingProgress, showPokemon = true }) => {
     const [loadingProgress, setLoadingProgress] = useState(0);
     const loadedPokemonCount = useRef(0);
     const targetPokemonCount = useRef(0);
-
+    
+    // Track current showPokemon state
+    const currentShowPokemon = useRef(showPokemon);
+    
+    // Update ref when prop changes
+    useEffect(() => {
+        currentShowPokemon.current = showPokemon;
+    }, [showPokemon]);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -225,7 +232,7 @@ const PokemonBackground = ({ onLoadingProgress, showPokemon = true }) => {
             const offsetX = gridOffset.current.x % SQUARE_SIZE;
             const offsetY = gridOffset.current.y % SQUARE_SIZE;
             
-            // Draw Pokemon or grid based on showPokemon prop
+            // Draw Pokemon or grid based on showPokemon prop and loading state
             for (let x = 0; x < gridDimensions.current.cols + 1; x++) {
                 for (let y = 0; y < gridDimensions.current.rows + 1; y++) {
                     const gridX = startCol + x;
@@ -238,8 +245,8 @@ const PokemonBackground = ({ onLoadingProgress, showPokemon = true }) => {
                     if (screenX > -SQUARE_SIZE && screenX < canvas.width && 
                         screenY > -SQUARE_SIZE && screenY < canvas.height) {
                         
-                        if (showPokemon) {
-                            // Draw Pokemon mode
+                        if (currentShowPokemon.current) {
+                            // Draw Pokemon mode when showPokemon is true
                             const pokemon = pokemonGrid.current.get(`${gridX},${gridY}`);
                             if (pokemon && pokemon.silhouette) {
                                 // Check if mouse is hovering over this Pokemon
@@ -254,6 +261,26 @@ const PokemonBackground = ({ onLoadingProgress, showPokemon = true }) => {
                                     // Draw colored silhouette
                                     ctx.drawImage(pokemon.silhouette, screenX, screenY, SQUARE_SIZE, SQUARE_SIZE);
                                 }
+                            } else {
+                                // Draw grid lines when Pokemon is not loaded for this cell
+                                const gridColor = theme === 'dark' 
+                                    ? 'rgba(59, 130, 246, 0.4)' 
+                                    : 'rgba(59, 130, 246, 0.3)';
+                                
+                                ctx.strokeStyle = gridColor;
+                                ctx.lineWidth = 1;
+                                
+                                // Draw vertical line
+                                ctx.beginPath();
+                                ctx.moveTo(screenX, screenY);
+                                ctx.lineTo(screenX, screenY + SQUARE_SIZE);
+                                ctx.stroke();
+                                
+                                // Draw horizontal line
+                                ctx.beginPath();
+                                ctx.moveTo(screenX, screenY);
+                                ctx.lineTo(screenX + SQUARE_SIZE, screenY);
+                                ctx.stroke();
                             }
                         } else {
                             // Draw grid lines mode with high visibility
@@ -290,6 +317,9 @@ const PokemonBackground = ({ onLoadingProgress, showPokemon = true }) => {
             clearPokemonGrid();
             currentTheme.current = theme;
         }
+        
+        // Clear canvas when showPokemon changes to ensure clean transition
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         // Khởi tạo
         const init = async () => {

@@ -12,28 +12,25 @@ const LoadingScreen = ({ setIsLoading, pokemonLoadingState }) => {
     if (pokemonLoadingState) {
       setProgress(pokemonLoadingState.progress);
       setIsPokemonLoading(pokemonLoadingState.isLoading);
-      
-      // Only hide loading screen when Pokemon are fully loaded
-      if (!pokemonLoadingState.isLoading) {
-        // Add a small delay for smooth transition
-        const timer = setTimeout(() => {
-          setIsLoading(false);
-        }, 500);
-        
-        return () => clearTimeout(timer);
-      }
     }
+    
+    // Show main content immediately after a short delay, don't wait for Pokemon
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500); // Reduced from waiting for Pokemon to just 1.5 seconds
+    
+    return () => clearTimeout(timer);
   }, [pokemonLoadingState, setIsLoading]);
 
   // Fallback timeout for loading screen
   useEffect(() => {
     const fallbackTimer = setTimeout(() => {
       const elapsedTime = Date.now() - loadingStartTime;
-      if (elapsedTime > 8000) { // 8 seconds
+      if (elapsedTime > 3000) { // 3 seconds
         console.warn('Loading screen fallback triggered');
         setIsLoading(false);
       }
-    }, 8000);
+    }, 3000);
 
     return () => clearTimeout(fallbackTimer);
   }, [setIsLoading, loadingStartTime]);

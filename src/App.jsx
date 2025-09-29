@@ -42,7 +42,7 @@ function App() {
         console.warn('Loading screen timeout - forcing app to load');
         setIsLoading(false);
       }
-    }, 10000); // 10 second fallback
+    }, 3000); // Reduced to 3 seconds since we don't wait for Pokemon anymore
 
     return () => clearTimeout(fallbackTimer);
   }, [isLoading]);
