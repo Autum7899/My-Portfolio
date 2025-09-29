@@ -75,7 +75,7 @@ const Hero = () => {
                     transition={{ duration: 0.6 }}
                 >
                     <motion.h1 
-                        className="text-4xl md:text-6xl font-extrabold text-center text-foreground relative z-10 leading-tight"
+                        className="text-4xl md:text-6xl font-extrabold text-center text-black dark:text-white relative z-10 leading-tight"
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -83,13 +83,42 @@ const Hero = () => {
                     >
                         <motion.span
                             className="inline-block"
+                            initial={{ opacity: 0, y: 20, rotateX: -90 }}
+                            animate={{ 
+                                opacity: 1, 
+                                y: 0, 
+                                rotateX: 0,
+                                textShadow: "0 0 20px rgba(59, 130, 246, 0.3)"
+                            }}
+                            transition={{ 
+                                duration: 1.2, 
+                                ease: "easeOut",
+                                delay: 0.5
+                            }}
                             whileHover={{ 
                                 backgroundImage: "linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899)",
                                 backgroundClip: "text",
                                 WebkitBackgroundClip: "text",
-                                WebkitTextFillColor: "transparent"
+                                WebkitTextFillColor: "transparent",
+                                scale: 1.05,
+                                rotateY: 5,
+                                textShadow: "0 0 30px rgba(59, 130, 246, 0.6)"
                             }}
-                            transition={{ duration: 0.3 }}
+                            whileTap={{ scale: 0.98 }}
+                            animate={{
+                                textShadow: [
+                                    "0 0 20px rgba(59, 130, 246, 0.3)",
+                                    "0 0 30px rgba(147, 51, 234, 0.4)",
+                                    "0 0 20px rgba(59, 130, 246, 0.3)"
+                                ]
+                            }}
+                            transition={{
+                                textShadow: {
+                                    duration: 3,
+                                    repeat: Infinity,
+                                    ease: "easeInOut"
+                                }
+                            }}
                         >
                             Hi, I'm Minh Sơn
                         </motion.span>
@@ -97,7 +126,7 @@ const Hero = () => {
                     
                     {/* Liquid Glass background for title */}
                     <motion.div 
-                        className="absolute inset-0 -m-4 liquid-glass rounded-2xl"
+                        className="absolute inset-0 -m-4 liquid-glass dark:liquid-glass rounded-2xl"
                         initial={{ scale: 0.8 }}
                         whileInView={{ scale: 1 }}
                         viewport={{ once: true }}
