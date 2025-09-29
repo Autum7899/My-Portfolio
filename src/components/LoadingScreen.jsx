@@ -1,16 +1,42 @@
 // src/components/LoadingScreen.js
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Zap } from 'lucide-react';
 
-const LoadingScreen = ({ setIsLoading }) => {
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2500);
+const LoadingScreen = ({ setIsLoading, pokemonLoadingState }) => {
+  const [progress, setProgress] = useState(0);
+  const [isPokemonLoading, setIsPokemonLoading] = useState(true);
+  const [loadingStartTime] = useState(Date.now());
 
-    return () => clearTimeout(timer);
-  }, [setIsLoading]);
+  useEffect(() => {
+    if (pokemonLoadingState) {
+      setProgress(pokemonLoadingState.progress);
+      setIsPokemonLoading(pokemonLoadingState.isLoading);
+      
+      // Only hide loading screen when Pokemon are fully loaded
+      if (!pokemonLoadingState.isLoading) {
+        // Add a small delay for smooth transition
+        const timer = setTimeout(() => {
+          setIsLoading(false);
+        }, 500);
+        
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [pokemonLoadingState, setIsLoading]);
+
+  // Fallback timeout for loading screen
+  useEffect(() => {
+    const fallbackTimer = setTimeout(() => {
+      const elapsedTime = Date.now() - loadingStartTime;
+      if (elapsedTime > 8000) { // 8 seconds
+        console.warn('Loading screen fallback triggered');
+        setIsLoading(false);
+      }
+    }, 8000);
+
+    return () => clearTimeout(fallbackTimer);
+  }, [setIsLoading, loadingStartTime]);
 
   return (
     <motion.div
@@ -65,8 +91,28 @@ const LoadingScreen = ({ setIsLoading }) => {
           <Zap size={24} className="text-primary" />
         </motion.div>
 
+        {/* Pokemon Loading Progress */}
+        <motion.div
+          className="w-64 mx-auto mb-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+        >
+          <div className="text-sm text-muted-foreground mb-2 text-center">
+            Loading Pokemon... {Math.round(progress)}%
+          </div>
+          <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
+            <motion.div
+              className="h-full bg-gradient-to-r from-primary to-purple-500 rounded-full"
+              initial={{ width: "0%" }}
+              animate={{ width: `${progress}%` }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+            />
+          </div>
+        </motion.div>
+
         {/* Simple progress dots */}
-        <div className="flex justify-center space-x-3">
+        <div className="flex justify-center space-x-3 mb-6">
           {[0, 1, 2].map((index) => (
             <motion.div
               key={index}
@@ -84,6 +130,18 @@ const LoadingScreen = ({ setIsLoading }) => {
             />
           ))}
         </div>
+
+        {/* Skip Loading Button */}
+        <motion.button
+          onClick={() => setIsLoading(false)}
+          className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300 underline"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 3, duration: 0.5 }}
+          whileHover={{ scale: 1.05 }}
+        >
+          Skip Loading
+        </motion.button>
       </div>
     </motion.div>
   );

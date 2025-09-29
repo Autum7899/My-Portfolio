@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTheme } from './useTheme';
 
-const PokemonBackground = () => {
+const PokemonBackground = ({ onLoadingProgress, showPokemon = true }) => {
     const canvasRef = useRef(null);
     const { theme } = useTheme();
 
@@ -34,6 +34,12 @@ const PokemonBackground = () => {
     const hoveredPokemon = useRef(null);
     const mousePosition = useRef({ x: 0, y: 0 });
     const originalImages = useRef(new Map()); // Store original Pokemon images
+    
+    // Loading state management
+    const [isLoading, setIsLoading] = useState(true);
+    const [loadingProgress, setLoadingProgress] = useState(0);
+    const loadedPokemonCount = useRef(0);
+    const targetPokemonCount = useRef(0);
 
 
     useEffect(() => {
@@ -125,6 +131,19 @@ const PokemonBackground = () => {
                         originalImage: image
                     });
                     pendingGridCells.current.delete(key);
+                    
+                    // Update loading progress
+                    loadedPokemonCount.current++;
+                    const progress = Math.min((loadedPokemonCount.current / targetPokemonCount.current) * 100, 100);
+                    setLoadingProgress(progress);
+                    
+                    // Check if we've loaded enough Pokemon for initial display
+                    if (loadedPokemonCount.current >= targetPokemonCount.current && isLoading) {
+                        setIsLoading(false);
+                        if (onLoadingProgress) {
+                            onLoadingProgress({ isLoading: false, progress: 100 });
+                        }
+                    }
                 };
                 image.onerror = () => { throw new Error('Image failed to load'); };
 
@@ -140,12 +159,30 @@ const PokemonBackground = () => {
             pendingGridCells.current.clear();
             activePokemonIds.current.clear();
             originalImages.current.clear();
+            // Reset loading state
+            loadedPokemonCount.current = 0;
+            targetPokemonCount.current = 0;
+            setLoadingProgress(0);
+            setIsLoading(true);
         };
 
         // Đảm bảo các ô có thể nhìn thấy đều có Pokémon
         const populateAndCleanGrid = () => {
             const startCol = Math.floor(gridOffset.current.x / SQUARE_SIZE);
             const startRow = Math.floor(gridOffset.current.y / SQUARE_SIZE);
+            
+            // Calculate how many Pokemon we need for initial loading
+            const neededPokemon = (gridDimensions.current.cols + 1) * (gridDimensions.current.rows + 1);
+            if (targetPokemonCount.current === 0) {
+                targetPokemonCount.current = neededPokemon;
+                // Reset loading state when we start loading
+                loadedPokemonCount.current = 0;
+                setLoadingProgress(0);
+                setIsLoading(true);
+                if (onLoadingProgress) {
+                    onLoadingProgress({ isLoading: true, progress: 0 });
+                }
+            }
             
             for (let x = 0; x < gridDimensions.current.cols + 1; x++) {
                 for (let y = 0; y < gridDimensions.current.rows + 1; y++) {
@@ -188,7 +225,7 @@ const PokemonBackground = () => {
             const offsetX = gridOffset.current.x % SQUARE_SIZE;
             const offsetY = gridOffset.current.y % SQUARE_SIZE;
             
-            // Only draw Pokemon that are visible on screen
+            // Draw Pokemon or grid based on showPokemon prop
             for (let x = 0; x < gridDimensions.current.cols + 1; x++) {
                 for (let y = 0; y < gridDimensions.current.rows + 1; y++) {
                     const gridX = startCol + x;
@@ -200,20 +237,44 @@ const PokemonBackground = () => {
                     // Skip drawing if outside viewport bounds
                     if (screenX > -SQUARE_SIZE && screenX < canvas.width && 
                         screenY > -SQUARE_SIZE && screenY < canvas.height) {
-                        const pokemon = pokemonGrid.current.get(`${gridX},${gridY}`);
-                        if (pokemon && pokemon.silhouette) {
-                            // Check if mouse is hovering over this Pokemon
-                            const isHovered = hoveredPokemon.current && 
-                                hoveredPokemon.current.gridX === gridX && 
-                                hoveredPokemon.current.gridY === gridY;
-                            
-                            if (isHovered && pokemon.originalImage) {
-                                // Draw original Pokemon image
-                                ctx.drawImage(pokemon.originalImage, screenX, screenY, SQUARE_SIZE, SQUARE_SIZE);
-                            } else {
-                                // Draw colored silhouette
-                                ctx.drawImage(pokemon.silhouette, screenX, screenY, SQUARE_SIZE, SQUARE_SIZE);
+                        
+                        if (showPokemon) {
+                            // Draw Pokemon mode
+                            const pokemon = pokemonGrid.current.get(`${gridX},${gridY}`);
+                            if (pokemon && pokemon.silhouette) {
+                                // Check if mouse is hovering over this Pokemon
+                                const isHovered = hoveredPokemon.current && 
+                                    hoveredPokemon.current.gridX === gridX && 
+                                    hoveredPokemon.current.gridY === gridY;
+                                
+                                if (isHovered && pokemon.originalImage) {
+                                    // Draw original Pokemon image
+                                    ctx.drawImage(pokemon.originalImage, screenX, screenY, SQUARE_SIZE, SQUARE_SIZE);
+                                } else {
+                                    // Draw colored silhouette
+                                    ctx.drawImage(pokemon.silhouette, screenX, screenY, SQUARE_SIZE, SQUARE_SIZE);
+                                }
                             }
+                        } else {
+                            // Draw grid lines mode with high visibility
+                            const gridColor = theme === 'dark' 
+                                ? 'rgba(59, 130, 246, 0.8)' 
+                                : 'rgba(59, 130, 246, 0.6)';
+                            
+                            ctx.strokeStyle = gridColor;
+                            ctx.lineWidth = 2;
+                            
+                            // Draw vertical line
+                            ctx.beginPath();
+                            ctx.moveTo(screenX, screenY);
+                            ctx.lineTo(screenX, screenY + SQUARE_SIZE);
+                            ctx.stroke();
+                            
+                            // Draw horizontal line
+                            ctx.beginPath();
+                            ctx.moveTo(screenX, screenY);
+                            ctx.lineTo(screenX + SQUARE_SIZE, screenY);
+                            ctx.stroke();
                         }
                     }
                 }
@@ -248,7 +309,7 @@ const PokemonBackground = () => {
             cancelAnimationFrame(animationFrameId.current);
             if (intervalId.current) clearInterval(intervalId.current);
         };
-    }, [theme]); // Re-run when theme changes to update Pokemon colors
+    }, [theme, showPokemon]); // Re-run when theme or showPokemon changes
 
     // Global mouse tracking effect
     useEffect(() => {

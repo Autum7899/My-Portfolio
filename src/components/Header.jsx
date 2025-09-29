@@ -1,9 +1,9 @@
 // src/components/Header.js
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Grid3X3, Zap } from "lucide-react";
 
-const Header = () => {
+const Header = ({ onTogglePokemonBackground, showPokemonBackground }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -32,12 +32,36 @@ const Header = () => {
       <header className={`fixed top-0 left-0 right-0 z-30 transition-all duration-300 ${isScrolled ? "bg-background/80 backdrop-blur-lg shadow-lg" : "bg-transparent"}`}>
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <a href="#hero" className="text-xl font-bold text-foreground hover:text-primary transition-colors">Minh Sơn</a>
-          <nav className="hidden md:flex space-x-8">
-            {navLinks.map((link) => (
-              <a key={link} href={`#${link.toLowerCase()}`} className="text-muted-foreground hover:text-primary transition-colors">{link}</a>
-            ))}
-          </nav>
-          <button onClick={() => setIsMenuOpen(true)} className="md:hidden text-foreground" aria-label="Open menu"><Menu /></button>
+          
+          <div className="flex items-center space-x-4">
+            {/* Pokemon Background Toggle Button */}
+            <motion.button
+              onClick={onTogglePokemonBackground}
+              className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors duration-300 text-sm font-medium"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              title={showPokemonBackground ? "Switch to Grid Background" : "Switch to Pokemon Background"}
+            >
+              {showPokemonBackground ? (
+                <>
+                  <Zap size={16} className="text-primary" />
+                  <span className="hidden sm:inline text-primary">Pokemon</span>
+                </>
+              ) : (
+                <>
+                  <Grid3X3 size={16} className="text-primary" />
+                  <span className="hidden sm:inline text-primary">Grid</span>
+                </>
+              )}
+            </motion.button>
+            
+            <nav className="hidden md:flex space-x-8">
+              {navLinks.map((link) => (
+                <a key={link} href={`#${link.toLowerCase()}`} className="text-muted-foreground hover:text-primary transition-colors">{link}</a>
+              ))}
+            </nav>
+            <button onClick={() => setIsMenuOpen(true)} className="md:hidden text-foreground" aria-label="Open menu"><Menu /></button>
+          </div>
         </div>
       </header>
       <AnimatePresence>
@@ -47,6 +71,32 @@ const Header = () => {
             <motion.div variants={menuVariants} initial="hidden" animate="visible" exit="exit" className="fixed top-0 bottom-0 right-0 w-4/5 max-w-sm bg-background shadow-2xl z-50 md:hidden">
               <div className="flex flex-col h-full p-8 justify-center">
                 <button onClick={() => setIsMenuOpen(false)} className="absolute top-5 right-5 text-muted-foreground hover:text-foreground transition-colors" aria-label="Close menu"><X size={28} /></button>
+                
+                {/* Mobile Pokemon Background Toggle */}
+                <motion.div variants={linkVariants} className="mb-8">
+                  <motion.button
+                    onClick={() => {
+                      onTogglePokemonBackground();
+                      setIsMenuOpen(false);
+                    }}
+                    className="flex items-center space-x-3 px-4 py-3 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors duration-300 text-lg font-medium w-full"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    {showPokemonBackground ? (
+                      <>
+                        <Zap size={20} className="text-primary" />
+                        <span className="text-primary">Switch to Grid Background</span>
+                      </>
+                    ) : (
+                      <>
+                        <Grid3X3 size={20} className="text-primary" />
+                        <span className="text-primary">Switch to Pokemon Background</span>
+                      </>
+                    )}
+                  </motion.button>
+                </motion.div>
+                
                 <nav className="flex flex-col space-y-8">
                   {navLinks.map((link) => (
                     <motion.a key={link} variants={linkVariants} href={`#${link.toLowerCase()}`} onClick={() => setIsMenuOpen(false)} className="text-2xl font-medium text-foreground hover:text-primary transition-colors">{link}</motion.a>

@@ -29,11 +29,11 @@ const Hero = () => {
     };
 
     return (
-        <section id="hero" className="min-h-screen flex flex-col items-center justify-center text-center relative overflow-hidden">
-            {/* Simplified Background Elements */}
+        <section id="hero" className="min-h-screen flex flex-col items-center justify-center text-center relative overflow-hidden px-4 sm:px-6 lg:px-8">
+            {/* Enhanced Background Elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <motion.div
-                    className="absolute top-20 left-10 w-2 h-2 bg-primary/10 rounded-full"
+                    className="absolute top-20 left-4 sm:left-10 w-2 h-2 bg-primary/10 rounded-full"
                     animate={{
                         y: [0, -10, 0],
                         opacity: [0.3, 0.6, 0.3]
@@ -45,7 +45,7 @@ const Hero = () => {
                     }}
                 />
                 <motion.div
-                    className="absolute top-40 right-20 w-3 h-3 bg-blue-500/10 rounded-full"
+                    className="absolute top-40 right-4 sm:right-20 w-3 h-3 bg-blue-500/10 rounded-full"
                     animate={{
                         y: [0, 15, 0],
                         opacity: [0.2, 0.5, 0.2]
@@ -57,13 +57,26 @@ const Hero = () => {
                         delay: 1
                     }}
                 />
+                <motion.div
+                    className="absolute bottom-32 left-1/4 w-1 h-1 bg-purple-500/10 rounded-full"
+                    animate={{
+                        y: [0, -8, 0],
+                        opacity: [0.2, 0.4, 0.2]
+                    }}
+                    transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: 2
+                    }}
+                />
             </div>
 
             <motion.div
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
-                className="container mx-auto px-6 relative z-10"
+                className="max-w-4xl mx-auto relative z-10"
             >
 
                 {/* Enhanced Name with Liquid Glass Background */}
@@ -75,7 +88,7 @@ const Hero = () => {
                     transition={{ duration: 0.6 }}
                 >
                     <motion.h1 
-                        className="text-4xl md:text-6xl font-extrabold text-center text-black dark:text-white relative z-10 leading-tight"
+                        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-center text-black dark:text-white relative z-10 leading-tight"
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -88,12 +101,21 @@ const Hero = () => {
                                 opacity: 1, 
                                 y: 0, 
                                 rotateX: 0,
-                                textShadow: "0 0 20px rgba(59, 130, 246, 0.3)"
+                                textShadow: [
+                                    "0 0 20px rgba(59, 130, 246, 0.3)",
+                                    "0 0 30px rgba(147, 51, 234, 0.4)",
+                                    "0 0 20px rgba(59, 130, 246, 0.3)"
+                                ]
                             }}
                             transition={{ 
                                 duration: 1.2, 
                                 ease: "easeOut",
-                                delay: 0.5
+                                delay: 0.5,
+                                textShadow: {
+                                    duration: 3,
+                                    repeat: Infinity,
+                                    ease: "easeInOut"
+                                }
                             }}
                             whileHover={{ 
                                 backgroundImage: "linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899)",
@@ -105,20 +127,6 @@ const Hero = () => {
                                 textShadow: "0 0 30px rgba(59, 130, 246, 0.6)"
                             }}
                             whileTap={{ scale: 0.98 }}
-                            animate={{
-                                textShadow: [
-                                    "0 0 20px rgba(59, 130, 246, 0.3)",
-                                    "0 0 30px rgba(147, 51, 234, 0.4)",
-                                    "0 0 20px rgba(59, 130, 246, 0.3)"
-                                ]
-                            }}
-                            transition={{
-                                textShadow: {
-                                    duration: 3,
-                                    repeat: Infinity,
-                                    ease: "easeInOut"
-                                }
-                            }}
                         >
                             Hi, I'm Minh Sơn
                         </motion.span>
@@ -137,7 +145,7 @@ const Hero = () => {
                 {/* Enhanced Title */}
                 <motion.p 
                     variants={itemVariants}
-                    className="text-xl md:text-2xl text-primary mb-6 font-medium"
+                    className="text-lg sm:text-xl md:text-2xl text-primary mb-6 font-medium max-w-2xl mx-auto"
                 >
                     <motion.span
                         initial={{ opacity: 0 }}
@@ -169,10 +177,10 @@ const Hero = () => {
                     </motion.div>
                 </motion.div>
 
-                {/* Simplified Social Links */}
+                {/* Enhanced Social Links */}
                 <motion.div 
                     variants={itemVariants}
-                    className="flex justify-center space-x-6 mb-10"
+                    className="flex justify-center space-x-4 sm:space-x-6 mb-10"
                 >
                     {[
                         { icon: Github, href: user.socials.github, label: "GitHub Profile" },
@@ -182,15 +190,17 @@ const Hero = () => {
                         <motion.a
                             key={index}
                             href={href}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             aria-label={label}
-                            className="text-muted-foreground hover:text-primary transition-all duration-300"
+                            className="text-muted-foreground hover:text-primary transition-all duration-300 p-2 rounded-lg hover:bg-primary/10"
                             whileHover={{ scale: 1.1, y: -2 }}
                             whileTap={{ scale: 0.95 }}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5 + index * 0.1, duration: 0.6 }}
                         >
-                            <Icon size={28} />
+                            <Icon size={24} className="sm:w-7 sm:h-7" />
                         </motion.a>
                     ))}
                 </motion.div>
@@ -199,7 +209,7 @@ const Hero = () => {
                 <motion.a
                     href="/LuongMinhSon-CV.pdf"
                     download="LuongMinhSon-CV.pdf"
-                    className="inline-flex items-center gap-3 liquid-glass text-black dark:text-white font-semibold px-8 py-4 rounded-xl liquid-glass-hover transition-all duration-300 shadow-xl border-2 border-primary/30 group relative overflow-hidden"
+                    className="inline-flex items-center gap-2 sm:gap-3 liquid-glass text-black dark:text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-xl liquid-glass-hover transition-all duration-300 shadow-xl border-2 border-primary/30 group relative overflow-hidden text-sm sm:text-base"
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                     initial={{ opacity: 0, y: 20 }}
@@ -208,12 +218,12 @@ const Hero = () => {
                 >
                     {/* Download Icon */}
                     <motion.div
-                        className="w-6 h-6 flex items-center justify-center"
+                        className="w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center"
                         whileHover={{ rotate: 360 }}
                         transition={{ duration: 0.6 }}
                     >
                         <svg 
-                            className="w-5 h-5" 
+                            className="w-4 h-4 sm:w-5 sm:h-5" 
                             fill="none" 
                             stroke="currentColor" 
                             viewBox="0 0 24 24"
@@ -232,12 +242,12 @@ const Hero = () => {
                     
                     {/* Arrow Icon */}
                     <motion.div
-                        className="w-5 h-5 flex items-center justify-center"
+                        className="w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center"
                         whileHover={{ x: 3 }}
                         transition={{ duration: 0.3 }}
                     >
                         <svg 
-                            className="w-4 h-4" 
+                            className="w-3 h-3 sm:w-4 sm:h-4" 
                             fill="none" 
                             stroke="currentColor" 
                             viewBox="0 0 24 24"

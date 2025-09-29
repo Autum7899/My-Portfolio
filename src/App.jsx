@@ -15,10 +15,37 @@ import LoadingScreen from './components/LoadingScreen';
 import ScrollToTop from './components/ScrollToTop';
 
 function App() {
-  // We only need one state: is the loading screen visible?
+  // Loading states
   const [isLoading, setIsLoading] = useState(true);
+  const [pokemonLoadingState, setPokemonLoadingState] = useState({
+    isLoading: true,
+    progress: 0
+  });
 
-  // All the useEffect logic for loading has been moved into LoadingScreen.js
+  // Pokemon background toggle state
+  const [showPokemonBackground, setShowPokemonBackground] = useState(true);
+
+  // Handle Pokemon loading progress updates
+  const handlePokemonLoadingProgress = (loadingState) => {
+    setPokemonLoadingState(loadingState);
+  };
+
+  // Toggle Pokemon background
+  const togglePokemonBackground = () => {
+    setShowPokemonBackground(prev => !prev);
+  };
+
+  // Fallback timeout to prevent infinite loading
+  React.useEffect(() => {
+    const fallbackTimer = setTimeout(() => {
+      if (isLoading) {
+        console.warn('Loading screen timeout - forcing app to load');
+        setIsLoading(false);
+      }
+    }, 10000); // 10 second fallback
+
+    return () => clearTimeout(fallbackTimer);
+  }, [isLoading]);
 
   return (
     <div className="relative isolate">
@@ -27,13 +54,21 @@ function App() {
           When the LoadingScreen is done, it will call setIsLoading(false),
           which will trigger AnimatePresence to remove it.
         */}
-        {isLoading && <LoadingScreen setIsLoading={setIsLoading} />}
+        {isLoading && <LoadingScreen setIsLoading={setIsLoading} pokemonLoadingState={pokemonLoadingState} />}
       </AnimatePresence>
+      
+      {/* Always render PokemonBackground so it can update loading state */}
+      <PokemonBackground 
+        onLoadingProgress={handlePokemonLoadingProgress} 
+        showPokemon={showPokemonBackground}
+      />
       
       {!isLoading && (
         <>
-          <PokemonBackground />
-          <Header />
+          <Header 
+            onTogglePokemonBackground={togglePokemonBackground} 
+            showPokemonBackground={showPokemonBackground} 
+          />
           <main>
             <Hero />
             <About />
