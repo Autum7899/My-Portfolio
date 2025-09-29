@@ -68,16 +68,10 @@ const Header = ({ onTogglePokemonBackground, showPokemonBackground }) => {
       transition: { 
         type: "spring", 
         stiffness: 120, 
-        damping: 25, 
-        staggerChildren: 0.1 
+        damping: 25
       } 
     },
     exit: { x: "100%", opacity: 0, transition: { duration: 0.3, ease: "easeInOut" } },
-  }), []);
-
-  const linkVariants = useMemo(() => ({
-    hidden: { x: 20, opacity: 0 },
-    visible: { x: 0, opacity: 1, transition: { type: "spring", stiffness: 100 } },
   }), []);
 
   // Memoized navigation link component
@@ -118,8 +112,7 @@ const Header = ({ onTogglePokemonBackground, showPokemonBackground }) => {
     const Icon = link.icon;
     
     return (
-      <motion.a 
-        variants={linkVariants} 
+      <a 
         href={`#${link.href}`} 
         onClick={onClose} 
         className={`group relative flex items-center space-x-4 px-5 py-4 rounded-xl transition-all duration-300 overflow-hidden ${
@@ -127,15 +120,10 @@ const Header = ({ onTogglePokemonBackground, showPokemonBackground }) => {
             ? "text-primary bg-primary/15 shadow-md border border-primary/20" 
             : "text-foreground hover:text-primary hover:bg-muted/60 hover:shadow-sm border border-transparent hover:border-primary/10"
         }`}
-        whileHover={{ scale: 1.01 }}
-        whileTap={{ scale: 0.98 }}
       >
         {isActive && (
-          <motion.div
-            layoutId="mobileActiveIndicator"
+          <div
             className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/5 rounded-xl border border-primary/30 shadow-inner"
-            initial={false}
-            transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
           />
         )}
         <Icon size={20} className={`relative z-10 transition-transform duration-300 ${
@@ -144,7 +132,7 @@ const Header = ({ onTogglePokemonBackground, showPokemonBackground }) => {
         <span className={`relative z-10 text-lg font-medium ${
           isActive ? "text-primary" : ""
         }`}>{link.name}</span>
-      </motion.a>
+      </a>
     );
   });
 
@@ -250,15 +238,13 @@ const Header = ({ onTogglePokemonBackground, showPokemonBackground }) => {
                 </div>
                 
                 {/* Mobile Pokemon Background Toggle */}
-                <motion.div variants={linkVariants} className="mb-6">
-                  <motion.button
+                <div className="mb-6">
+                  <button
                     onClick={() => {
                       onTogglePokemonBackground();
                       setIsMenuOpen(false);
                     }}
                     className="group relative flex items-center space-x-3 px-5 py-4 rounded-xl liquid-glass-card liquid-glass-hover transition-all duration-300 text-lg font-medium w-full overflow-hidden"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
                   >
                     
                     <div className="relative z-10 flex items-center space-x-3">
@@ -274,8 +260,8 @@ const Header = ({ onTogglePokemonBackground, showPokemonBackground }) => {
                       </>
                     )}
                     </div>
-                  </motion.button>
-                </motion.div>
+                  </button>
+                </div>
                 
                 {/* Mobile Navigation Links */}
                 <nav className="flex flex-col space-y-3">
