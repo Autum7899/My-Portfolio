@@ -28,6 +28,20 @@ const Hero = () => {
         }
     };
 
+    // Add CSS animation for gradient
+    React.useEffect(() => {
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes gradientShift {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+            }
+        `;
+        document.head.appendChild(style);
+        return () => document.head.removeChild(style);
+    }, []);
+
     return (
         <section id="hero" className="min-h-screen flex flex-col items-center justify-center text-center relative overflow-hidden px-4 sm:px-6 lg:px-8">
 
@@ -38,10 +52,18 @@ const Hero = () => {
                 className="max-w-4xl mx-auto relative z-10"
             >
 
-                {/* Name */}
+                {/* Name with Cool Gradient */}
                 <motion.h1 
                     variants={itemVariants}
-                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-center text-black dark:text-white relative z-10 leading-tight mb-8"
+                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-center relative z-10 leading-tight mb-8"
+                    style={{
+                        background: "linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%)",
+                        backgroundSize: "300% 300%",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        backgroundClip: "text",
+                        animation: "gradientShift 4s ease-in-out infinite"
+                    }}
                 >
                     Hi, I'm Minh Sơn
                 </motion.h1>
@@ -89,15 +111,36 @@ const Hero = () => {
                     ))}
                 </motion.div>
 
-                {/* Download CV Button */}
+                {/* Enhanced Download CV Button */}
                 <motion.a
                     variants={itemVariants}
                     href="/LuongMinhSon-CV.pdf"
                     download="LuongMinhSon-CV.pdf"
-                    className="inline-flex items-center gap-2 sm:gap-3 liquid-glass text-black dark:text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-xl liquid-glass-hover transition-all duration-300 shadow-xl border-2 border-primary/30 text-sm sm:text-base"
+                    className="group relative inline-flex items-center gap-2 sm:gap-3 liquid-glass text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-xl liquid-glass-hover transition-all duration-300 shadow-xl border-2 border-primary/50 text-sm sm:text-base overflow-hidden"
+                    whileHover={{ 
+                        scale: 1.05, 
+                        y: -2,
+                        transition: { type: "spring", stiffness: 400, damping: 10 }
+                    }}
+                    whileTap={{ scale: 0.95 }}
                 >
-                    {/* Download Icon */}
-                    <div className="w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center">
+                    {/* Animated Background Gradient */}
+                    <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-primary/40 via-purple-500/50 to-primary/40 rounded-xl"
+                        initial={{ x: "-100%" }}
+                        whileHover={{ x: "100%" }}
+                        transition={{ duration: 0.8, ease: "easeInOut" }}
+                    />
+                    
+                    {/* Download Icon with Animation */}
+                    <motion.div 
+                        className="w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center relative z-10"
+                        whileHover={{ 
+                            rotate: 360,
+                            scale: 1.1
+                        }}
+                        transition={{ duration: 0.6, ease: "easeInOut" }}
+                    >
                         <svg 
                             className="w-4 h-4 sm:w-5 sm:h-5" 
                             fill="none" 
@@ -111,13 +154,27 @@ const Hero = () => {
                                 d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" 
                             />
                         </svg>
-                    </div>
+                    </motion.div>
                     
-                    {/* Button Text */}
-                    <span>Download CV</span>
+                    {/* Button Text with Glow */}
+                    <motion.span 
+                        className="relative z-10"
+                        whileHover={{
+                            textShadow: "0 0 8px rgba(59, 130, 246, 0.6)"
+                        }}
+                    >
+                        Download CV
+                    </motion.span>
                     
-                    {/* Arrow Icon */}
-                    <div className="w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center">
+                    {/* Arrow Icon with Slide Animation */}
+                    <motion.div 
+                        className="w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center relative z-10"
+                        whileHover={{ 
+                            x: 3,
+                            scale: 1.1
+                        }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                    >
                         <svg 
                             className="w-3 h-3 sm:w-4 sm:h-4" 
                             fill="none" 
@@ -131,7 +188,21 @@ const Hero = () => {
                                 d="M17 8l4 4m0 0l-4 4m4-4H3" 
                             />
                         </svg>
-                    </div>
+                    </motion.div>
+                    
+                    {/* Shimmer Effect */}
+                    <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 opacity-0 group-hover:opacity-100"
+                        animate={{
+                            x: ['-100%', '100%'],
+                        }}
+                        transition={{
+                            duration: 1.5,
+                            repeat: Infinity,
+                            repeatDelay: 2,
+                            ease: "easeInOut"
+                        }}
+                    />
                 </motion.a>
             </motion.div>
         </section>
