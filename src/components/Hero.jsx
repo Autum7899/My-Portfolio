@@ -11,7 +11,7 @@ const Hero = () => {
             opacity: 1,
             transition: {
                 staggerChildren: 0.1,
-                delayChildren: 0.1
+                delayChildren: 0.2
             }
         }
     };
@@ -22,7 +22,7 @@ const Hero = () => {
             opacity: 1, 
             y: 0,
             transition: {
-                duration: 0.6,
+                duration: 0.5,
                 ease: "easeOut"
             }
         }
@@ -30,47 +30,6 @@ const Hero = () => {
 
     return (
         <section id="hero" className="min-h-screen flex flex-col items-center justify-center text-center relative overflow-hidden px-4 sm:px-6 lg:px-8">
-            {/* Enhanced Background Elements */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <motion.div
-                    className="absolute top-20 left-4 sm:left-10 w-2 h-2 bg-primary/10 rounded-full"
-                    animate={{
-                        y: [0, -10, 0],
-                        opacity: [0.3, 0.6, 0.3]
-                    }}
-                    transition={{
-                        duration: 4,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                    }}
-                />
-                <motion.div
-                    className="absolute top-40 right-4 sm:right-20 w-3 h-3 bg-blue-500/10 rounded-full"
-                    animate={{
-                        y: [0, 15, 0],
-                        opacity: [0.2, 0.5, 0.2]
-                    }}
-                    transition={{
-                        duration: 5,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: 1
-                    }}
-                />
-                <motion.div
-                    className="absolute bottom-32 left-1/4 w-1 h-1 bg-purple-500/10 rounded-full"
-                    animate={{
-                        y: [0, -8, 0],
-                        opacity: [0.2, 0.4, 0.2]
-                    }}
-                    transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: 2
-                    }}
-                />
-            </div>
 
             <motion.div
                 variants={containerVariants}
@@ -79,105 +38,35 @@ const Hero = () => {
                 className="max-w-4xl mx-auto relative z-10"
             >
 
-                {/* Enhanced Name with Liquid Glass Background */}
-                <motion.div 
-                    className="relative mb-8"
-                    initial={{ y: 20 }}
-                    whileInView={{ y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
+                {/* Name */}
+                <motion.h1 
+                    variants={itemVariants}
+                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-center text-black dark:text-white relative z-10 leading-tight mb-8"
                 >
-                    <motion.h1 
-                        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-center text-black dark:text-white relative z-10 leading-tight"
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, ease: "easeOut" }}
-                        whileHover={{ scale: 1.02 }}
-                    >
-                        <motion.span
-                            className="inline-block"
-                            initial={{ opacity: 0, y: 20, rotateX: -90 }}
-                            animate={{ 
-                                opacity: 1, 
-                                y: 0, 
-                                rotateX: 0,
-                                textShadow: [
-                                    "0 0 20px rgba(59, 130, 246, 0.3)",
-                                    "0 0 30px rgba(147, 51, 234, 0.4)",
-                                    "0 0 20px rgba(59, 130, 246, 0.3)"
-                                ]
-                            }}
-                            transition={{ 
-                                duration: 1.2, 
-                                ease: "easeOut",
-                                delay: 0.5,
-                                textShadow: {
-                                    duration: 3,
-                                    repeat: Infinity,
-                                    ease: "easeInOut"
-                                }
-                            }}
-                            whileHover={{ 
-                                backgroundImage: "linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899)",
-                                backgroundClip: "text",
-                                WebkitBackgroundClip: "text",
-                                WebkitTextFillColor: "transparent",
-                                scale: 1.05,
-                                rotateY: 5,
-                                textShadow: "0 0 30px rgba(59, 130, 246, 0.6)"
-                            }}
-                            whileTap={{ scale: 0.98 }}
-                        >
-                            Hi, I'm Minh Sơn
-                        </motion.span>
-                    </motion.h1>
-                    
-                    {/* Liquid Glass background for title */}
-                    <motion.div 
-                        className="absolute inset-0 -m-4 liquid-glass dark:liquid-glass rounded-2xl"
-                        initial={{ scale: 0.8 }}
-                        whileInView={{ scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
-                    />
-                </motion.div>
+                    Hi, I'm Minh Sơn
+                </motion.h1>
 
-                {/* Enhanced Title */}
+                {/* Title */}
                 <motion.p 
                     variants={itemVariants}
                     className="text-lg sm:text-xl md:text-2xl text-primary mb-6 font-medium max-w-2xl mx-auto"
                 >
-                    <motion.span
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1.5, duration: 0.5 }}
-                    >
-                        Information Systems Student & Aspiring Full-Stack Developer
-                    </motion.span>
+                    Information Systems Student & Aspiring Full-Stack Developer
                 </motion.p>
 
 
-                {/* Location with Animation */}
+                {/* Location */}
                 <motion.div 
                     variants={itemVariants}
                     className="flex justify-center items-center space-x-4 mb-8"
                 >
-                    <motion.div 
-                        className="flex items-center text-muted-foreground"
-                        whileHover={{ scale: 1.1, color: "#3b82f6" }}
-                        transition={{ type: "spring", stiffness: 400 }}
-                    >
-                        <motion.div
-                            animate={{ rotate: [0, 10, -10, 0] }}
-                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                        >
-                            <MapPin size={18} className="mr-2"/>
-                        </motion.div>
+                    <div className="flex items-center text-muted-foreground">
+                        <MapPin size={18} className="mr-2"/>
                         {user.location}
-                    </motion.div>
+                    </div>
                 </motion.div>
 
-                {/* Enhanced Social Links */}
+                {/* Social Links */}
                 <motion.div 
                     variants={itemVariants}
                     className="flex justify-center space-x-4 sm:space-x-6 mb-10"
@@ -187,41 +76,28 @@ const Hero = () => {
                         { icon: Linkedin, href: user.socials.linkedin, label: "LinkedIn Profile" },
                         { icon: Mail, href: `https://mail.google.com/mail/?view=cm&fs=1&to=${user.email}`, label: "Email" }
                     ].map(({ icon: Icon, href, label }, index) => (
-                        <motion.a
+                        <a
                             key={index}
                             href={href}
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label={label}
-                            className="text-muted-foreground hover:text-primary transition-all duration-300 p-2 rounded-lg hover:bg-primary/10"
-                            whileHover={{ scale: 1.1, y: -2 }}
-                            whileTap={{ scale: 0.95 }}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.5 + index * 0.1, duration: 0.6 }}
+                            className="text-muted-foreground hover:text-primary transition-colors duration-300 p-2 rounded-lg hover:bg-primary/10"
                         >
                             <Icon size={24} className="sm:w-7 sm:h-7" />
-                        </motion.a>
+                        </a>
                     ))}
                 </motion.div>
 
-                {/* Enhanced Download CV Button */}
+                {/* Download CV Button */}
                 <motion.a
+                    variants={itemVariants}
                     href="/LuongMinhSon-CV.pdf"
                     download="LuongMinhSon-CV.pdf"
-                    className="inline-flex items-center gap-2 sm:gap-3 liquid-glass text-black dark:text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-xl liquid-glass-hover transition-all duration-300 shadow-xl border-2 border-primary/30 group relative overflow-hidden text-sm sm:text-base"
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.8, duration: 0.6 }}
+                    className="inline-flex items-center gap-2 sm:gap-3 liquid-glass text-black dark:text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-xl liquid-glass-hover transition-all duration-300 shadow-xl border-2 border-primary/30 text-sm sm:text-base"
                 >
                     {/* Download Icon */}
-                    <motion.div
-                        className="w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center"
-                        whileHover={{ rotate: 360 }}
-                        transition={{ duration: 0.6 }}
-                    >
+                    <div className="w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center">
                         <svg 
                             className="w-4 h-4 sm:w-5 sm:h-5" 
                             fill="none" 
@@ -235,17 +111,13 @@ const Hero = () => {
                                 d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" 
                             />
                         </svg>
-                    </motion.div>
+                    </div>
                     
                     {/* Button Text */}
-                    <span className="relative z-10">Download CV</span>
+                    <span>Download CV</span>
                     
                     {/* Arrow Icon */}
-                    <motion.div
-                        className="w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center"
-                        whileHover={{ x: 3 }}
-                        transition={{ duration: 0.3 }}
-                    >
+                    <div className="w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center">
                         <svg 
                             className="w-3 h-3 sm:w-4 sm:h-4" 
                             fill="none" 
@@ -259,29 +131,7 @@ const Hero = () => {
                                 d="M17 8l4 4m0 0l-4 4m4-4H3" 
                             />
                         </svg>
-                    </motion.div>
-                    
-                    {/* Animated Background Effect */}
-                    <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-primary/20 to-purple-500/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        whileHover={{ scale: 1.1, opacity: 0.3 }}
-                        transition={{ duration: 0.4 }}
-                    />
-                    
-                    {/* Shimmer Effect */}
-                    <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 opacity-0 group-hover:opacity-100"
-                        animate={{
-                            x: ['-100%', '100%'],
-                        }}
-                        transition={{
-                            duration: 1.5,
-                            repeat: Infinity,
-                            repeatDelay: 2,
-                            ease: "easeInOut"
-                        }}
-                    />
+                    </div>
                 </motion.a>
             </motion.div>
         </section>
