@@ -92,13 +92,13 @@ const Header = ({ onTogglePokemonBackground, showPokemonBackground }) => {
             ? "text-primary bg-primary/10" 
             : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
         }`}
-        whileHover={{ scale: 1.05, y: -1 }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
       >
         {isActive && (
           <motion.div
             layoutId="activeIndicator"
-            className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/10 to-transparent rounded-xl border border-primary/30"
+            className="absolute inset-0 bg-primary/10 rounded-xl border border-primary/30"
             initial={false}
             transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
           />
@@ -122,18 +122,18 @@ const Header = ({ onTogglePokemonBackground, showPokemonBackground }) => {
         variants={linkVariants} 
         href={`#${link.href}`} 
         onClick={onClose} 
-        className={`group relative flex items-center space-x-4 px-4 py-3 rounded-xl transition-all duration-300 overflow-hidden ${
+        className={`group relative flex items-center space-x-4 px-5 py-4 rounded-xl transition-all duration-300 overflow-hidden ${
           isActive 
-            ? "text-primary bg-primary/10" 
-            : "text-foreground hover:text-primary hover:bg-muted/50"
+            ? "text-primary bg-primary/15 shadow-md border border-primary/20" 
+            : "text-foreground hover:text-primary hover:bg-muted/60 hover:shadow-sm border border-transparent hover:border-primary/10"
         }`}
-        whileHover={{ scale: 1.02, x: 4 }}
+        whileHover={{ scale: 1.01 }}
         whileTap={{ scale: 0.98 }}
       >
         {isActive && (
           <motion.div
             layoutId="mobileActiveIndicator"
-            className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/10 to-transparent rounded-xl border border-primary/30"
+            className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/5 rounded-xl border border-primary/30 shadow-inner"
             initial={false}
             transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
           />
@@ -157,7 +157,7 @@ const Header = ({ onTogglePokemonBackground, showPokemonBackground }) => {
       }`}>
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            {/* Logo with Gradient */}
+            {/* Logo */}
             <motion.a 
               href="#hero" 
               className="relative group"
@@ -165,42 +165,25 @@ const Header = ({ onTogglePokemonBackground, showPokemonBackground }) => {
               whileTap={{ scale: 0.95 }}
             >
               <div className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
-                <span 
-                  className="bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent"
-                  style={{
-                    backgroundSize: "200% 200%",
-                    animation: "gradientShift 3s ease-in-out infinite"
-                  }}
-                >
-                  Minh Sơn
-                </span>
+                Minh Sơn
               </div>
-              {/* Subtle glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-purple-500/20 to-primary/20 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
             </motion.a>
             
             <div className="flex items-center space-x-6">
               {/* Pokemon Background Toggle Button */}
               <motion.button
                 onClick={onTogglePokemonBackground}
-                className="group relative flex items-center justify-center w-10 h-10 rounded-lg liquid-glass-card liquid-glass-hover transition-all duration-300 overflow-hidden"
-                whileHover={{ scale: 1.05, y: -1 }}
-                whileTap={{ scale: 0.95 }}
+                className="group relative flex items-center justify-center p-3 rounded-xl liquid-glass-card liquid-glass-hover transition-all duration-300"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 title={showPokemonBackground ? "Switch to Grid Background" : "Switch to Pokemon Background"}
               >
-                {/* Animated background */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-primary/20 via-purple-500/30 to-primary/20 rounded-lg"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: "100%" }}
-                  transition={{ duration: 0.6, ease: "easeInOut" }}
-                />
                 
                 <div className="relative z-10 flex items-center justify-center">
                   {showPokemonBackground ? (
-                    <Zap size={18} className="text-blue-400 group-hover:rotate-12 transition-transform duration-300" />
+                    <Zap size={20} className="text-gray-700 dark:text-gray-300 group-hover:scale-110 transition-transform duration-300" />
                   ) : (
-                    <Grid3X3 size={18} className="text-blue-400 transition-transform duration-300" />
+                    <Grid3X3 size={20} className="text-gray-700 dark:text-gray-300 group-hover:scale-110 transition-transform duration-300" />
                   )}
                 </div>
               </motion.button>
@@ -219,12 +202,12 @@ const Header = ({ onTogglePokemonBackground, showPokemonBackground }) => {
               {/* Mobile Menu Button */}
               <motion.button 
                 onClick={() => setIsMenuOpen(true)} 
-                className="lg:hidden p-2 rounded-xl bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 border border-gray-700/50"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                className="lg:hidden p-3 rounded-xl liquid-glass-card liquid-glass-hover transition-all duration-300"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 aria-label="Open menu"
               >
-                <Menu size={20} className="text-white" />
+                <Menu size={20} className="text-gray-700 dark:text-gray-300 group-hover:scale-110 transition-transform duration-300" />
               </motion.button>
             </div>
           </div>
@@ -240,68 +223,54 @@ const Header = ({ onTogglePokemonBackground, showPokemonBackground }) => {
               animate={{ opacity: 1 }} 
               exit={{ opacity: 0 }} 
               onClick={() => setIsMenuOpen(false)} 
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden" 
+              className="fixed inset-0 bg-black/40 dark:bg-black/60 bg-white/40 backdrop-blur-md z-40 lg:hidden" 
             />
             <motion.div 
               variants={menuVariants} 
               initial="hidden" 
               animate="visible" 
               exit="exit" 
-              className="fixed top-0 bottom-0 right-0 w-4/5 max-w-sm bg-gray-900/95 backdrop-blur-xl shadow-2xl z-50 lg:hidden border-l border-gray-700/50"
+              className="fixed top-0 bottom-0 right-0 w-4/5 max-w-sm bg-white/98 dark:bg-gray-900/98 backdrop-blur-2xl shadow-2xl z-50 lg:hidden border-l border-gray-200/60 dark:border-gray-700/60"
             >
-              <div className="flex flex-col h-full p-8">
+              <div className="flex flex-col h-full p-6">
                 {/* Header */}
-                <div className="flex justify-between items-center mb-8">
-                  <div className="text-xl font-bold">
-                    <span 
-                      className="bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent"
-                      style={{
-                        backgroundSize: "200% 200%",
-                        animation: "gradientShift 3s ease-in-out infinite"
-                      }}
-                    >
-                      Menu
-                    </span>
+                <div className="flex justify-between items-center mb-8 pb-4 border-b border-gray-200/50 dark:border-gray-700/50">
+                  <div className="text-2xl font-bold text-foreground">
+                    Menu
                   </div>
                   <motion.button 
                     onClick={() => setIsMenuOpen(false)} 
-                    className="p-2 rounded-xl bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 border border-gray-700/50"
+                    className="p-3 rounded-xl liquid-glass-card liquid-glass-hover transition-all duration-300 hover:scale-105 active:scale-95"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     aria-label="Close menu"
                   >
-                    <X size={24} className="text-white" />
+                    <X size={20} className="text-gray-700 dark:text-gray-300" />
                   </motion.button>
                 </div>
                 
                 {/* Mobile Pokemon Background Toggle */}
-                <motion.div variants={linkVariants} className="mb-8">
+                <motion.div variants={linkVariants} className="mb-6">
                   <motion.button
                     onClick={() => {
                       onTogglePokemonBackground();
                       setIsMenuOpen(false);
                     }}
-                    className="group relative flex items-center space-x-3 px-4 py-3 rounded-xl bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 text-lg font-medium w-full overflow-hidden border border-gray-700/50"
+                    className="group relative flex items-center space-x-3 px-5 py-4 rounded-xl liquid-glass-card liquid-glass-hover transition-all duration-300 text-lg font-medium w-full overflow-hidden"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-primary/20 via-purple-500/30 to-primary/20 rounded-xl"
-                      initial={{ x: "-100%" }}
-                      whileHover={{ x: "100%" }}
-                      transition={{ duration: 0.6, ease: "easeInOut" }}
-                    />
                     
                     <div className="relative z-10 flex items-center space-x-3">
                     {showPokemonBackground ? (
                       <>
-                          <Zap size={20} className="text-blue-400 group-hover:rotate-12 transition-transform duration-300" />
-                          <span className="text-blue-400 font-semibold">Switch to Grid</span>
+                          <Zap size={20} className="text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-all duration-300" />
+                          <span className="text-blue-600 dark:text-blue-400 font-semibold group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors duration-300">Switch to Grid</span>
                       </>
                     ) : (
                       <>
-                          <Grid3X3 size={20} className="text-blue-400 transition-transform duration-300" />
-                          <span className="text-blue-400 font-semibold">Switch to Pokemon</span>
+                          <Grid3X3 size={20} className="text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-all duration-300" />
+                          <span className="text-blue-600 dark:text-blue-400 font-semibold group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors duration-300">Switch to Pokemon</span>
                       </>
                     )}
                     </div>
@@ -309,7 +278,7 @@ const Header = ({ onTogglePokemonBackground, showPokemonBackground }) => {
                 </motion.div>
                 
                 {/* Mobile Navigation Links */}
-                <nav className="flex flex-col space-y-4">
+                <nav className="flex flex-col space-y-3">
                   {navLinks.map((link) => (
                     <MobileNavLink 
                       key={link.name} 
