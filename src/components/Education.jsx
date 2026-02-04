@@ -73,7 +73,7 @@ const Education = () => {
                         
                         {/* Liquid Glass background for title */}
                         <motion.div 
-                            className="absolute inset-0 -m-4 liquid-glass rounded-2xl"
+                            className="absolute inset-0 -m-4 bg-primary/5 rounded-2xl"
                             initial={{ scale: 0.8 }}
                             whileInView={{ scale: 1 }}
                             viewport={{ once: true }}
@@ -110,15 +110,15 @@ const Education = () => {
                                 >
                                     {/* Education Card */}
                                     <motion.div 
-                                        className="relative p-8 rounded-3xl liquid-glass-card liquid-glass-hover liquid-gradient-primary transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-primary/10"
+                                        className="relative p-8 rounded-3xl bg-card/30 dark:bg-card/10 border border-white/10 hover:shadow-2xl hover:bg-card/50 transition-all duration-500 group-hover:shadow-primary/10"
                                         whileHover={{ 
-                                            scale: 1.02, 
-                                            y: -8
+                                            scale: 1.01, 
+                                            y: -4
                                         }}
                                     >
                                         {/* Status Badge */}
                                         <motion.div
-                                            className="absolute -top-3 -right-3 liquid-glass text-black dark:text-white px-4 py-1.5 rounded-full text-sm font-semibold shadow-lg"
+                                            className="absolute -top-3 -right-3 bg-primary text-primary-foreground px-4 py-1.5 rounded-full text-sm font-semibold shadow-lg"
                                             initial={{ opacity: 0, scale: 0 }}
                                             animate={{ opacity: 1, scale: 1 }}
                                             transition={{ delay: 0.4 + index * 0.1 }}
@@ -147,7 +147,7 @@ const Education = () => {
                                                 className="flex items-center gap-3"
                                                 whileHover={{ x: 5 }}
                                             >
-                                                <div className="w-10 h-10 liquid-glass-card rounded-xl flex items-center justify-center">
+                                                <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
                                                     <MapPin size={18} className="text-primary" />
                                                 </div>
                                                 <p className="text-xl text-foreground font-medium">{edu.institution}</p>
@@ -157,7 +157,7 @@ const Education = () => {
                                                 className="flex items-center gap-3"
                                                 whileHover={{ x: 5 }}
                                             >
-                                                <div className="w-10 h-10 liquid-glass-card rounded-xl flex items-center justify-center">
+                                                <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
                                                     <BookOpen size={18} className="text-primary" />
                                                 </div>
                                                 <span className="text-muted-foreground font-medium text-lg">Major: {edu.major}</span>
@@ -177,8 +177,7 @@ const Education = () => {
                                         <motion.div
                                             className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 pointer-events-none"
                                             style={{
-                                                background: "linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1))",
-                                                filter: "blur(20px)"
+                                                background: "linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1))"
                                             }}
                                             animate={{
                                                 scale: [1, 1.05, 1],

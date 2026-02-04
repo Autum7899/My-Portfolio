@@ -49,12 +49,12 @@ const ProjectCard = memo(({
       layout
       className={`group relative ${
         viewMode === 'list' 
-          ? 'flex flex-col md:flex-row gap-6 p-6 liquid-glass-card liquid-glass-hover rounded-2xl' 
-          : 'liquid-glass-card liquid-glass-hover rounded-2xl overflow-hidden shadow-xl transition-all duration-300'
+          ? 'flex flex-col md:flex-row gap-6 p-6 bg-card/30 dark:bg-card/10 border border-white/10 shadow-xl hover:shadow-2xl hover:bg-card/40 dark:hover:bg-card/20 rounded-2xl' 
+          : 'bg-card/30 dark:bg-card/10 border border-white/10 shadow-xl hover:shadow-2xl hover:bg-card/40 dark:hover:bg-card/20 rounded-2xl overflow-hidden transition-all duration-300'
       }`}
       whileHover={{ 
-        scale: viewMode === 'grid' ? 1.02 : 1.01, 
-        y: viewMode === 'grid' ? -8 : -2,
+        scale: viewMode === 'grid' ? 1.01 : 1.005, 
+        y: viewMode === 'grid' ? -4 : -2,
         transition: { duration: 0.2, ease: "easeOut" }
       }}
       onHoverStart={() => setHoveredProject(index)}
@@ -69,7 +69,7 @@ const ProjectCard = memo(({
           src={project.image} 
           alt={project.title} 
           className="w-full h-full object-cover"
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ scale: 1.02 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
         />
         
@@ -95,16 +95,16 @@ const ProjectCard = memo(({
         >
           <motion.a
             href={project.demo}
-            className="w-10 h-10 liquid-glass rounded-full flex items-center justify-center"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            className="w-10 h-10 bg-black/20 dark:bg-white/20 rounded-full flex items-center justify-center"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.1 }}
           >
             <ExternalLink size={16} className="text-white dark:text-gray-900" />
           </motion.a>
           <motion.a
             href={project.repo}
-            className="w-10 h-10 liquid-glass rounded-full flex items-center justify-center"
+            className="w-10 h-10 bg-black/20 dark:bg-white/20 rounded-full flex items-center justify-center"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             transition={{ duration: 0.1 }}
@@ -116,7 +116,7 @@ const ProjectCard = memo(({
         {/* Featured Badge */}
         {index < 2 && (
           <motion.div 
-            className="absolute top-4 left-4 liquid-glass px-3 py-1 rounded-full text-xs font-semibold text-primary-foreground flex items-center gap-1"
+            className="absolute top-4 left-4 bg-black/20 dark:bg-white/20 px-3 py-1 rounded-full text-xs font-semibold text-primary-foreground flex items-center gap-1"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ 
@@ -157,7 +157,7 @@ const ProjectCard = memo(({
           {project.tags.slice(0, 6).map((tag, tagIndex) => (
             <motion.span
               key={tag}
-              className="px-3 py-1 liquid-glass-card text-xs font-medium text-foreground rounded-full flex items-center gap-1"
+              className="px-3 py-1 bg-secondary/50 text-xs font-medium text-foreground rounded-full flex items-center gap-1"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ 
@@ -174,7 +174,7 @@ const ProjectCard = memo(({
             </motion.span>
           ))}
           {project.tags.length > 6 && (
-            <span className="px-3 py-1 liquid-glass-card text-xs font-medium text-muted-foreground rounded-full">
+            <span className="px-3 py-1 bg-secondary/50 text-xs font-medium text-muted-foreground rounded-full">
               +{project.tags.length - 6} more
             </span>
           )}
@@ -184,7 +184,7 @@ const ProjectCard = memo(({
         <div className="flex gap-3">
           <motion.a
             href={project.demo}
-            className="flex items-center gap-2 px-4 py-2 liquid-glass text-primary-foreground rounded-lg font-medium transition-all duration-200"
+            className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg font-medium transition-all duration-200"
             whileHover={{ scale: 1.05, x: 5 }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.1 }}
@@ -195,7 +195,7 @@ const ProjectCard = memo(({
           </motion.a>
           <motion.a
             href={project.repo}
-            className="flex items-center gap-2 px-4 py-2 liquid-glass-card text-foreground rounded-lg font-medium transition-all duration-200 hover:liquid-glass"
+            className="flex items-center gap-2 px-4 py-2 bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-lg font-medium transition-all duration-200"
             whileHover={{ scale: 1.05, x: 5 }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.1 }}
@@ -344,7 +344,7 @@ const Projects = () => {
             </motion.h2>
             {/* Liquid Glass background for title */}
             <motion.div 
-              className="absolute inset-0 -m-4 liquid-glass rounded-2xl"
+              className="absolute inset-0 -m-4 bg-primary/5 rounded-2xl"
               initial={{ scale: 0.8 }}
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
@@ -367,7 +367,7 @@ const Projects = () => {
               problem-solving, and innovative thinking. Each project tells a story of learning and growth.
             </motion.p>
             <motion.div
-              className="w-24 h-1 liquid-glass mx-auto rounded-full"
+              className="w-24 h-1 bg-primary mx-auto rounded-full"
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
@@ -389,14 +389,14 @@ const Projects = () => {
                   placeholder="Search projects..."
                   value={searchTerm}
                   onChange={handleSearchChange}
-                  className="w-full pl-10 pr-4 py-3 liquid-glass-card rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-200"
+                  className="w-full pl-10 pr-4 py-3 bg-card/30 dark:bg-card/10 border border-white/10 rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-200"
                 />
               </div>
 
               {/* Filter Toggle */}
               <motion.button
                 onClick={toggleFilters}
-                className="flex items-center gap-2 px-4 py-3 liquid-glass-card rounded-xl text-foreground hover:liquid-glass transition-all duration-200"
+                className="flex items-center gap-2 px-4 py-3 bg-card/30 dark:bg-card/10 border border-white/10 rounded-xl text-foreground hover:bg-card/40 transition-all duration-200"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.1 }}
@@ -407,12 +407,12 @@ const Projects = () => {
               </motion.button>
 
               {/* View Mode Toggle */}
-              <div className="flex liquid-glass-card rounded-lg p-1">
+              <div className="flex bg-card/30 dark:bg-card/10 border border-white/10 rounded-lg p-1">
                 <button
                   onClick={() => handleViewModeChange('grid')}
                   className={`p-2 rounded-md transition-all duration-200 ${
                     viewMode === 'grid' 
-                      ? 'liquid-glass text-primary-foreground' 
+                      ? 'bg-primary text-primary-foreground' 
                       : 'text-muted-foreground hover:text-foreground'
                   }`}
                 >
@@ -422,7 +422,7 @@ const Projects = () => {
                   onClick={() => handleViewModeChange('list')}
                   className={`p-2 rounded-md transition-all duration-200 ${
                     viewMode === 'list' 
-                      ? 'liquid-glass text-primary-foreground' 
+                      ? 'bg-primary text-primary-foreground' 
                       : 'text-muted-foreground hover:text-foreground'
                   }`}
                 >
@@ -439,7 +439,7 @@ const Projects = () => {
                   animate={{ opacity: 1, height: 'auto' }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.2 }}
-                  className="mt-6 p-6 liquid-glass-card rounded-xl"
+                  className="mt-6 p-6 bg-card/30 dark:bg-card/10 border border-white/10 rounded-xl"
                 >
                   <div className="grid md:grid-cols-2 gap-6">
                     {/* Category Filter */}
@@ -452,8 +452,8 @@ const Projects = () => {
                             onClick={() => handleCategoryChange(category.id)}
                             className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                               selectedCategory === category.id
-                                ? 'liquid-glass text-primary-foreground'
-                                : 'liquid-glass-card text-muted-foreground hover:text-foreground'
+                                ? 'bg-primary text-primary-foreground'
+                                : 'bg-secondary/50 text-muted-foreground hover:text-foreground'
                             }`}
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
@@ -475,8 +475,8 @@ const Projects = () => {
                             onClick={() => handleSortChange(option.id)}
                             className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                               sortBy === option.id
-                                ? 'liquid-glass text-primary-foreground'
-                                : 'liquid-glass-card text-muted-foreground hover:text-foreground'
+                                ? 'bg-primary text-primary-foreground'
+                                : 'bg-secondary/50 text-muted-foreground hover:text-foreground'
                             }`}
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
@@ -524,7 +524,7 @@ const Projects = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
             >
-              <div className="liquid-glass-card p-8 rounded-2xl max-w-md mx-auto">
+              <div className="bg-card/30 dark:bg-card/10 border border-white/10 p-8 rounded-2xl max-w-md mx-auto">
                 <Search size={48} className="mx-auto mb-4 text-muted-foreground" />
                 <h3 className="text-xl font-semibold text-foreground mb-2">No Projects Found</h3>
                 <p className="text-muted-foreground">
@@ -539,7 +539,7 @@ const Projects = () => {
             className="text-center mt-16"
             variants={itemVariants}
           >
-            <div className="liquid-glass-card p-8 rounded-2xl max-w-2xl mx-auto">
+            <div className="bg-card/30 dark:bg-card/10 border border-white/10 p-8 rounded-2xl max-w-2xl mx-auto">
               <h3 className="text-2xl font-bold text-foreground mb-4">
                 Ready to Build Something Amazing?
               </h3>
@@ -549,7 +549,7 @@ const Projects = () => {
               </p>
               <motion.a
                 href="#contact"
-                className="inline-flex items-center gap-2 px-6 py-3 liquid-glass text-black dark:text-white rounded-lg font-semibold transition-all duration-200"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold transition-all duration-200"
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.1 }}

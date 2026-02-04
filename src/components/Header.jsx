@@ -3,6 +3,75 @@ import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Grid3X3, Zap, User, GraduationCap, Code, FolderOpen, Mail } from "lucide-react";
 
+// Memoized navigation link component defined outside Header
+const NavLink = React.memo(({ link, isActive }) => {
+  const Icon = link.icon;
+  
+  return (
+    <motion.a
+      href={`#${link.href}`}
+      className={`group relative flex items-center space-x-2 px-4 py-2 rounded-xl transition-all duration-300 overflow-hidden ${
+        isActive 
+          ? "text-primary bg-primary/10" 
+          : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+      }`}
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+    >
+      {isActive && (
+        <motion.div
+          layoutId="activeIndicator"
+          className="absolute inset-0 bg-primary/10 rounded-xl border border-primary/30"
+          initial={false}
+          transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+        />
+      )}
+      <Icon size={16} className={`relative z-10 transition-transform duration-300 ${
+        isActive ? "text-primary" : "group-hover:text-primary group-hover:scale-110"
+      }`} />
+      <span className={`relative z-10 font-medium ${
+        isActive ? "text-primary" : ""
+      }`}>{link.name}</span>
+    </motion.a>
+  );
+});
+
+NavLink.displayName = 'NavLink';
+
+// Memoized mobile navigation link component defined outside Header
+const MobileNavLink = React.memo(({ link, isActive, onClose }) => {
+  const Icon = link.icon;
+  
+  return (
+    <a 
+      href={`#${link.href}`} 
+      onClick={onClose} 
+      className={`group relative flex items-center space-x-4 px-5 py-4 rounded-xl transition-all duration-300 overflow-hidden ${
+        isActive 
+          ? "text-primary bg-primary/15 shadow-md border border-primary/20" 
+          : "text-foreground hover:text-primary hover:bg-muted/60 hover:shadow-sm border border-transparent hover:border-primary/10"
+      }`}
+    >
+      {isActive && (
+        <motion.div
+          layoutId="activeIndicatorMobile"
+          className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/5 rounded-xl border border-primary/30 shadow-inner"
+          initial={false}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+        />
+      )}
+      <Icon size={20} className={`relative z-10 transition-transform duration-300 ${
+        isActive ? "text-primary" : "group-hover:text-primary group-hover:scale-110"
+      }`} />
+      <span className={`relative z-10 text-lg font-medium ${
+        isActive ? "text-primary" : ""
+      }`}>{link.name}</span>
+    </a>
+  );
+});
+
+MobileNavLink.displayName = 'MobileNavLink';
+
 const Header = ({ onTogglePokemonBackground, showPokemonBackground }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -74,73 +143,11 @@ const Header = ({ onTogglePokemonBackground, showPokemonBackground }) => {
     exit: { x: "100%", opacity: 0, transition: { duration: 0.3, ease: "easeInOut" } },
   }), []);
 
-  // Memoized navigation link component
-  const NavLink = React.memo(({ link, isActive }) => {
-    const Icon = link.icon;
-    
-    return (
-      <motion.a
-        href={`#${link.href}`}
-        className={`group relative flex items-center space-x-2 px-4 py-2 rounded-xl transition-all duration-300 overflow-hidden ${
-          isActive 
-            ? "text-primary bg-primary/10" 
-            : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-        }`}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-      >
-        {isActive && (
-          <motion.div
-            layoutId="activeIndicator"
-            className="absolute inset-0 bg-primary/10 rounded-xl border border-primary/30"
-            initial={false}
-            transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-          />
-        )}
-        <Icon size={16} className={`relative z-10 transition-transform duration-300 ${
-          isActive ? "text-primary" : "group-hover:text-primary group-hover:scale-110"
-        }`} />
-        <span className={`relative z-10 font-medium ${
-          isActive ? "text-primary" : ""
-        }`}>{link.name}</span>
-      </motion.a>
-    );
-  });
-
-  // Memoized mobile navigation link component
-  const MobileNavLink = React.memo(({ link, isActive, onClose }) => {
-    const Icon = link.icon;
-    
-    return (
-      <a 
-        href={`#${link.href}`} 
-        onClick={onClose} 
-        className={`group relative flex items-center space-x-4 px-5 py-4 rounded-xl transition-all duration-300 overflow-hidden ${
-          isActive 
-            ? "text-primary bg-primary/15 shadow-md border border-primary/20" 
-            : "text-foreground hover:text-primary hover:bg-muted/60 hover:shadow-sm border border-transparent hover:border-primary/10"
-        }`}
-      >
-        {isActive && (
-          <div
-            className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/5 rounded-xl border border-primary/30 shadow-inner"
-          />
-        )}
-        <Icon size={20} className={`relative z-10 transition-transform duration-300 ${
-          isActive ? "text-primary" : "group-hover:text-primary group-hover:scale-110"
-        }`} />
-        <span className={`relative z-10 text-lg font-medium ${
-          isActive ? "text-primary" : ""
-        }`}>{link.name}</span>
-      </a>
-    );
-  });
-
   return (
     <>
       <header className={`fixed top-0 left-0 right-0 z-30 transition-all duration-500 ${
         isScrolled 
-          ? "liquid-glass backdrop-blur-xl shadow-2xl border-b border-primary/20" 
+          ? "bg-white/80 dark:bg-black/80 shadow-md border-b border-primary/20" 
           : "bg-transparent"
       }`}>
         <div className="container mx-auto px-6 py-4">
@@ -161,7 +168,7 @@ const Header = ({ onTogglePokemonBackground, showPokemonBackground }) => {
               {/* Pokemon Background Toggle Button */}
               <motion.button
                 onClick={onTogglePokemonBackground}
-                className="group relative flex items-center justify-center p-3 rounded-xl liquid-glass-card liquid-glass-hover transition-all duration-300"
+                className="group relative flex items-center justify-center p-3 rounded-xl bg-card/30 dark:bg-card/10 hover:bg-card/50 transition-all duration-300"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 title={showPokemonBackground ? "Switch to Grid Background" : "Switch to Pokemon Background"}
@@ -190,7 +197,7 @@ const Header = ({ onTogglePokemonBackground, showPokemonBackground }) => {
               {/* Mobile Menu Button */}
               <motion.button 
                 onClick={() => setIsMenuOpen(true)} 
-                className="lg:hidden p-3 rounded-xl liquid-glass-card liquid-glass-hover transition-all duration-300"
+                className="lg:hidden p-3 rounded-xl bg-card/30 dark:bg-card/10 hover:bg-card/50 transition-all duration-300"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 aria-label="Open menu"
@@ -211,14 +218,14 @@ const Header = ({ onTogglePokemonBackground, showPokemonBackground }) => {
               animate={{ opacity: 1 }} 
               exit={{ opacity: 0 }} 
               onClick={() => setIsMenuOpen(false)} 
-              className="fixed inset-0 bg-black/40 dark:bg-black/60 bg-white/40 backdrop-blur-md z-40 lg:hidden" 
+              className="fixed inset-0 bg-black/40 dark:bg-black/60 bg-white/40 z-40 lg:hidden" 
             />
             <motion.div 
               variants={menuVariants} 
               initial="hidden" 
               animate="visible" 
               exit="exit" 
-              className="fixed top-0 bottom-0 right-0 w-4/5 max-w-sm bg-white/98 dark:bg-gray-900/98 backdrop-blur-2xl shadow-2xl z-50 lg:hidden border-l border-gray-200/60 dark:border-gray-700/60"
+              className="fixed top-0 bottom-0 right-0 w-4/5 max-w-sm bg-white/98 dark:bg-gray-900/98 shadow-2xl z-50 lg:hidden border-l border-gray-200/60 dark:border-gray-700/60"
             >
               <div className="flex flex-col h-full p-6">
                 {/* Header */}
@@ -228,7 +235,7 @@ const Header = ({ onTogglePokemonBackground, showPokemonBackground }) => {
                   </div>
                   <motion.button 
                     onClick={() => setIsMenuOpen(false)} 
-                    className="p-3 rounded-xl liquid-glass-card liquid-glass-hover transition-all duration-300 hover:scale-105 active:scale-95"
+                    className="p-3 rounded-xl bg-card/30 dark:bg-card/10 hover:bg-card/50 transition-all duration-300 hover:scale-105 active:scale-95"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     aria-label="Close menu"
@@ -244,7 +251,7 @@ const Header = ({ onTogglePokemonBackground, showPokemonBackground }) => {
                       onTogglePokemonBackground();
                       setIsMenuOpen(false);
                     }}
-                    className="group relative flex items-center space-x-3 px-5 py-4 rounded-xl liquid-glass-card liquid-glass-hover transition-all duration-300 text-lg font-medium w-full overflow-hidden"
+                    className="group relative flex items-center space-x-3 px-5 py-4 rounded-xl bg-card/30 dark:bg-card/10 hover:bg-card/50 transition-all duration-300 text-lg font-medium w-full overflow-hidden"
                   >
                     
                     <div className="relative z-10 flex items-center space-x-3">

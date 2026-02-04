@@ -45,7 +45,7 @@ const LoadingScreen = ({ setIsLoading, pokemonLoadingState }) => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6 }}
     >
-      <div className="text-center max-w-sm mx-auto px-6">
+      <div className="text-center max-w-md mx-auto px-6">
         {/* Simple Pikachu Animation */}
         <motion.div
           className="relative mb-8"
@@ -57,7 +57,7 @@ const LoadingScreen = ({ setIsLoading, pokemonLoadingState }) => {
           }}
         >
           <motion.div
-            className="relative w-24 h-24 mx-auto"
+            className="relative w-48 h-48 mx-auto"
             animate={{
               y: [0, -8, 0]
             }}
@@ -82,12 +82,6 @@ const LoadingScreen = ({ setIsLoading, pokemonLoadingState }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.6 }}
         >
-          <h1 className="text-2xl font-bold text-foreground mb-2">
-            Loading Portfolio
-          </h1>
-          <p className="text-sm text-muted-foreground">
-            Loading Pokemon background...
-          </p>
         </motion.div>
 
         {/* Simple Progress Bar */}
@@ -97,10 +91,10 @@ const LoadingScreen = ({ setIsLoading, pokemonLoadingState }) => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.6 }}
         >
-          <div className="text-xs text-muted-foreground mb-2 text-center">
+          <div className="text-lg font-medium text-muted-foreground mb-2 text-center">
             {Math.round(progress)}%
           </div>
-          <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
+          <div className="w-full bg-muted rounded-full h-4 overflow-hidden">
             <motion.div
               className="h-full bg-primary rounded-full"
               initial={{ width: "0%" }}

@@ -140,7 +140,7 @@ const Contact = () => {
                         </motion.h2>
                         {/* Liquid Glass background for title */}
                         <motion.div 
-                            className="absolute inset-0 -m-4 liquid-glass rounded-2xl"
+                            className="absolute inset-0 -m-4 bg-primary/5 rounded-2xl"
                             initial={{ scale: 0.8 }}
                             whileInView={{ scale: 1 }}
                             viewport={{ once: true }}
@@ -165,7 +165,7 @@ const Contact = () => {
                         </motion.p>
 
                         <motion.div
-                            className="w-24 h-1 liquid-glass mx-auto rounded-full"
+                            className="w-24 h-1 bg-primary mx-auto rounded-full"
                             initial={{ scaleX: 0 }}
                             whileInView={{ scaleX: 1 }}
                             viewport={{ once: true }}
@@ -189,8 +189,8 @@ const Contact = () => {
                                     <motion.a
                                         key={index}
                                         href={info.href}
-                                        className="flex items-center space-x-4 p-4 rounded-xl liquid-glass-card liquid-glass-hover transition-all duration-300 group"
-                                        whileHover={{ scale: 1.02, x: 10 }}
+                                        className="flex items-center space-x-4 p-4 rounded-xl bg-card/30 dark:bg-card/10 border border-white/10 hover:bg-card/50 transition-all duration-300 group"
+                                        whileHover={{ scale: 1.01, x: 5 }}
                                         initial={{ opacity: 0, x: -50 }}
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ delay: 0.3 + index * 0.1 }}
@@ -229,7 +229,7 @@ const Contact = () => {
                                             key={index}
                                             href={social.href}
                                             className={`text-muted-foreground ${social.color} transition-all duration-300`}
-                                            whileHover={{ scale: 1.2, y: -5 }}
+                                            whileHover={{ scale: 1.1, y: -2 }}
                                             whileTap={{ scale: 0.9 }}
                                         >
                                             {social.icon}
@@ -241,10 +241,10 @@ const Contact = () => {
 
                         {/* Contact Form */}
                         <motion.div variants={itemVariants} className="relative">
-                            <div className="relative liquid-glass-card rounded-2xl p-8 shadow-2xl border border-primary/20">
+                            <div className="relative bg-card/30 dark:bg-card/10 border border-white/10 rounded-2xl p-8 shadow-2xl">
                                 <div className="relative z-10">
                                     <div className="flex items-center gap-3 mb-8">
-                                        <div className="w-12 h-12 liquid-glass rounded-xl flex items-center justify-center">
+                                        <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
                                             <Send size={24} className="text-primary" />
                                         </div>
                                         <h3 className="text-2xl font-bold text-foreground">Send Me a Message</h3>
@@ -263,7 +263,7 @@ const Contact = () => {
                                                 placeholder="Your Name" 
                                                 value={formData.name}
                                                 onChange={handleInputChange}
-                                                className={`w-full liquid-glass-card border-2 rounded-xl px-4 py-4 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 ${
+                                                className={`w-full bg-black/5 dark:bg-white/5 border-2 rounded-xl px-4 py-4 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 ${
                                                     errors.name ? 'border-red-500 dark:border-red-400' : 'border-primary/20'
                                                 }`}
                                             />
@@ -289,7 +289,7 @@ const Contact = () => {
                                                 placeholder="Your Email" 
                                                 value={formData.email}
                                                 onChange={handleInputChange}
-                                                className={`w-full liquid-glass-card border-2 rounded-xl px-4 py-4 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 ${
+                                                className={`w-full bg-black/5 dark:bg-white/5 border-2 rounded-xl px-4 py-4 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 ${
                                                     errors.email ? 'border-red-500 dark:border-red-400' : 'border-primary/20'
                                                 }`}
                                             />
@@ -317,7 +317,7 @@ const Contact = () => {
                                                 placeholder="Your Message" 
                                                 value={formData.message}
                                                 onChange={handleInputChange}
-                                                className={`w-full liquid-glass-card border-2 rounded-xl px-4 py-4 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 resize-none ${
+                                                className={`w-full bg-black/5 dark:bg-white/5 border-2 rounded-xl px-4 py-4 text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 resize-none ${
                                                     errors.message ? 'border-red-500 dark:border-red-400' : 'border-primary/20'
                                                 }`}
                                             />
@@ -345,7 +345,7 @@ const Contact = () => {
                                         <motion.button 
                                             type="submit" 
                                             disabled={isSubmitting}
-                                            className="liquid-glass text-black dark:text-white font-semibold px-8 py-4 rounded-xl hover:liquid-glass-hover transition-all duration-300 shadow-xl w-full md:w-auto relative overflow-hidden group border-2 border-primary/30"
+                                            className="bg-primary text-primary-foreground font-semibold px-8 py-4 rounded-xl hover:bg-primary/90 transition-all duration-300 shadow-xl w-full md:w-auto relative overflow-hidden group border-2 border-primary/30"
                                             whileHover={{ scale: 1.02, y: -2 }}
                                             whileTap={{ scale: 0.98 }}
                                         >

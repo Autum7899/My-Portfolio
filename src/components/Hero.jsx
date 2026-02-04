@@ -28,19 +28,7 @@ const Hero = () => {
         }
     };
 
-    // Add CSS animation for gradient
-    React.useEffect(() => {
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes gradientShift {
-                0% { background-position: 0% 50%; }
-                50% { background-position: 100% 50%; }
-                100% { background-position: 0% 50%; }
-            }
-        `;
-        document.head.appendChild(style);
-        return () => document.head.removeChild(style);
-    }, []);
+    // Simplified: Removed CSS animation for gradient
 
     return (
         <section id="hero" className="min-h-screen flex flex-col items-center justify-center text-center relative overflow-hidden px-4 sm:px-6 lg:px-8">
@@ -52,18 +40,9 @@ const Hero = () => {
                 className="max-w-4xl mx-auto relative z-10"
             >
 
-                {/* Name with Cool Gradient */}
                 <motion.h1 
                     variants={itemVariants}
-                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-center relative z-10 leading-tight mb-10"
-                    style={{
-                        background: "linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%)",
-                        backgroundSize: "300% 300%",
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                        backgroundClip: "text",
-                        animation: "gradientShift 4s ease-in-out infinite"
-                    }}
+                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-center relative z-10 leading-tight mb-10 text-foreground"
                 >
                     Hi, I'm Minh Sơn
                 </motion.h1>
@@ -116,7 +95,7 @@ const Hero = () => {
                     variants={itemVariants}
                     href="/LuongMinhSon-CV.pdf"
                     download="LuongMinhSon-CV.pdf"
-                    className="group relative inline-flex items-center gap-3 sm:gap-4 liquid-glass text-black dark:text-white font-semibold px-8 sm:px-10 py-4 sm:py-5 rounded-xl liquid-glass-hover transition-all duration-300 shadow-xl border-2 border-primary/70 dark:border-primary/50 text-base sm:text-lg overflow-hidden"
+                    className="group relative inline-flex items-center gap-3 sm:gap-4 bg-primary text-primary-foreground hover:bg-primary/90 font-semibold px-8 sm:px-10 py-4 sm:py-5 rounded-xl transition-all duration-300 shadow-xl border-2 border-primary/70 dark:border-primary/50 text-base sm:text-lg overflow-hidden"
                     whileHover={{ 
                         scale: 1.05, 
                         y: -2,

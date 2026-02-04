@@ -55,7 +55,7 @@ const Skills = () => {
             Technical Skills
           </h2>
           {/* Liquid Glass background for title */}
-          <div className="absolute inset-0 -m-4 liquid-glass rounded-2xl" />
+          <div className="absolute inset-0 -m-4 bg-primary/5 rounded-2xl" />
         </motion.div>
         
         <div className="space-y-16">
@@ -76,7 +76,7 @@ const Skills = () => {
               <div className="relative">
                 <div className="flex items-center gap-6 relative z-10">
                   <div 
-                    className={`h-2 w-20 liquid-glass rounded-full relative overflow-hidden`}
+                    className={`h-2 w-20 bg-card/50 dark:bg-card/30 rounded-full relative overflow-hidden`}
                   >
                     <div 
                       className={`absolute inset-0 bg-gradient-to-r ${category.color} opacity-60`}
@@ -86,7 +86,7 @@ const Skills = () => {
                 </div>
                 {/* Liquid Glass background for category header */}
                 <div 
-                  className="absolute inset-0 -m-3 liquid-glass-card rounded-xl"
+                  className="absolute inset-0 -m-3 bg-card/20 dark:bg-card/10 rounded-xl"
                 />
               </div>
               
@@ -95,7 +95,7 @@ const Skills = () => {
                 {category.skills.map((skill, skillIndex) => (
                   <motion.div
                     key={skill.name}
-                    className={`group relative flex flex-col items-center justify-center gap-4 p-6 rounded-2xl liquid-glass-card transition-all duration-300 hover:shadow-lg ${getLevelBackground(skill.level)}`}
+                    className={`group relative flex flex-col items-center justify-center gap-4 p-6 rounded-2xl bg-card/30 dark:bg-card/10 border border-white/10 transition-all duration-300 hover:shadow-lg ${getLevelBackground(skill.level)}`}
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true, amount: 0.1 }}
@@ -105,7 +105,7 @@ const Skills = () => {
                       delay: skillIndex * 0.03 
                     }}
                     whileHover={{ 
-                      scale: 1.02,
+                      scale: 1.01,
                       y: -2,
                       transition: { duration: 0.2 }
                     }}
@@ -116,7 +116,7 @@ const Skills = () => {
                     />
                     
                     <div className="relative z-10">
-                      <div className="p-4 rounded-xl liquid-glass-card">
+                      <div className="p-4 rounded-xl bg-white/10 dark:bg-black/20">
                         <img
                           src={skill.logo}
                           alt={`${skill.name} logo`}

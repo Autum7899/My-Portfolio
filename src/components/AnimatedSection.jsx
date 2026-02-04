@@ -24,9 +24,9 @@ const AnimatedSection = ({ children, id }) => {
       initial="hidden"
       variants={{
         visible: { opacity: 1, y: 0 },
-        hidden: { opacity: 0, y: 50 },
+        hidden: { opacity: 0, y: 20 },
       }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
       className="py-20 md:py-28 scroll-mt-16"
     >
       {children}

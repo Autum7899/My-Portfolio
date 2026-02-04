@@ -72,7 +72,7 @@ const About = () => {
             </motion.h2>
           {/* Liquid Glass background for title */}
           <motion.div 
-            className="absolute inset-0 -m-4 liquid-glass rounded-2xl"
+            className="absolute inset-0 -m-4 bg-primary/5 rounded-2xl"
             initial={{ scale: 0.8 }}
             whileInView={{ scale: 1 }}
             viewport={{ once: true }}
@@ -90,7 +90,7 @@ const About = () => {
               <div className="relative group w-full max-w-lg">
                 {/* Animated Background Glow */}
                 <motion.div
-                  className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-purple-500/20 to-primary/20 rounded-3xl blur-xl"
+                  className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-purple-500/20 to-primary/20 rounded-3xl"
                   animate={{
                     scale: [1, 1.03, 1],
                     opacity: [0.3, 0.5, 0.3]
@@ -103,7 +103,7 @@ const About = () => {
                 />
                 
                 {/* Liquid Glass Border */}
-                <div className="absolute -inset-2 liquid-glass rounded-3xl p-2">
+                <div className="absolute -inset-2 bg-primary/10 border border-white/10 rounded-3xl p-2">
                   <div className="bg-background rounded-2xl h-full w-full" />
                 </div>
                 
@@ -133,7 +133,7 @@ const About = () => {
 
                 {/* Status Badge */}
                 <motion.div
-                  className="absolute -bottom-2 -right-2 liquid-glass text-black dark:text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg"
+                  className="absolute -bottom-2 -right-2 bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-semibold shadow-lg"
                   initial={{ scale: 0, rotate: -180 }}
                   animate={{ scale: 1, rotate: 0 }}
                   transition={{ 
