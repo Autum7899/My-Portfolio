@@ -28,8 +28,8 @@ const AdminLayout = () => {
   const menuItems = [
     { path: "/admin", icon: Home, label: "Dashboard", exact: true },
     { path: "/admin/user", icon: User, label: "User Profile" },
-    { path: "/admin/education", icon: GraduationCap, label: "Education" },
-    { path: "/admin/projects", icon: Briefcase, label: "Projects" },
+    { path: "/admin/career", icon: Briefcase, label: "Career" },
+    { path: "/admin/projects", icon: GraduationCap, label: "Projects" },
     { path: "/admin/skills", icon: Code, label: "Skills" },
   ];
 

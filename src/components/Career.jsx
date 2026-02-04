@@ -1,13 +1,12 @@
-// src/components/Education.js
+// src/components/Career.jsx
 import React, { useState, useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import { GraduationCap, BookOpen, Calendar, MapPin } from "lucide-react";
+import { BookOpen, Calendar, MapPin } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 import { usePortfolio } from "../context/PortfolioContext";
 
-const Education = () => {
-  const { education } = usePortfolio();
-  const [hoveredItem, setHoveredItem] = useState(null);
+const Career = () => {
+  const { career } = usePortfolio();
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
@@ -47,7 +46,7 @@ const Education = () => {
   };
 
   return (
-    <AnimatedSection id="education">
+    <AnimatedSection id="career">
       <div className="container mx-auto px-6 py-20">
         <motion.div
           ref={ref}
@@ -65,7 +64,7 @@ const Education = () => {
             transition={{ duration: 0.6 }}
           >
             <motion.h2 className="text-4xl md:text-5xl font-bold text-center text-foreground relative z-10">
-              Education
+              Career
             </motion.h2>
 
             {/* Liquid Glass background for title */}
@@ -92,18 +91,16 @@ const Education = () => {
             </motion.p>
           </motion.div>
 
-          {/* Main Education Content */}
+          {/* Main Career Content */}
           <div className="max-w-4xl mx-auto">
             <div className="space-y-8">
-              {education.map((edu, index) => (
+              {career.map((item, index) => (
                 <motion.div
                   key={index}
                   variants={itemVariants}
                   className="group relative"
-                  onHoverStart={() => setHoveredItem(index)}
-                  onHoverEnd={() => setHoveredItem(null)}
                 >
-                  {/* Education Card */}
+                  {/* Career Card */}
                   <motion.div
                     className="relative p-8 rounded-3xl bg-card/30 dark:bg-card/10 border border-white/10 hover:shadow-2xl hover:bg-card/50 transition-all duration-500 group-hover:shadow-primary/10"
                     whileHover={{
@@ -128,11 +125,11 @@ const Education = () => {
                         whileHover={{ x: 5 }}
                       >
                         <Calendar size={20} />
-                        <span>{edu.date}</span>
+                        <span>{item.date}</span>
                       </motion.div>
 
                       <h3 className="text-4xl font-bold text-foreground group-hover:text-primary transition-colors mb-6">
-                        {edu.degree}
+                        {item.degree}
                       </h3>
                     </div>
 
@@ -146,7 +143,7 @@ const Education = () => {
                           <MapPin size={18} className="text-primary" />
                         </div>
                         <p className="text-xl text-foreground font-medium">
-                          {edu.institution}
+                          {item.institution}
                         </p>
                       </motion.div>
 
@@ -158,7 +155,7 @@ const Education = () => {
                           <BookOpen size={18} className="text-primary" />
                         </div>
                         <span className="text-muted-foreground font-medium text-lg">
-                          Major: {edu.major}
+                          Major: {item.major}
                         </span>
                       </motion.div>
                     </div>
@@ -169,7 +166,7 @@ const Education = () => {
                       initial={{ opacity: 0.8 }}
                       whileHover={{ opacity: 1 }}
                     >
-                      {edu.description}
+                      {item.description}
                     </motion.p>
 
                     {/* Hover Glow Effect */}
@@ -199,4 +196,4 @@ const Education = () => {
     </AnimatedSection>
   );
 };
-export default Education;
+export default Career;

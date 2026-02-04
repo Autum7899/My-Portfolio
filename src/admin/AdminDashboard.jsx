@@ -1,9 +1,9 @@
 import React from "react";
 import { usePortfolio } from "../context/PortfolioContext";
-import { User, GraduationCap, Briefcase, Code } from "lucide-react";
+import { User, Briefcase, FolderOpen, Code } from "lucide-react";
 
 const AdminDashboard = () => {
-  const { user, education, projects, skills } = usePortfolio();
+  const { user, career, projects, skills } = usePortfolio();
 
   const totalSkills = Object.values(skills).reduce(
     (acc, category) => acc + category.length,
@@ -12,15 +12,15 @@ const AdminDashboard = () => {
 
   const stats = [
     {
-      label: "Education Entries",
-      value: education.length,
-      icon: GraduationCap,
+      label: "Career Entries",
+      value: career.length,
+      icon: Briefcase,
       color: "bg-blue-500",
     },
     {
       label: "Projects",
       value: projects.length,
-      icon: Briefcase,
+      icon: FolderOpen,
       color: "bg-green-500",
     },
     {
@@ -107,19 +107,19 @@ const AdminDashboard = () => {
             </span>
           </a>
           <a
-            href="/admin/education"
+            href="/admin/career"
             className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg text-center hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
           >
-            <GraduationCap className="w-8 h-8 mx-auto mb-2 text-blue-500" />
+            <Briefcase className="w-8 h-8 mx-auto mb-2 text-blue-500" />
             <span className="text-gray-700 dark:text-gray-300">
-              Edit Education
+              Edit Career
             </span>
           </a>
           <a
             href="/admin/projects"
             className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg text-center hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors"
           >
-            <Briefcase className="w-8 h-8 mx-auto mb-2 text-green-500" />
+            <FolderOpen className="w-8 h-8 mx-auto mb-2 text-green-500" />
             <span className="text-gray-700 dark:text-gray-300">
               Edit Projects
             </span>

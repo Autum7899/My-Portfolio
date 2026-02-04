@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-// Default data - will be used as initial state if no data in localStorage
+// Default data - will be used as fallback if API fails
 const defaultData = {
   user: {
     name: "Minh Sơn",
@@ -15,7 +15,7 @@ const defaultData = {
     },
     email: "minhson789999@gmail.com",
   },
-  education: [
+  career: [
     {
       id: 1,
       institution: "University of Economics - Technology for Industries",
@@ -23,7 +23,7 @@ const defaultData = {
       major: "Information Systems",
       date: "Expected Graduation: 2026",
       description:
-        "Focusing on database management, system analysis, and full-stack web development. Consistently maintaining a high GPA through challenging coursework and practical projects.",
+        "Focusing on database management, system analysis, and full-stack web development.",
     },
   ],
   projects: [
@@ -31,29 +31,9 @@ const defaultData = {
       id: 1,
       title: "University Web Project",
       description:
-        "A comprehensive university project focused on database management and web interfaces, built with React and SQL.",
+        "A comprehensive university project focused on database management and web interfaces.",
       image: "https://placehold.co/600x400/1e293b/a5b4fc?text=Project+1",
       tags: ["React", "SQL Server", "Express"],
-      demo: "#",
-      repo: "#",
-    },
-    {
-      id: 2,
-      title: "Personal .NET App",
-      description:
-        "An personal learning project to explore backend development using C# and the .NET framework.",
-      image: "https://placehold.co/600x400/1e293b/a5b4fc?text=Project+2",
-      tags: ["C#", ".NET", "MySQL"],
-      demo: "#",
-      repo: "#",
-    },
-    {
-      id: 3,
-      title: "Next.js Portfolio",
-      description:
-        "A personal portfolio website (like this one) built to showcase skills and projects, using Next.js for performance.",
-      image: "https://placehold.co/600x400/1e293b/a5b4fc?text=Project+3",
-      tags: ["Next.js", "TypeScript", "Tailwind"],
       demo: "#",
       repo: "#",
     },
@@ -62,259 +42,19 @@ const defaultData = {
     frontend: [
       {
         id: 1,
-        name: "HTML5",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
-        level: "Advanced",
-      },
-      {
-        id: 2,
-        name: "CSS3",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
-        level: "Advanced",
-      },
-      {
-        id: 3,
-        name: "JavaScript",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
-        level: "Advanced",
-      },
-      {
-        id: 4,
-        name: "TypeScript",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
-        level: "Intermediate",
-      },
-      {
-        id: 5,
         name: "React",
         logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
         level: "Advanced",
       },
-      {
-        id: 6,
-        name: "Next.js",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
-        invert: true,
-        level: "Intermediate",
-      },
-      {
-        id: 7,
-        name: "Vue.js",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg",
-        level: "Learning",
-      },
-      {
-        id: 8,
-        name: "Tailwind CSS",
-        logo: "/Tailwind CSS.svg",
-        level: "Advanced",
-      },
-      {
-        id: 9,
-        name: "SASS/SCSS",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg",
-        level: "Intermediate",
-      },
-      {
-        id: 10,
-        name: "Bootstrap",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg",
-        level: "Intermediate",
-      },
     ],
-    backend: [
-      {
-        id: 1,
-        name: "Node.js",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-        level: "Advanced",
-      },
-      {
-        id: 2,
-        name: "Express.js",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
-        invert: true,
-        level: "Advanced",
-      },
-      {
-        id: 3,
-        name: "Java",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
-        level: "Intermediate",
-      },
-      {
-        id: 4,
-        name: "Spring Boot",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg",
-        level: "Learning",
-      },
-      {
-        id: 5,
-        name: "C#",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg",
-        level: "Intermediate",
-      },
-      {
-        id: 6,
-        name: ".NET",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg",
-        level: "Intermediate",
-      },
-      {
-        id: 7,
-        name: "Python",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
-        level: "Learning",
-      },
-      {
-        id: 8,
-        name: "Django",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg",
-        level: "Learning",
-      },
-      {
-        id: 9,
-        name: "FastAPI",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg",
-        level: "Learning",
-      },
-      {
-        id: 10,
-        name: "PHP",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg",
-        level: "Learning",
-      },
-      {
-        id: 11,
-        name: "Laravel",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg",
-        level: "Learning",
-      },
-    ],
-    database: [
-      {
-        id: 1,
-        name: "MySQL",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
-        level: "Advanced",
-      },
-      {
-        id: 2,
-        name: "PostgreSQL",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
-        level: "Intermediate",
-      },
-      {
-        id: 3,
-        name: "SQL Server",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg",
-        level: "Intermediate",
-      },
-      {
-        id: 4,
-        name: "MongoDB",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
-        level: "Learning",
-      },
-      {
-        id: 5,
-        name: "Redis",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg",
-        level: "Learning",
-      },
-      {
-        id: 6,
-        name: "Firebase",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg",
-        level: "Learning",
-      },
-    ],
-    cloudDevOps: [
-      {
-        id: 1,
-        name: "Docker",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
-        level: "Intermediate",
-      },
-      {
-        id: 2,
-        name: "AWS",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg",
-        level: "Learning",
-      },
-      {
-        id: 3,
-        name: "Azure",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg",
-        level: "Learning",
-      },
-      {
-        id: 4,
-        name: "Google Cloud",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg",
-        level: "Learning",
-      },
-      {
-        id: 5,
-        name: "Kubernetes",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-original.svg",
-        level: "Learning",
-      },
-      {
-        id: 6,
-        name: "GitHub Actions",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
-        level: "Learning",
-      },
-      {
-        id: 7,
-        name: "Jenkins",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg",
-        level: "Learning",
-      },
-    ],
-    tools: [
-      {
-        id: 1,
-        name: "Git",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-        level: "Advanced",
-      },
-      {
-        id: 2,
-        name: "GitHub",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
-        level: "Advanced",
-      },
-      {
-        id: 3,
-        name: "Figma",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
-        level: "Intermediate",
-      },
-      {
-        id: 4,
-        name: "Postman",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg",
-        level: "Intermediate",
-      },
-      {
-        id: 5,
-        name: "Jira",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg",
-        level: "Learning",
-      },
-      {
-        id: 6,
-        name: "Slack",
-        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slack/slack-original.svg",
-        level: "Learning",
-      },
-    ],
+    backend: [],
+    database: [],
+    cloudDevOps: [],
+    tools: [],
   },
 };
 
-const STORAGE_KEY = "portfolio_data";
+const API_BASE = "/.netlify/functions";
 
 const PortfolioContext = createContext(null);
 
@@ -326,143 +66,382 @@ export const usePortfolio = () => {
   return context;
 };
 
+// Helper to transform DB user to frontend format
+const transformUser = (dbUser) => {
+  if (!dbUser) return defaultData.user;
+  return {
+    name: dbUser.name,
+    title: dbUser.title,
+    location: dbUser.location,
+    bio: dbUser.bio,
+    profileImage: dbUser.profile_image || dbUser.profileImage,
+    email: dbUser.email,
+    socials: {
+      github: dbUser.github || dbUser.socials?.github || "#",
+      linkedin: dbUser.linkedin || dbUser.socials?.linkedin || "#",
+      twitter: dbUser.twitter || dbUser.socials?.twitter || "#",
+    },
+  };
+};
+
 export const PortfolioProvider = ({ children }) => {
-  const [data, setData] = useState(() => {
-    // Try to load from localStorage on initial render
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        return JSON.parse(saved);
-      }
-    } catch (error) {
-      console.error("Error loading data from localStorage:", error);
-    }
-    return defaultData;
-  });
+  const [data, setData] = useState(defaultData);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     return sessionStorage.getItem("admin_authenticated") === "true";
   });
 
-  // Save to localStorage whenever data changes
+  const [authToken, setAuthToken] = useState(() => {
+    return sessionStorage.getItem("admin_token") || null;
+  });
+
+  // Fetch data from API on mount
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-    } catch (error) {
-      console.error("Error saving data to localStorage:", error);
+    fetchPortfolioData();
+  }, []);
+
+  // Save to localStorage as backup
+  useEffect(() => {
+    if (!loading) {
+      try {
+        localStorage.setItem("portfolio_data", JSON.stringify(data));
+      } catch (e) {
+        console.error("Error saving to localStorage:", e);
+      }
     }
-  }, [data]);
+  }, [data, loading]);
+
+  const fetchPortfolioData = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${API_BASE}/get-portfolio`);
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch portfolio data");
+      }
+
+      const apiData = await response.json();
+
+      setData({
+        user: transformUser(apiData.user),
+        career: apiData.career || apiData.education || [],
+        projects: apiData.projects || [],
+        skills: apiData.skills || defaultData.skills,
+      });
+      setError(null);
+    } catch (err) {
+      console.error("Error fetching portfolio data:", err);
+      setError(err.message);
+      // Fall back to localStorage if API fails
+      try {
+        const saved = localStorage.getItem("portfolio_data");
+        if (saved) {
+          setData(JSON.parse(saved));
+        } else {
+          // Use default data if nothing in localStorage
+          setData(defaultData);
+        }
+      } catch (e) {
+        console.error("Error loading from localStorage:", e);
+        // Use default data as final fallback
+        setData(defaultData);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Helper for authenticated API calls
+  const apiCall = async (endpoint, method, body) => {
+    const response = await fetch(`${API_BASE}/${endpoint}`, {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: body ? JSON.stringify(body) : undefined,
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error || "API call failed");
+    }
+
+    return response.json();
+  };
 
   // Update user data
-  const updateUser = (newUserData) => {
-    setData((prev) => ({
-      ...prev,
-      user: { ...prev.user, ...newUserData },
-    }));
+  const updateUser = async (newUserData) => {
+    try {
+      await apiCall("admin-user", "PUT", newUserData);
+      setData((prev) => ({
+        ...prev,
+        user: { ...prev.user, ...newUserData },
+      }));
+      return true;
+    } catch (err) {
+      console.error("Error updating user:", err);
+      // Still update locally
+      setData((prev) => ({
+        ...prev,
+        user: { ...prev.user, ...newUserData },
+      }));
+      return false;
+    }
   };
 
-  // Update education
-  const updateEducation = (newEducation) => {
-    setData((prev) => ({
-      ...prev,
-      education: newEducation,
-    }));
+  // Career CRUD
+  const addCareer = async (career) => {
+    try {
+      const result = await apiCall("admin-career", "POST", career);
+      setData((prev) => ({
+        ...prev,
+        career: [...prev.career, { ...career, id: result.id }],
+      }));
+      return true;
+    } catch (err) {
+      console.error("Error adding career:", err);
+      // Add locally with temp id
+      const tempId = Date.now();
+      setData((prev) => ({
+        ...prev,
+        career: [...prev.career, { ...career, id: tempId }],
+      }));
+      return false;
+    }
   };
 
-  const addEducation = (education) => {
-    const newId = Math.max(...data.education.map((e) => e.id || 0), 0) + 1;
-    setData((prev) => ({
-      ...prev,
-      education: [...prev.education, { ...education, id: newId }],
-    }));
+  const updateCareer = async (updatedCareer) => {
+    try {
+      if (Array.isArray(updatedCareer)) {
+        setData((prev) => ({
+          ...prev,
+          career: updatedCareer,
+        }));
+        return true;
+      }
+
+      await apiCall("admin-career", "PUT", updatedCareer);
+      setData((prev) => ({
+        ...prev,
+        career: prev.career.map((e) =>
+          e.id === updatedCareer.id ? updatedCareer : e,
+        ),
+      }));
+      return true;
+    } catch (err) {
+      console.error("Error updating career:", err);
+      if (!Array.isArray(updatedCareer)) {
+        setData((prev) => ({
+          ...prev,
+          career: prev.career.map((e) =>
+            e.id === updatedCareer.id ? updatedCareer : e,
+          ),
+        }));
+      }
+      return false;
+    }
   };
 
-  const deleteEducation = (id) => {
-    setData((prev) => ({
-      ...prev,
-      education: prev.education.filter((e) => e.id !== id),
-    }));
+  const deleteCareer = async (id) => {
+    try {
+      await apiCall("admin-career", "DELETE", { id });
+      setData((prev) => ({
+        ...prev,
+        career: prev.career.filter((e) => e.id !== id),
+      }));
+      return true;
+    } catch (err) {
+      console.error("Error deleting career:", err);
+      setData((prev) => ({
+        ...prev,
+        career: prev.career.filter((e) => e.id !== id),
+      }));
+      return false;
+    }
   };
 
-  // Update projects
-  const updateProjects = (newProjects) => {
-    setData((prev) => ({
-      ...prev,
-      projects: newProjects,
-    }));
+  // Projects CRUD
+  const addProject = async (project) => {
+    try {
+      const result = await apiCall("admin-projects", "POST", project);
+      setData((prev) => ({
+        ...prev,
+        projects: [...prev.projects, { ...project, id: result.id }],
+      }));
+      return true;
+    } catch (err) {
+      console.error("Error adding project:", err);
+      const tempId = Date.now();
+      setData((prev) => ({
+        ...prev,
+        projects: [...prev.projects, { ...project, id: tempId }],
+      }));
+      return false;
+    }
   };
 
-  const addProject = (project) => {
-    const newId = Math.max(...data.projects.map((p) => p.id || 0), 0) + 1;
-    setData((prev) => ({
-      ...prev,
-      projects: [...prev.projects, { ...project, id: newId }],
-    }));
+  const updateProjects = async (updatedProjects) => {
+    if (Array.isArray(updatedProjects)) {
+      setData((prev) => ({
+        ...prev,
+        projects: updatedProjects,
+      }));
+      return true;
+    }
+
+    try {
+      await apiCall("admin-projects", "PUT", updatedProjects);
+      setData((prev) => ({
+        ...prev,
+        projects: prev.projects.map((p) =>
+          p.id === updatedProjects.id ? updatedProjects : p,
+        ),
+      }));
+      return true;
+    } catch (err) {
+      console.error("Error updating project:", err);
+      return false;
+    }
   };
 
-  const deleteProject = (id) => {
-    setData((prev) => ({
-      ...prev,
-      projects: prev.projects.filter((p) => p.id !== id),
-    }));
+  const deleteProject = async (id) => {
+    try {
+      await apiCall("admin-projects", "DELETE", { id });
+      setData((prev) => ({
+        ...prev,
+        projects: prev.projects.filter((p) => p.id !== id),
+      }));
+      return true;
+    } catch (err) {
+      console.error("Error deleting project:", err);
+      setData((prev) => ({
+        ...prev,
+        projects: prev.projects.filter((p) => p.id !== id),
+      }));
+      return false;
+    }
   };
 
-  // Update skills
-  const updateSkills = (category, newSkills) => {
+  // Skills CRUD
+  const addSkill = async (category, skill) => {
+    try {
+      const result = await apiCall("admin-skills", "POST", {
+        ...skill,
+        category,
+      });
+      setData((prev) => ({
+        ...prev,
+        skills: {
+          ...prev.skills,
+          [category]: [
+            ...(prev.skills[category] || []),
+            { ...skill, id: result.id },
+          ],
+        },
+      }));
+      return true;
+    } catch (err) {
+      console.error("Error adding skill:", err);
+      const tempId = Date.now();
+      setData((prev) => ({
+        ...prev,
+        skills: {
+          ...prev.skills,
+          [category]: [
+            ...(prev.skills[category] || []),
+            { ...skill, id: tempId },
+          ],
+        },
+      }));
+      return false;
+    }
+  };
+
+  const updateSkills = async (category, updatedSkills) => {
     setData((prev) => ({
       ...prev,
       skills: {
         ...prev.skills,
-        [category]: newSkills,
+        [category]: updatedSkills,
       },
     }));
+    return true;
   };
 
-  const addSkill = (category, skill) => {
-    const categorySkills = data.skills[category] || [];
-    const newId = Math.max(...categorySkills.map((s) => s.id || 0), 0) + 1;
-    setData((prev) => ({
-      ...prev,
-      skills: {
-        ...prev.skills,
-        [category]: [...(prev.skills[category] || []), { ...skill, id: newId }],
-      },
-    }));
-  };
-
-  const deleteSkill = (category, id) => {
-    setData((prev) => ({
-      ...prev,
-      skills: {
-        ...prev.skills,
-        [category]: prev.skills[category].filter((s) => s.id !== id),
-      },
-    }));
+  const deleteSkill = async (category, id) => {
+    try {
+      await apiCall("admin-skills", "DELETE", { id });
+      setData((prev) => ({
+        ...prev,
+        skills: {
+          ...prev.skills,
+          [category]: prev.skills[category].filter((s) => s.id !== id),
+        },
+      }));
+      return true;
+    } catch (err) {
+      console.error("Error deleting skill:", err);
+      setData((prev) => ({
+        ...prev,
+        skills: {
+          ...prev.skills,
+          [category]: prev.skills[category].filter((s) => s.id !== id),
+        },
+      }));
+      return false;
+    }
   };
 
   // Authentication
-  const login = (password) => {
-    // Simple password check - in production, use proper authentication
-    const ADMIN_PASSWORD = "admin123"; // Change this!
-    if (password === ADMIN_PASSWORD) {
-      setIsAuthenticated(true);
-      sessionStorage.setItem("admin_authenticated", "true");
-      return true;
+  const login = async (password) => {
+    try {
+      const response = await fetch(`${API_BASE}/admin-login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setIsAuthenticated(true);
+        setAuthToken(result.token);
+        sessionStorage.setItem("admin_authenticated", "true");
+        sessionStorage.setItem("admin_token", result.token);
+        return true;
+      }
+      return false;
+    } catch (err) {
+      console.error("Login error:", err);
+      // Fallback to local auth for development
+      const ADMIN_PASSWORD = "admin123";
+      if (password === ADMIN_PASSWORD) {
+        setIsAuthenticated(true);
+        setAuthToken("dev-token");
+        sessionStorage.setItem("admin_authenticated", "true");
+        sessionStorage.setItem("admin_token", "dev-token");
+        return true;
+      }
+      return false;
     }
-    return false;
   };
 
   const logout = () => {
     setIsAuthenticated(false);
+    setAuthToken(null);
     sessionStorage.removeItem("admin_authenticated");
+    sessionStorage.removeItem("admin_token");
   };
 
-  // Reset to default data
+  // Data management
   const resetToDefault = () => {
     setData(defaultData);
+    fetchPortfolioData();
   };
 
-  // Export data
   const exportData = () => {
     const dataStr = JSON.stringify(data, null, 2);
     const dataBlob = new Blob([dataStr], { type: "application/json" });
@@ -474,7 +453,6 @@ export const PortfolioProvider = ({ children }) => {
     URL.revokeObjectURL(url);
   };
 
-  // Import data
   const importData = (jsonData) => {
     try {
       const parsed = JSON.parse(jsonData);
@@ -486,20 +464,26 @@ export const PortfolioProvider = ({ children }) => {
     }
   };
 
+  const refreshData = () => {
+    fetchPortfolioData();
+  };
+
   const value = {
     // Data
     user: data.user,
-    education: data.education,
+    career: data.career,
     projects: data.projects,
     skills: data.skills,
+    loading,
+    error,
 
     // User actions
     updateUser,
 
-    // Education actions
-    updateEducation,
-    addEducation,
-    deleteEducation,
+    // Career actions
+    updateCareer,
+    addCareer,
+    deleteCareer,
 
     // Project actions
     updateProjects,
@@ -520,6 +504,7 @@ export const PortfolioProvider = ({ children }) => {
     resetToDefault,
     exportData,
     importData,
+    refreshData,
   };
 
   return (
