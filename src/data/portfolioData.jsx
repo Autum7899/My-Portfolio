@@ -64,7 +64,7 @@ export const projects = [
       "ESLint",
       "Netlify",
     ],
-    demo: "https://khoduyminh.netlify.app",
+    demo: "https://khoaduyminh.netlify.app",
     repo: "https://github.com/Autum7899/DuyMinhSmartDoorLock",
   },
 ];
